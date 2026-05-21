@@ -1,4 +1,0 @@
-interface:
-  display_name: "Human Tweet Editor"
-  short_description: "Grade and rewrite natural builder tweets"
-  default_prompt: "Use $human-tweet-editor to grade this tweet and rewrite it in a natural builder voice."

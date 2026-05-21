@@ -11,17 +11,6 @@
   },
   "plugins": [
     {
-      "name": "agent-browser",
-      "source": "./plugins/agent-browser",
-      "description": "Browser automation using Vercel's agent-browser CLI. Use when you need to interact with web pages, fill forms, take screenshots, or scrape data. Alternative to Playwright MCP - ...",
-      "version": "0.1.0",
-      "category": "tools",
-      "keywords": [
-        "agent",
-        "browser"
-      ]
-    },
-    {
       "name": "annas-archive-ebooks",
       "source": "./plugins/annas-archive-ebooks",
       "description": "Use when needing to look up book content, find a book by title/author, download an ebook, or reference material from a published book. Triggers on book lookups, ebook downloads,...",
@@ -34,39 +23,6 @@
       ]
     },
     {
-      "name": "beautiful-mermaid-ascii",
-      "source": "./plugins/beautiful-mermaid-ascii",
-      "description": "Render Mermaid diagrams as readable ASCII/Unicode art in the terminal (from .mmd/.mermaid files, stdin, or Markdown ```mermaid fences). Use when installing or using lukilabs/bea...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "beautiful",
-        "mermaid",
-        "ascii"
-      ]
-    },
-    {
-      "name": "brave-search",
-      "source": "./plugins/brave-search",
-      "description": "Use when user asks to search the web, look something up online, find current/recent/latest information, or needs cited answers. Triggers on \"search\", \"look up\", \"find out about\"...",
-      "version": "0.1.0",
-      "category": "tools",
-      "keywords": [
-        "brave",
-        "search"
-      ]
-    },
-    {
-      "name": "caveman",
-      "source": "./plugins/caveman",
-      "description": "> Ultra-compressed communication mode. Cuts token usage ~75% by dropping filler, articles, and pleasantries while keeping full technical accuracy. Use when user says \"caveman mo...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "caveman"
-      ]
-    },
-    {
       "name": "clarify",
       "source": "./plugins/clarify",
       "description": "Run a chained clarity review across a target repo, plan, or work items. Use when the user asks to clarify, defuzz, audit, review, harden, distill, de-duplicate, inspect naming, ...",
@@ -74,60 +30,6 @@
       "category": "developer tools",
       "keywords": [
         "clarify"
-      ]
-    },
-    {
-      "name": "data-systems-architecture",
-      "source": "./plugins/data-systems-architecture",
-      "description": "Use when designing databases for data-heavy applications, making schema decisions for performance, choosing between normalization and denormalization, selecting storage/indexing...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "data",
-        "systems",
-        "architecture"
-      ]
-    },
-    {
-      "name": "debugging",
-      "source": "./plugins/debugging",
-      "description": "Systematic debugging that identifies root causes rather than treating symptoms. Uses sequential thinking for complex analysis, web search for research, and structured investigat...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "debugging"
-      ]
-    },
-    {
-      "name": "deepen-plan",
-      "source": "./plugins/deepen-plan",
-      "description": "Enhance a plan with parallel research agents for each section to add depth, best practices, and implementation details",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "deepen",
-        "plan"
-      ]
-    },
-    {
-      "name": "design-patterns",
-      "source": "./plugins/design-patterns",
-      "description": "Use when designing software architecture, refactoring code structure, solving recurring design problems, or when code exhibits symptoms like tight coupling, rigid hierarchies, s...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "design",
-        "patterns"
-      ]
-    },
-    {
-      "name": "diagnose",
-      "source": "./plugins/diagnose",
-      "description": "Disciplined diagnosis loop for hard bugs and performance regressions. Reproduce → minimise → hypothesise → instrument → fix → regression-test. Use when user says \"diagnose this\"...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "diagnose"
       ]
     },
     {
@@ -187,17 +89,6 @@
       ]
     },
     {
-      "name": "frontend-design",
-      "source": "./plugins/frontend-design",
-      "description": "This skill should be used when creating distinctive, production-grade frontend interfaces with high design quality. It applies when the user asks to build web components, pages,...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "frontend",
-        "design"
-      ]
-    },
-    {
       "name": "graph-researcher",
       "source": "./plugins/graph-researcher",
       "description": "Deep web research with relevance scoring and knowledge graph storage. Use when researching topics, companies, people, or concepts. Performs Graph-of-Thoughts style exploration w...",
@@ -206,53 +97,6 @@
       "keywords": [
         "graph",
         "researcher"
-      ]
-    },
-    {
-      "name": "grill-me",
-      "source": "./plugins/grill-me",
-      "description": "Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "grill",
-        "me"
-      ]
-    },
-    {
-      "name": "grill-with-docs",
-      "source": "./plugins/grill-with-docs",
-      "description": "Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise....",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "grill",
-        "with",
-        "docs"
-      ]
-    },
-    {
-      "name": "human-tweet-editor",
-      "source": "./plugins/human-tweet-editor",
-      "description": "Grade, critique, rewrite, and strengthen tweets or X threads in a natural human voice for tech, AI, developer, startup, product, and builder audiences. Use when Codex is asked t...",
-      "version": "0.1.0",
-      "category": "writing",
-      "keywords": [
-        "human",
-        "tweet",
-        "editor"
-      ]
-    },
-    {
-      "name": "improve-codebase-architecture",
-      "source": "./plugins/improve-codebase-architecture",
-      "description": "Find deepening opportunities in a codebase, informed by the domain language in CONTEXT.md and the decisions in docs/adr/. Use when the user wants to improve architecture, find r...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "improve",
-        "codebase",
-        "architecture"
       ]
     },
     {
@@ -351,87 +195,6 @@
       ]
     },
     {
-      "name": "postgres-query-expert",
-      "source": "./plugins/postgres-query-expert",
-      "description": "A comprehensive guide for interacting with PostgreSQL 16 databases. Use this skill for constructing standard and advanced SQL queries, optimizing performance, debugging errors, ...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "postgres",
-        "query",
-        "expert"
-      ]
-    },
-    {
-      "name": "process-research",
-      "source": "./plugins/process-research",
-      "description": "Use when working in the Polymarket research repo and you need to process queued targets from spinal_cord.jsonl, especially for batch queue runs or periodic research sweeps.",
-      "version": "0.1.0",
-      "category": "tools",
-      "keywords": [
-        "process",
-        "research"
-      ]
-    },
-    {
-      "name": "run-simulations",
-      "source": "./plugins/run-simulations",
-      "description": "Use BEFORE and AFTER running trading engine simulations. Helps with: (1) SETUP - choosing configs, selecting segments via segment collections, batch sizing (recommend 2,000-3,00...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "run",
-        "simulations"
-      ]
-    },
-    {
-      "name": "senior-architect",
-      "source": "./plugins/senior-architect",
-      "description": "This skill should be used when the user asks to \"design system architecture\", \"evaluate microservices vs monolith\", \"create architecture diagrams\", \"analyze dependencies\", \"choo...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "senior",
-        "architect"
-      ]
-    },
-    {
-      "name": "setup-matt-pocock-skills",
-      "source": "./plugins/setup-matt-pocock-skills",
-      "description": "Sets up an `## Agent skills` block in AGENTS.md/CLAUDE.md and `docs/agents/` so the engineering skills know this repo's issue tracker (GitHub or local markdown), triage label vo...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "setup",
-        "matt",
-        "pocock",
-        "skills"
-      ]
-    },
-    {
-      "name": "spec-flow-analyzer",
-      "source": "./plugins/spec-flow-analyzer",
-      "description": "Use this agent when you have a specification, plan, feature description, or technical document that needs user flow analysis and gap identification. This agent should be used pr...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "spec",
-        "flow",
-        "analyzer"
-      ]
-    },
-    {
-      "name": "systematic-debugging",
-      "source": "./plugins/systematic-debugging",
-      "description": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "systematic",
-        "debugging"
-      ]
-    },
-    {
       "name": "tdd",
       "source": "./plugins/tdd",
       "description": "Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions \"red-green-refactor\", wants integration tests, or ask...",
@@ -439,48 +202,6 @@
       "category": "developer tools",
       "keywords": [
         "tdd"
-      ]
-    },
-    {
-      "name": "to-issues",
-      "source": "./plugins/to-issues",
-      "description": "Break a plan, spec, or PRD into independently-grabbable issues on the project issue tracker using tracer-bullet vertical slices. Use when user wants to convert a plan into issue...",
-      "version": "0.1.0",
-      "category": "project management",
-      "keywords": [
-        "to",
-        "issues"
-      ]
-    },
-    {
-      "name": "to-prd",
-      "source": "./plugins/to-prd",
-      "description": "Turn the current conversation context into a PRD and publish it to the project issue tracker. Use when user wants to create a PRD from the current context.",
-      "version": "0.1.0",
-      "category": "project management",
-      "keywords": [
-        "to",
-        "prd"
-      ]
-    },
-    {
-      "name": "triage",
-      "source": "./plugins/triage",
-      "description": "Triage issues through a state machine driven by triage roles. Use when user wants to create an issue, triage issues, review incoming bugs or feature requests, prepare issues for...",
-      "version": "0.1.0",
-      "category": "project management",
-      "keywords": [
-        "triage"
-      ]
-    },
-    {
-      "name": "twitter",
-      "source": "./plugins/twitter",
-      "description": "Write viral, persuasive, engaging tweets and threads. Uses web research to find viral examples in your niche, then models writing based on proven formulas and X algorithm optimi...",
-      "version": "0.1.0",
-      "category": "writing",
-      "keywords": [
-        "twitter"
       ]
     },
     {
@@ -496,17 +217,6 @@
       ]
     },
     {
-      "name": "writing-documentation",
-      "source": "./plugins/writing-documentation",
-      "description": "Produces concise, clear documentation by applying Elements of Style principles. Use when writing or improving any technical documentation (READMEs, guides, API docs, architectur...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "writing",
-        "documentation"
-      ]
-    },
-    {
       "name": "x-undocumented-api",
       "source": "./plugins/x-undocumented-api",
       "description": "Manual-only skill. Never automatically load or select this skill from task context. Use only when the user explicitly asks to manually reference this skill or names `x-undocumen...",
@@ -516,17 +226,6 @@
         "x",
         "undocumented",
         "api"
-      ]
-    },
-    {
-      "name": "zoom-out",
-      "source": "./plugins/zoom-out",
-      "description": "Tell the agent to zoom out and give broader context or a higher-level perspective. Use when you're unfamiliar with a section of code or need to understand how it fits into the b...",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "zoom",
-        "out"
       ]
     }
   ]

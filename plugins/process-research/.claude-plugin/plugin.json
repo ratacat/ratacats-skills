@@ -1,8 +1,0 @@
-{
-  "name": "process-research",
-  "description": "Use when working in the Polymarket research repo and you need to process queued targets from spinal_cord.jsonl, especially for batch queue runs or periodic research sweeps.",
-  "author": {
-    "name": "Jared Smith",
-    "url": "https://github.com/ratacat"
-  }
-}

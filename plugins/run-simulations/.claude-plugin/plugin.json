@@ -1,8 +1,0 @@
-{
-  "name": "run-simulations",
-  "description": "Use BEFORE and AFTER running trading engine simulations. Helps with: (1) SETUP - choosing configs, selecting segments via segment collections, batch sizing (recommend 2,000-3,00...",
-  "author": {
-    "name": "Jared Smith",
-    "url": "https://github.com/ratacat"
-  }
-}

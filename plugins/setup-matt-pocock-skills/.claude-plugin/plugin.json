@@ -1,8 +1,0 @@
-{
-  "name": "setup-matt-pocock-skills",
-  "description": "Sets up an `## Agent skills` block in AGENTS.md/CLAUDE.md and `docs/agents/` so the engineering skills know this repo's issue tracker (GitHub or local markdown), triage label vo...",
-  "author": {
-    "name": "Jared Smith",
-    "url": "https://github.com/ratacat"
-  }
-}

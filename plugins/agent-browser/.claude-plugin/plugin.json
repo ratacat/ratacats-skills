@@ -1,8 +1,0 @@
-{
-  "name": "agent-browser",
-  "description": "Browser automation using Vercel's agent-browser CLI. Use when you need to interact with web pages, fill forms, take screenshots, or scrape data. Alternative to Playwright MCP - ...",
-  "author": {
-    "name": "Jared Smith",
-    "url": "https://github.com/ratacat"
-  }
-}

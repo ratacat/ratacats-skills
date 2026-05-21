@@ -1,8 +1,0 @@
-{
-  "name": "brave-search",
-  "description": "Use when user asks to search the web, look something up online, find current/recent/latest information, or needs cited answers. Triggers on \"search\", \"look up\", \"find out about\"...",
-  "author": {
-    "name": "Jared Smith",
-    "url": "https://github.com/ratacat"
-  }
-}
