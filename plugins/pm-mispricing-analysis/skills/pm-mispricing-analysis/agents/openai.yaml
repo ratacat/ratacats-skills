@@ -1,0 +1,4 @@
+interface:
+  display_name: "PM Mispricing Analysis"
+  short_description: "Market-aware PM mispricing scans"
+  default_prompt: "Use $pm-mispricing-analysis to scan one prediction-market event, fetch current prices, and surface any 15+ point candidate mispricings."

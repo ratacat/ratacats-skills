@@ -1,0 +1,8 @@
+{
+  "name": "diagnose",
+  "description": "Disciplined diagnosis loop for hard bugs and performance regressions. Reproduce → minimise → hypothesise → instrument → fix → regression-test. Use when user says \"diagnose this\"...",
+  "author": {
+    "name": "Jared Smith",
+    "url": "https://github.com/ratacat"
+  }
+}

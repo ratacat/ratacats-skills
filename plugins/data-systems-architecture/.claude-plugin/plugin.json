@@ -1,0 +1,8 @@
+{
+  "name": "data-systems-architecture",
+  "description": "Use when designing databases for data-heavy applications, making schema decisions for performance, choosing between normalization and denormalization, selecting storage/indexing...",
+  "author": {
+    "name": "Jared Smith",
+    "url": "https://github.com/ratacat"
+  }
+}

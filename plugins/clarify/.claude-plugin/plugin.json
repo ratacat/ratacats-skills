@@ -1,0 +1,8 @@
+{
+  "name": "clarify",
+  "description": "Run a chained clarity review across a target repo, plan, or work items. Use when the user asks to clarify, defuzz, audit, review, harden, distill, de-duplicate, inspect naming, ...",
+  "author": {
+    "name": "Jared Smith",
+    "url": "https://github.com/ratacat"
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "PM Deep Analysis"
+  short_description: "Price-blind deep PM research"
+  default_prompt: "Use $pm-deep-analysis to research this Polymarket event without using odds and produce 0-100 likelihoods."

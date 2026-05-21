@@ -1,0 +1,4 @@
+interface:
+  display_name: "Clarify"
+  short_description: "Run chained clarity reviews across code, plans, or work items."
+  default_prompt: "Use $clarify to review this target for code blunders, plan ambiguity, deep-module opportunities, DRY/cruft, and naming clarity, then apply the smallest safe improvements."

@@ -1,0 +1,82 @@
+{
+  "candidate_count_after_filters": 2318,
+  "created_at_local": "2026-05-09",
+  "files": {
+    "jsonl": "references/corpus/tech-builder-tweets.jsonl",
+    "live_xpool_top_search": "references/corpus/live-xpool-top-search.jsonl",
+    "top_sample": "references/corpus/top-sample.json"
+  },
+  "filters": {
+    "excluded": [
+      "replies",
+      "retweets",
+      "quote tweets",
+      "obvious spam/giveaways",
+      "very short URL-only posts",
+      "off-topic posts admitted only by profile metadata"
+    ],
+    "ranking": "selection_score combines engagement_per_1k_followers, weighted engagement, lift vs author average, text topic coverage, project signal, profile topic coverage, and quality-builder tags.",
+    "required": [
+      "tweet text contains builder/dev/AI/software topic signal",
+      "at least 1 weighted engagement point"
+    ]
+  },
+  "input_tweet_count": 11432,
+  "live_xpool": {
+    "deduped_live_candidates": 415,
+    "job_ids": {
+      "0eb8bc81-ee99-4649-a7c6-c005f144df22": "xpool_top_founder_build_partial",
+      "1af06e89-232e-4a73-8b27-0d5157faaa41": "xpool_top_dev_build",
+      "ad5d11b6-6b6e-4e41-a03a-1dc48637197d": "xpool_top_ai_build"
+    },
+    "live_rows_in_final": 414,
+    "raw_live_candidates": 438,
+    "result_file": "references/corpus/live-xpool-top-search.jsonl"
+  },
+  "metric_formulae": {
+    "engagement_per_1k_followers": "weighted_engagement / max(follower_count, 100) * 1000",
+    "lift_vs_author_average": "weighted_engagement / max(profile.avg_likes + 2*avg_replies + 1.5*avg_retweets, 1)",
+    "weighted_engagement": "likes + 2*replies + 1.5*retweets"
+  },
+  "record_count": 2000,
+  "selection_goal": "2,000 high-relative-engagement tweets whose text itself mentions tech/building/dev/AI/software/project topics, with author follower counts.",
+  "source": "profiles.db in /Users/jaredsmith/Projects/x-woodchipdaddy plus live xPool SearchTimeline Top queries on 2026-05-09",
+  "summary": {
+    "domain_labels": {
+      "ai": 1065,
+      "builder": 1129,
+      "dev": 713,
+      "stack": 262
+    },
+    "engagement_per_1k_followers_median": 5.1025,
+    "follower_buckets": {
+      "large:100k+": 170,
+      "micro:<1k": 179,
+      "mid:10k-100k": 620,
+      "small:1k-10k": 1031
+    },
+    "format_labels": {
+      "build-log": 292,
+      "has-link": 961,
+      "hiring": 49,
+      "launch": 307,
+      "lesson": 27,
+      "opinion": 42,
+      "project-signal": 464,
+      "question": 58,
+      "thread": 24
+    },
+    "profile_domain_labels": {
+      "ai": 391,
+      "builder": 643,
+      "dev": 311,
+      "stack": 76
+    },
+    "project_signal_count": 464,
+    "score_max": 49.7806,
+    "score_median": 12.7292,
+    "score_min": 7.1096,
+    "unique_authors": 992,
+    "weighted_engagement_median": 31.0
+  }
+}

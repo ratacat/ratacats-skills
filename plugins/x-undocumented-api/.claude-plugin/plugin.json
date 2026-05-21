@@ -1,0 +1,8 @@
+{
+  "name": "x-undocumented-api",
+  "description": "Manual-only skill. Never automatically load or select this skill from task context. Use only when the user explicitly asks to manually reference this skill or names `x-undocumen...",
+  "author": {
+    "name": "Jared Smith",
+    "url": "https://github.com/ratacat"
+  }
+}

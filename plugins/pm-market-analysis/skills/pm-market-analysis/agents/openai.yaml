@@ -1,0 +1,4 @@
+interface:
+  display_name: "PM Market Analysis"
+  short_description: "Prediction-market analysis for PMKNB"
+  default_prompt: "Use $pm-market-analysis to analyze one prediction-market PM event, extract exact instruments, and assess market forces plus resolution, liquidity, and platform risk."

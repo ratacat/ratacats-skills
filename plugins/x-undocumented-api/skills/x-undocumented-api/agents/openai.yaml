@@ -1,0 +1,4 @@
+interface:
+  display_name: "X Undocumented API"
+  short_description: "X.com frontend GraphQL API"
+  default_prompt: "Use $x-undocumented-api to investigate X.com frontend GraphQL/web API behavior."

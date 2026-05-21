@@ -1,0 +1,8 @@
+{
+  "name": "beautiful-mermaid-ascii",
+  "description": "Render Mermaid diagrams as readable ASCII/Unicode art in the terminal (from .mmd/.mermaid files, stdin, or Markdown ```mermaid fences). Use when installing or using lukilabs/bea...",
+  "author": {
+    "name": "Jared Smith",
+    "url": "https://github.com/ratacat"
+  }
+}

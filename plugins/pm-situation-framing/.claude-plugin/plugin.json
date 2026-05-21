@@ -1,0 +1,8 @@
+{
+  "name": "pm-situation-framing",
+  "description": "Use when the user or router explicitly names pm-situation-framing to create or update a PMKNB situation frame. This skill is direct-invocation-only and must never be automatical...",
+  "author": {
+    "name": "Jared Smith",
+    "url": "https://github.com/ratacat"
+  }
+}
