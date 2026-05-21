@@ -1,92 +1,16 @@
-# Anna's Archive Ebook Search & Download
+# Anna's Archive Ebooks
 
-A Claude Code skill and CLI tool for searching and downloading ebooks from [Anna's Archive](https://annas-archive.gl).
+This skill helps an agent find a book, pick the right edition, and locate useful metadata or files when the user needs source material.
 
-## Features
+Use it when someone asks for a PDF, EPUB, MOBI, or a book lookup by title and author. It is also useful when a build or research task needs book text as raw material, because the skill pairs naturally with `ebook-extractor`.
 
-- Search by title, author, or both
-- Filter by format (PDF, EPUB, MOBI, AZW3, DJVU)
-- Download via fast API with membership key
-- Automatic mirror fallback when primary domain is down
-- Verify search results against expected titles
-- No external dependencies (stdlib only)
+Books are messy to search for. Titles have editions, translations, bad metadata, and duplicate scans. This skill gives the agent a calm way to search, compare, and explain what it found before downloading anything.
 
-## Prerequisites
+Good fits:
 
-**Downloads require an Anna's Archive membership key.**
+- Finding the right edition of a technical book
+- Getting source text for analysis
+- Turning a vague book request into a concrete file
+- Handing the downloaded file to another skill for extraction
 
-1. [Get a membership](https://annas-archive.gl/donate?r=7XfHurr)
-2. Set your API key:
-   ```bash
-   export ANNAS_ARCHIVE_KEY="your-key-here"
-   ```
-
-Search works without a key. Downloads will fail without one.
-
-## Usage
-
-### Search for books
-
-```bash
-python3 annas.py search "Clean Code Robert Martin" --format pdf --limit 5
-```
-
-### Get book details
-
-```bash
-python3 annas.py details adb5293cf369256a883718e71d3771c3
-```
-
-### Download a book
-
-```bash
-python3 annas.py download adb5293cf369256a883718e71d3771c3 --output ./books/
-```
-
-### Verify a match
-
-```bash
-python3 annas.py search "Design Patterns" --verify "Design Patterns"
-```
-
-### Check API key
-
-```bash
-python3 annas.py check-key
-```
-
-## As a Claude Code Skill
-
-Drop the `SKILL.md` and `annas.py` files into your Claude Code skills directory to use this as an AI-assisted ebook lookup tool. The skill triggers on book lookups, ebook downloads, and related queries.
-
-## Format Priority
-
-When no format is specified: `pdf > epub > mobi > azw3 > djvu`
-
-## Mirror Fallback
-
-The tool automatically tries multiple mirrors if the primary domain is unreachable:
-
-1. annas-archive.gl (primary)
-2. annas-archive.li
-3. annas-archive.in
-4. annas-archive.pm
-
-If all known mirrors fail, it checks the status page at https://open-slum.pages.dev/ to discover new domains automatically.
-
-## Troubleshooting
-
-### SSL Certificate Error on macOS
-
-If you see `[SSL: CERTIFICATE_VERIFY_FAILED]`:
-
-```bash
-pip3 install certifi
-python3 -c "import certifi; print(certifi.where())"
-# Add to ~/.zshrc:
-export SSL_CERT_FILE=/path/from/above/cacert.pem
-```
-
-## License
-
-MIT
+Use it with care. Search works without a key, but automated fast downloads need the configured Anna's Archive membership key. Do not download, reproduce, or redistribute copyrighted material unless the user has lawful access.
