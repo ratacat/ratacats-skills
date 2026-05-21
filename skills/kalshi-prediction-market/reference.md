@@ -1,0 +1,1 @@
+../../plugins/kalshi-prediction-market/skills/kalshi-prediction-market/reference.md

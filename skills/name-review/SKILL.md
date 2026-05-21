@@ -1,0 +1,1 @@
+../../plugins/name-review/skills/name-review/SKILL.md

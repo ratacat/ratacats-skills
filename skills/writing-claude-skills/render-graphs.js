@@ -1,0 +1,1 @@
+../../plugins/writing-claude-skills/skills/writing-claude-skills/render-graphs.js

@@ -1,0 +1,1 @@
+../../plugins/pm-market-analysis/skills/pm-market-analysis/SKILL.md

@@ -1,0 +1,1 @@
+../../plugins/graph-researcher/skills/graph-researcher/schema.sql

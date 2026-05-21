@@ -1,0 +1,1 @@
+../../plugins/ebook-extractor/skills/ebook-extractor/setup.sh

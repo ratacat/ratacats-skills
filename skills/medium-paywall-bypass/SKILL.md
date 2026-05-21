@@ -1,0 +1,1 @@
+../../plugins/medium-paywall-bypass/skills/medium-paywall-bypass/SKILL.md

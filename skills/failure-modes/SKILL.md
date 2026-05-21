@@ -1,0 +1,1 @@
+../../plugins/failure-modes/skills/failure-modes/SKILL.md

@@ -1,0 +1,1 @@
+../../plugins/annas-archive-ebooks/skills/annas-archive-ebooks/SKILL.md

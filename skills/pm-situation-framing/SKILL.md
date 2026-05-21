@@ -1,0 +1,1 @@
+../../plugins/pm-situation-framing/skills/pm-situation-framing/SKILL.md
