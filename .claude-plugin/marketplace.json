@@ -23,6 +23,20 @@
       ]
     },
     {
+      "name": "ansi-art",
+      "source": "./plugins/ansi-art",
+      "description": "Use when creating, reviewing, converting, or embedding terminal text art: ASCII art, ANSI art, CP437/code page 437 glyph art, block ASCII, BBS-style logos, CLI banners, NFOs, fixed-width art, or SAUCE/XBIN/BIN/ANS output.",
+      "version": "0.1.0",
+      "category": "art",
+      "keywords": [
+        "ansi",
+        "ascii",
+        "cp437",
+        "terminal",
+        "art"
+      ]
+    },
+    {
       "name": "clarify",
       "source": "./plugins/clarify",
       "description": "Run a chained clarity review across a target repo, plan, or work items. Use when the user asks to clarify, defuzz, audit, review, harden, distill, de-duplicate, inspect naming, ...",
@@ -30,6 +44,19 @@
       "category": "developer tools",
       "keywords": [
         "clarify"
+      ]
+    },
+    {
+      "name": "conjecture-cascade",
+      "source": "./plugins/conjecture-cascade",
+      "description": "Use when inspecting a software target for hidden bugs, dropped behavior, missing records, stale state, unclear failures, broad reliability risks, or likely issue classes across a bounded scope.",
+      "version": "0.1.0",
+      "category": "developer tools",
+      "keywords": [
+        "bugs",
+        "review",
+        "reliability",
+        "audit"
       ]
     },
     {
@@ -173,7 +200,7 @@
     {
       "name": "pm-situation-framing",
       "source": "./plugins/pm-situation-framing",
-      "description": "Use when the user or router explicitly names pm-situation-framing to create or update a PMKNB situation frame. This skill is direct-invocation-only and must never be automatical...",
+      "description": "PM Situation Framing. Use when explicitly invoked to create or update a PMKNB situation frame. Direct-invocation-only; not a general market-analysis trigger.",
       "version": "0.1.0",
       "category": "prediction markets",
       "keywords": [
