@@ -1,9 +1,9 @@
 ---
 name: pm-situation-framing
-description: Use when the user or router explicitly names pm-situation-framing to create or update a PMKNB situation frame. This skill is direct-invocation-only and must never be automatically loaded for general market, forecasting, research, or news-analysis requests.
+description: Use when the user or router explicitly names PM Situation Framing or pm-situation-framing to create or update a PMKNB situation frame. This skill is direct-invocation-only and must never be automatically loaded for general market, forecasting, research, or news-analysis requests.
 ---
 
-# PM Situation Frame
+# PM Situation Framing
 
 Create a durable, isolated reasoning guide for a PMKNB situation. A situation frame is **not evidence, not a forecast, and not a report**. It is a structured model that helps later agents reason, research, and update without mixing facts with interpretation.
 

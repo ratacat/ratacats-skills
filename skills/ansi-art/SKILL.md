@@ -1,0 +1,1 @@
+../../plugins/ansi-art/skills/ansi-art/SKILL.md

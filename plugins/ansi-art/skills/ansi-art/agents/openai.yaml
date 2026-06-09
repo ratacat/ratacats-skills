@@ -1,0 +1,4 @@
+interface:
+  display_name: "ANSI Art"
+  short_description: "Create CP437/ANSI terminal art."
+  default_prompt: "Use $ansi-art to create terminal-ready CP437/ANSI art with fixed-width rows, intentional shading, and modern terminal rendering constraints."

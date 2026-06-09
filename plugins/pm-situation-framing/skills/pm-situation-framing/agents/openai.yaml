@@ -1,0 +1,4 @@
+interface:
+  display_name: "PM Situation Framing"
+  short_description: "Structure PMKNB situation frames"
+  default_prompt: "Use $pm-situation-framing to create a compact PMKNB situation frame with actors, gates, clocks, cruxes, observables, and update rules."

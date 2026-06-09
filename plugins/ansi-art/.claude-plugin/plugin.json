@@ -1,0 +1,8 @@
+{
+  "name": "ansi-art",
+  "description": "Use when creating, reviewing, converting, or embedding terminal text art: ASCII art, ANSI art, CP437/code page 437 glyph art, block ASCII, BBS-style logos, CLI banners, NFOs, fixed-width art, or SAUCE/XBIN/BIN/ANS output.",
+  "author": {
+    "name": "Jared Smith",
+    "url": "https://github.com/ratacat"
+  }
+}
