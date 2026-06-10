@@ -1,8 +1,0 @@
-{
-  "name": "pm-mispricing-analysis",
-  "description": "Use when an agent needs a bounded market-aware scan of one Polymarket or prediction-market event to fetch current prices, do quick subject research, estimate resolution likeliho...",
-  "author": {
-    "name": "Jared Smith",
-    "url": "https://github.com/ratacat"
-  }
-}

@@ -72,7 +72,7 @@
     {
       "name": "duris-game-knowledge",
       "source": "./plugins/duris-game-knowledge",
-      "description": "Use whenever working on Duris MUD — connecting to the game, navigating, exploring, fighting, parsing game output, writing commands, understanding zones, combat mechanics, spellc...",
+      "description": "Use whenever working on Duris MUD \u2014 connecting to the game, navigating, exploring, fighting, parsing game output, writing commands, understanding zones, combat mechanics, spellc...",
       "version": "0.1.0",
       "category": "games",
       "keywords": [
@@ -129,7 +129,7 @@
     {
       "name": "kalshi-prediction-market",
       "source": "./plugins/kalshi-prediction-market",
-      "description": "Context and working knowledge for Calci’s prediction-market domain, which is powered by Kalshi. Use this skill whenever the user asks about Calci prediction markets, Kalshi mark...",
+      "description": "Context and working knowledge for Calci\u2019s prediction-market domain, which is powered by Kalshi. Use this skill whenever the user asks about Calci prediction markets, Kalshi mark...",
       "version": "0.1.0",
       "category": "prediction markets",
       "keywords": [
@@ -182,18 +182,6 @@
       "keywords": [
         "pm",
         "market",
-        "analysis"
-      ]
-    },
-    {
-      "name": "pm-mispricing-analysis",
-      "source": "./plugins/pm-mispricing-analysis",
-      "description": "Use when an agent needs a bounded market-aware scan of one Polymarket or prediction-market event to fetch current prices, do quick subject research, estimate resolution likeliho...",
-      "version": "0.1.0",
-      "category": "prediction markets",
-      "keywords": [
-        "pm",
-        "mispricing",
         "analysis"
       ]
     },
