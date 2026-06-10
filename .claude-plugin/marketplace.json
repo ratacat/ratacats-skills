@@ -242,6 +242,20 @@
         "undocumented",
         "api"
       ]
+    },
+    {
+      "name": "pm-research-methodologies",
+      "source": "./plugins/pm-research-methodologies",
+      "description": "Manual-only. Load only when the user explicitly names pm-research-methodologies or asks for the general research methodology framework for deep research on a subject with no dedicated methodology skill.",
+      "version": "0.1.0",
+      "category": "prediction markets",
+      "keywords": [
+        "pm",
+        "research",
+        "methodology",
+        "scaffolding",
+        "provenance"
+      ]
     }
   ]
 }

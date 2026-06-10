@@ -1,0 +1,8 @@
+{
+  "name": "pm-research-methodologies",
+  "description": "Manual-only generalized research methodology framework: scaffolding, chain-of-knowing provenance judgment, source discovery, and synthesis for deep research when no domain-specific methodology skill exists.",
+  "author": {
+    "name": "Jared Smith",
+    "url": "https://github.com/ratacat"
+  }
+}
