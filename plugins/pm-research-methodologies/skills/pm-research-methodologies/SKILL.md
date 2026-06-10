@@ -41,9 +41,9 @@ A **scaffold** is a high-specificity list or graph of named entities whose indiv
 
 Build the scaffold **before** running research queries. The scaffold is the research plan.
 
-### The question itself is the first node
+### Root into the question's context
 
-Research the question before researching the subject. Verify its presuppositions: the deadline lies in the future, the named event has not already occurred or been mooted, and the question means what it appears to mean. When the subject is a prediction market, fetch the market's rules text verbatim and mine it for nodes: the exact deadline, the named resolution sources, any named bills, instruments, or laws, and the qualifying and disqualifying clauses. Defective rules — expired deadlines, mismatched source links, template residue from earlier versions of the market — are findings of the first order. For re-issued or series markets, how earlier versions actually resolved outweighs textual analysis: the resolver's past behavior is the best evidence of how the rules will be read.
+A research question arrives wrapped in context, and the context is part of the subject. Before researching the world, understand the question: who is asking, what would actually settle it, and whether its premises still hold. For prediction markets, resolution context is central — read the rules text, learn who or what resolves the market, what counts and what is excluded, and what has counted before. For re-issued or series markets, how earlier versions actually resolved outweighs textual analysis: the resolver's past behavior is the best evidence of how the rules will be read. The world and the resolution can diverge; research serves the question as it will actually be settled, not the question as it appears.
 
 ### Node types
 
@@ -85,7 +85,6 @@ Work node by node, with bounded passes:
 2. Capture findings as atomic claims with the source attached. One claim, one statement, one provenance.
 3. Mark dark nodes and move on. Darkness is information: absence of coverage is itself a finding worth one line.
 4. At every finding, take the **going-deeper juncture**: a report cites a dataset — get the dataset. A story quotes a person — that person is a new node. A filing references a docket — open the docket.
-5. Anchor every cadence, base-rate, or precedent argument to dated events from primary sources. A claimed "six-week release rhythm" or "86% endorsement win rate" becomes a finding only when the dated event list appears with it.
 
 ### Insider vocabulary
 
@@ -99,17 +98,13 @@ Run the same scaffold through different lenses and compare what each lens return
 
 ## Stage 3 — The Chain of Knowing
 
-Every statement reaches you through a chain: event → witness → reporter → editor → publisher → aggregator → you. Each link has interests, and each link can transform the statement. Treat every source as answering two questions at once: *what does this say about the subject?* and *what does this say about the speaker?*
+Every statement reaches you through a chain: event → witness → reporter → editor → publisher → aggregator → you. Each link has interests, and each link can transform the statement. *Where did this come from?* is always the question. Trace reports back to their origin — apparent corroboration often launders a single origin, one leaker's claim quoted by an aggregator quoted by three more outlets. Credit corroboration only across independent origins.
 
-A statement is evidence about its speaker at least as much as about its subject.
+Treat every source as answering two questions at once: *what does this say about the subject?* and *what does this say about the speaker?* A statement is evidence about its speaker at least as much as about its subject.
 
 ### Interest mapping
 
 For each load-bearing source, write one line: **who benefits if this is believed?** Campaign-adjacent outlets, state media, short sellers, litigants, officials managing expectations — their statements are moves in a game, and the game is often more informative than the statement. Sources with no visible stake in the claim earn more weight; sources whose stake aligns with the claim earn a discount; sources speaking **against** their own interest earn a premium.
-
-### Count origins, not outlets
-
-Apparent corroboration often launders a single origin: one leaker's claim, quoted by an aggregator, quoted by three more outlets. Before crediting "multiple sources," trace each report to its origin and count the independent origins. Three retellings of one checkpoint-access account is one source.
 
 ### Actor reads
 
@@ -117,7 +112,6 @@ For recurring public actors, the historical record supports a precedent-grounded
 
 - Example: Trump's record establishes that his positions are instantaneous and reversible, his statements frequently conflict, and he treats prior commitments as non-binding. Therefore weight any single Trump statement as a move, not a commitment — and weight markets that resolve on his *actions* very differently from markets that resolve on his *words*.
 - Build the same kind of read for any actor who appears repeatedly in your subject: does this institution pre-announce or surprise? Does this CEO ship on announced dates? Does this ministry's spokesman ever contradict the leader?
-- Map where authority over this outcome actually sits and how contested it is — authority is a research finding, not an org chart. Titles claim control; factions, successions, and purges fracture it. In a contested or freshly-succeeded leadership, treat any single actor's directive as one faction's position, and weight observed behavior over statements at every level.
 
 ### Knowability tiers
 
@@ -136,7 +130,6 @@ Climb back up the scaffold. Node-level findings answer level-above questions: wh
 - Write the synthesis as explanation: *why it is like this, how it became like this*, with the claims that carry the explanation cited inline.
 - Preserve contradictions as contradictions. Two well-sourced claims that disagree are a finding; pick neither, record both, and state what evidence would settle them.
 - State what would change your mind: the specific observation that would break the synthesis. That sentence becomes a signal worth monitoring.
-- When the subject is a market, state two likelihoods whenever they diverge: the likelihood of the world event, and the likelihood the market resolves YES. Rules defects, wording ambiguity, and resolver discretion live in the gap between them.
 - Include the scaffold you actually used in the report, with dark nodes marked. The research plan is part of the deliverable; it makes the run auditable and gives the next run its starting map.
 - Convert every dark node into a specific open question, phrased so a future bounded run can execute it directly.
 
@@ -192,18 +185,18 @@ Shared terms for this framework, usable across prompts, reports, and discussion:
 
 ## Quick Reference
 
-1. Name the subject question, verify its presuppositions (for markets: fetch the rules verbatim), and write the outcome block.
+1. Root into the question's context — for markets, the resolution context: rules, resolver, series precedent — and write the outcome block.
 2. Build the scaffold: pick 2–3 descent moves, list 8–25 proper-noun nodes.
 3. Research node by node: bounded queries, atomic sourced claims, deeper at every juncture, re-search with insider terms of art when they show themselves.
-4. Judge each load-bearing source's chain: interest map, independent-origin count, actor read, knowability tier, per-claim-type trust.
-5. Synthesize upward: explain why/how-it-became, keep contradictions, split world likelihood from resolution likelihood when they diverge, show the scaffold, state what would change your mind, file dark nodes as open questions.
+4. Judge each load-bearing source's chain: where it came from, independent origins, interest map, actor read, knowability tier, per-claim-type trust.
+5. Synthesize upward: explain why/how-it-became, keep contradictions, show the scaffold, state what would change your mind, file dark nodes as open questions.
 
 ## Rules
 
-- Verify the question's presuppositions before researching the subject; for markets, read the rules text verbatim first.
+- Root into the question's context before researching the subject; for markets, resolution context comes first.
 - Build the scaffold before running queries; queries without a scaffold produce surface takes.
 - Make every node a proper noun; descend until that is true.
-- Credit corroboration only across independent origins; count origins, not outlets.
+- Trace reports to their origin; credit corroboration only across independent origins.
 - Take the going-deeper juncture every time a source cites something more primary.
 - Write the interest map for every source that carries weight in the synthesis.
 - Treat statements by tracked actors through their actor reads, and statements against interest as premium evidence.
