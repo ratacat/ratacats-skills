@@ -86,7 +86,7 @@ Work node by node, with bounded passes:
 
 Every domain has an insider vocabulary, and the insider terms unlock a stratum of sources the lay terms can never reach. Search the lay term, harvest the terms of art from the first good source, then re-search with the terms of art. That single move is often worth more than ten additional lay-term queries.
 
-Examples: "election lawsuit" → the docket number and the legal doctrine name; "weather forecast" → "MOS guidance", the station identifier; "Fed decision" → the specific facility, the dot plot, the named alternates. Each break drops you into trade press, dockets, registries, and practitioner forums.
+Examples: "election lawsuit" → the docket number and the legal doctrine name; "weather forecast" → "MOS guidance", the station identifier; "Fed decision" → the specific facility, the dot plot, the named alternates. Each one drops you into trade press, dockets, registries, and practitioner forums.
 
 ### Slices
 
