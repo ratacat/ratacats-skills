@@ -43,7 +43,7 @@ Build the scaffold **before** running research queries. The scaffold is the rese
 
 ### The question itself is the first node
 
-Research the question before researching the subject. Verify its presuppositions: the deadline lies in the future, the named event has not already occurred or been mooted, and the question means what it appears to mean. When the subject is a prediction market, fetch the market's rules text verbatim and mine it for nodes: the exact deadline, the named resolution sources, any named bills, instruments, or laws, and the qualifying and disqualifying clauses. Defective rules — expired deadlines, mismatched source links, template residue from earlier versions of the market — are findings of the first order: they convert the market from a world question into an interpretation question.
+Research the question before researching the subject. Verify its presuppositions: the deadline lies in the future, the named event has not already occurred or been mooted, and the question means what it appears to mean. When the subject is a prediction market, fetch the market's rules text verbatim and mine it for nodes: the exact deadline, the named resolution sources, any named bills, instruments, or laws, and the qualifying and disqualifying clauses. Defective rules — expired deadlines, mismatched source links, template residue from earlier versions of the market — are findings of the first order. For re-issued or series markets, how earlier versions actually resolved outweighs textual analysis: the resolver's past behavior is the best evidence of how the rules will be read.
 
 ### Node types
 
@@ -117,7 +117,7 @@ For recurring public actors, the historical record supports a precedent-grounded
 
 - Example: Trump's record establishes that his positions are instantaneous and reversible, his statements frequently conflict, and he treats prior commitments as non-binding. Therefore weight any single Trump statement as a move, not a commitment — and weight markets that resolve on his *actions* very differently from markets that resolve on his *words*.
 - Build the same kind of read for any actor who appears repeatedly in your subject: does this institution pre-announce or surprise? Does this CEO ship on announced dates? Does this ministry's spokesman ever contradict the leader?
-- Identify the actor who holds **final authority** over the outcome — a supreme leader, a court, a release approver — and weight their statements above negotiators, ministers, and spokesmen, who speak tactically and can be overruled.
+- Map where authority over this outcome actually sits and how contested it is — authority is a research finding, not an org chart. Titles claim control; factions, successions, and purges fracture it. In a contested or freshly-succeeded leadership, treat any single actor's directive as one faction's position, and weight observed behavior over statements at every level.
 
 ### Knowability tiers
 
