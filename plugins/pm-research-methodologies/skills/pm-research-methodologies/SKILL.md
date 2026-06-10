@@ -67,8 +67,8 @@ Apply whichever moves fit the subject; most subjects reward two or three:
 
 Descend until nodes become individually researchable; ascend when they stop being findable.
 
-- A node that returns only national-level commentary sits **above the surface ceiling** — descend a level.
-- A node that returns nothing at all is a **dry node** — ascend one level or approach it through a neighboring node's edges.
+- A node that returns only national-level commentary sits too high to learn from — descend a level.
+- A node that returns nothing at all is a **dark node** — ascend one level or approach it through a neighboring node's edges.
 - The **specificity test**: scaffold nodes are proper nouns or near-proper nouns. A list of categories ("local industries, key politicians") is a template, not a scaffold. A list of names ("Hénin-Beaumont; Steeve Briois; the CGT local at the former Metaleurop site") is a scaffold.
 
 Size the scaffold to the run budget: 8–25 nodes for a bounded run, organized in 2–3 levels. Record nodes you cut — they become open questions.
@@ -79,12 +79,12 @@ Work node by node, with bounded passes:
 
 1. Run 2–5 queries per node. Vary the query form: the node's name alone, the name + the subject question, the name + each slice (economic, political, historical).
 2. Capture findings as atomic claims with the source attached. One claim, one statement, one provenance.
-3. Mark dry nodes and move on. Dry is information: absence of coverage is itself a finding worth one line.
+3. Mark dark nodes and move on. Darkness is information: absence of coverage is itself a finding worth one line.
 4. At every finding, take the **going-deeper juncture**: a report cites a dataset — get the dataset. A story quotes a person — that person is a new node. A filing references a docket — open the docket.
 
-### Layer breaks
+### Insider vocabulary
 
-Every domain has an insider vocabulary, and the insider terms unlock a stratum of sources the lay terms can never reach. Search the lay term, harvest the terms of art from the first good source, then re-search with the terms of art. That move — a **layer break** — is often worth more than ten additional lay-term queries.
+Every domain has an insider vocabulary, and the insider terms unlock a stratum of sources the lay terms can never reach. Search the lay term, harvest the terms of art from the first good source, then re-search with the terms of art. That single move is often worth more than ten additional lay-term queries.
 
 Examples: "election lawsuit" → the docket number and the legal doctrine name; "weather forecast" → "MOS guidance", the station identifier; "Fed decision" → the specific facility, the dot plot, the named alternates. Each break drops you into trade press, dockets, registries, and practitioner forums.
 
@@ -102,18 +102,18 @@ A statement is evidence about its speaker at least as much as about its subject.
 
 For each load-bearing source, write one line: **who benefits if this is believed?** Campaign-adjacent outlets, state media, short sellers, litigants, officials managing expectations — their statements are moves in a game, and the game is often more informative than the statement. Sources with no visible stake in the claim earn more weight; sources whose stake aligns with the claim earn a discount; sources speaking **against** their own interest earn a premium.
 
-### Actor priors
+### Actor reads
 
-For recurring public actors, the historical record supports specific, high-value behavioral priors. Build them from precedent and use them to weight statements:
+For recurring public actors, the historical record supports a precedent-grounded theory of mind — an **actor read**. Build it from the record and use it to weight statements:
 
 - Example: Trump's record establishes that his positions are instantaneous and reversible, his statements frequently conflict, and he treats prior commitments as non-binding. Therefore weight any single Trump statement as a move, not a commitment — and weight markets that resolve on his *actions* very differently from markets that resolve on his *words*.
-- Build the same kind of prior for any actor who appears repeatedly in your subject: does this institution pre-announce or surprise? Does this CEO ship on announced dates? Does this ministry's spokesman ever contradict the leader?
+- Build the same kind of read for any actor who appears repeatedly in your subject: does this institution pre-announce or surprise? Does this CEO ship on announced dates? Does this ministry's spokesman ever contradict the leader?
 
 ### Knowability tiers
 
 Calibrate how much chain-judgment is even possible:
 
-- **Tracked actors** (politicians, agencies, listed companies, established outlets): long public records — build real priors.
+- **Tracked actors** (politicians, agencies, listed companies, established outlets): long public records — build real actor reads.
 - **Identifiable but thin** (local figures, small outlets, named analysts): judge from affiliation and incentive structure.
 - **Anonymous or new** (unattributed claims, fresh accounts, single-source stories): the chain is dark — weight the claim by its checkability, and check it.
 
@@ -126,7 +126,7 @@ Climb back up the scaffold. Node-level findings answer level-above questions: wh
 - Write the synthesis as explanation: *why it is like this, how it became like this*, with the claims that carry the explanation cited inline.
 - Preserve contradictions as contradictions. Two well-sourced claims that disagree are a finding; pick neither, record both, and state what evidence would settle them.
 - State what would change your mind: the specific observation that would break the synthesis. That sentence becomes a signal worth monitoring.
-- Convert every dark or cut node into a specific open question, phrased so a future bounded run can execute it directly.
+- Convert every dark node into a specific open question, phrased so a future bounded run can execute it directly.
 
 ## Source Genres and Discovery Moves
 
@@ -134,10 +134,10 @@ Conceptualize sources by genre, and use lateral and spatial questions to find th
 
 | genre | examples | reach them via |
 |---|---|---|
-| primary records | filings, dockets, registries, budgets, transcripts, datasets, election returns | layer breaks; institutional descent |
+| primary records | filings, dockets, registries, budgets, transcripts, datasets, election returns | insider terms of art; institutional descent |
 | institutional output | agency reports, minutes, inspection records, procurement notices | the issuing office, found by descent |
 | local press & media | county papers, local radio, regional TV, municipal newsletters | spatial descent; search in local language |
-| trade & practitioner | industry press, conference talks, job postings, technical forums | layer breaks into the insider lexicon |
+| trade & practitioner | industry press, conference talks, job postings, technical forums | search with the insider lexicon |
 | social listening | X/Twitter questions and chatter (`x-questions` skill via xpool), Reddit, local Facebook groups, Telegram | search the node names, not the topic |
 | adversarial | opposition research, short-seller reports, litigation discovery, leaked documents | search the node + "lawsuit / investigation / report" |
 
@@ -152,7 +152,7 @@ Leading directions per genre of the active Polymarket board. These are pointers;
 
 - **Elections & domestic politics** (US races, primaries, appointments, "will X happen by date"): descend spatially to the decisive jurisdictions; research named local actors and machines; pull precedent base rates for the event class; map the procedural mechanics — who certifies, who counts, what deadlines and legal challenges exist. Polling is one source genre, never the scaffold.
 - **Global elections** (Sweden, France, by-elections): same descent plus local-language press, coalition arithmetic, and the country's specific electoral law (thresholds, rounds, seat formulas — markets often resolve on these mechanics).
-- **Geopolitics & conflict** (Iran, Israel, Ukraine, Hormuz, ceasefires, treaties): actor priors and interest mapping carry the most weight here — most sources are parties to the conflict. Find local and regional media in original languages; name the actual negotiators and commanders; map the procedural path a deal must travel (ratification, cabinet votes, oversight). Defer to `middle-east-research` for its region.
+- **Geopolitics & conflict** (Iran, Israel, Ukraine, Hormuz, ceasefires, treaties): actor reads and interest mapping carry the most weight here — most sources are parties to the conflict. Find local and regional media in original languages; name the actual negotiators and commanders; map the procedural path a deal must travel (ratification, cabinet votes, oversight). Defer to `middle-east-research` for its region.
 - **Macro & rates** (Fed, global central banks, inflation prints): the calendar is the scaffold — meetings, release dates, blackout periods; named voters and their speech records; revision history of the data series; the resolution source's exact print (which index, which release).
 - **Equities & company events** (price levels, valuations, IPOs, M&A): filings over news — 8-Ks, S-1s, prospectuses; precedent behavior of the specific company; the mechanics of the trigger (whose print resolves it, intraday or close).
 - **Tech & AI** (model releases, benchmarks, product launches): the company's release precedent (announced vs shipped dates); insider telemetry — job postings, GitHub activity, app-store metadata, conference schedules; benchmark mechanics (who scores it, what counts as a result).
@@ -171,20 +171,17 @@ Shared terms for this framework, usable across prompts, reports, and discussion:
 | **node** | one individually researchable entity on the scaffold |
 | **descent** | moving down a specificity level (nation → county → town) |
 | **slice** | one lens run across the whole scaffold (economic, social, temporal) |
-| **surface ceiling** | the depth limit of aggregate/national coverage that forces descent |
-| **dry node** | a node with no recoverable sources — itself a finding |
-| **layer break** | harvesting insider terms of art to unlock a deeper source stratum |
+| **dark node** | a node left unlit — searched and empty, or cut for budget; itself a finding |
 | **chain of knowing** | the transmission path of a statement from event to reader |
 | **interest map** | the one-line answer to "who benefits if this is believed?" |
-| **actor prior** | a precedent-grounded behavioral expectation for a named actor |
-| **getting under** | the move from describing a subject to explaining it |
+| **actor read** | a precedent-grounded theory of mind for a named actor or group |
 
 ## Quick Reference
 
 1. Name the subject question and write the outcome block.
 2. Build the scaffold: pick 2–3 descent moves, list 8–25 proper-noun nodes.
-3. Research node by node: bounded queries, atomic sourced claims, deeper at every juncture, layer breaks when the insider lexicon shows itself.
-4. Judge each load-bearing source's chain: interest map, actor prior, knowability tier, per-claim-type trust.
+3. Research node by node: bounded queries, atomic sourced claims, deeper at every juncture, re-search with insider terms of art when they show themselves.
+4. Judge each load-bearing source's chain: interest map, actor read, knowability tier, per-claim-type trust.
 5. Synthesize upward: explain why/how-it-became, keep contradictions, state what would change your mind, file dark nodes as open questions.
 
 ## Rules
@@ -193,6 +190,6 @@ Shared terms for this framework, usable across prompts, reports, and discussion:
 - Make every node a proper noun; descend until that is true.
 - Take the going-deeper juncture every time a source cites something more primary.
 - Write the interest map for every source that carries weight in the synthesis.
-- Treat statements by tracked actors through their priors, and statements against interest as premium evidence.
+- Treat statements by tracked actors through their actor reads, and statements against interest as premium evidence.
 - Keep contradictions; resolving them prematurely destroys the most valuable finding.
 - End every run with open questions specific enough to execute directly.
