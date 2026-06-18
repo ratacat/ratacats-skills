@@ -23,6 +23,15 @@ The script writes:
 - `x-graphql-endpoints-<date>.csv`
 - `x-graphql-community-endpoints-<date>.md`
 
+### Structural limits of bundle extraction
+
+Bundle extraction has two hard limits — knowing them prevents wild-goose hunts:
+
+1. **Lazy chunks.** The logged-out `x.com` harvest only sees bootstrap bundles. Many operations ship in **on-demand chunks** loaded only at their surface *after* its gate clears (e.g. `/i/chat` after the E2E PIN gate). To find those operations, drive a logged-in browser to the surface and scan the chunks `performance.getEntriesByType('resource')` shows as loaded — not just the main bundle.
+2. **WebSocket surfaces.** Some actions are not GraphQL at all. X Chat sends are WebSocket frames to `wss://chat-ws.x.com/ws?token=<JWT>` — there is **no** send `operationName`/`queryId` to extract, ever, because the operation is not a GraphQL mutation. Bundle extraction cannot surface it regardless of auth or which chunks are scanned. Capture it with CDP WebSocket frame handlers instead.
+
+"Regenerate, don't trust stale query ids" remains correct for the HTTP operations that exist; these limits explain why some operations will simply never appear in a bundle scan.
+
 ## What Metadata Gives You
 
 Operation metadata usually gives:
@@ -87,14 +96,13 @@ Common field toggles seen in current metadata:
 
 If a metadata block advertises field toggles, include them unless a fresh browser trace shows otherwise.
 
-## 2026-05-18 Inventory Snapshot
+## 2026-06-18 Inventory Snapshot
 
-A scan of current X client-web scripts found 158 operations from 6 scripts:
+A scan of current X client-web scripts found 157 operations from 6 scripts:
 
 | Category | Count |
 | --- | ---: |
 | bookmark | 2 |
-| commerce | 1 |
 | community | 37 |
 | direct-message | 3 |
 | list | 20 |
@@ -105,37 +113,32 @@ A scan of current X client-web scripts found 158 operations from 6 scripts:
 
 High-value operation families from that scan:
 
-- community: `CommunityTweetsTimeline`, `CommunityTweetsLoggedOutTimeline`, `CommunityTweetsRankedLoggedOutTimeline`, `CommunityMediaTimeline`, `CommunityByRestId`
+- search: `SearchTimeline`, `BookmarkSearchTimeline`, `ListSearchTimeline`
 - list: `ListLatestTweetsTimeline`, list metadata, list membership, list subscribe/update operations
-- search: `SearchTimeline`, `BookmarkSearchTimeline`, `ListSearchTimeline`, global communities post search timelines
 - tweet: tweet detail, result-by-ID, create/delete/retweet/favorite/bookmark operations
 - user: identity, profile, followers/following, verification, follow relationship operations
 
 For current work, regenerate instead of trusting an old snapshot.
 
-## Selected Query IDs From 2026-05-18
+## Selected Query IDs From 2026-06-18
 
 These are examples from one bundle scan and can drift:
 
 | Operation | Type | Query ID |
 | --- | --- | --- |
-| `SearchTimeline` | query | `Yw6L66Pw54NHKuq4Dp7b4Q` |
-| `ListSearchTimeline` | query | `YTkV8GjFNGfgnhRNP6kDbQ` |
-| `ListLatestTweetsTimeline` | query | `7UuJsFvnWuZo0HmxrzU42Q` |
-| `ListRankedTweetsTimeline` | query | `k6XNxM7f9JrrqcITWhkv0Q` |
-| `UserTweets` | query | `36rb3Xj3iJ64Q-9wKDjCcQ` |
-| `UserTweetsAndReplies` | query | `D5eKzDa5ZoJuC1TCeAXbWA` |
-| `UserMedia` | query | `9EovraBTXJYGSEQXZqlLmQ` |
-| `Followers` | query | `_orfRBQae57vylFPH0Huhg` |
-| `Following` | query | `F42cDX8PDFxkbjjq6JrM2w` |
-| `UserByRestId` | query | `VQfQ9wwYdk6j_u2O4vt64Q` |
-| `UserByScreenName` | query | `IGgvgiOx4QZndDHuD3x9TQ` |
-| `TweetDetail` | query | `oCon7R-cgWRFy6EfZjaKfg` |
-| `TweetResultByRestId` | query | `2Acdg-VztGlHX7MjX67Ysw` |
-| `TweetResultsByRestIds` | query | `BwuN_YTc9eeI25mH_qjqPw` |
-| `CommunityTweetsTimeline` | query | `gabM2RYROuhItXzDYUdjyA` |
-| `CommunityMediaTimeline` | query | `cMhAbdDdk-pZKGwqi5FY_g` |
-| `CommunityByRestId` | query | `vLS7mhOqMLtGZdXqFP1DEg` |
+| `SearchTimeline` | query | `yIphfmxUO-hddQHKIOk9tA` |
+| `ListLatestTweetsTimeline` | query | `27HKUy8ulrflZ9Tole038g` |
+| `UserTweets` | query | `RyDU3I9VJtPF-Pnl6vrRlw` |
+| `UserTweetsAndReplies` | query | `plVqzvVGaDxbFEPoOe_i-A` |
+| `Followers` | query | `9jsVJ9l2uXUIKslHvJqIhw` |
+| `Following` | query | `OLm4oHZBfqWx8jbcEhWoFw` |
+| `UserByRestId` | query | `IBScZCvFJadZC25ubLYNRQ` |
+| `UserByScreenName` | query | `681MIj51w00Aj6dY0GXnHw` |
+| `TweetDetail` | query | `meGUdoK_ryVZ0daBK-HJ2g` |
+| `TweetResultByRestId` | query | `8CEYnZhCp0dx9DFyyEBlbQ` |
+| `TweetResultsByRestIds` | query | `Sc9EUQTZNEH-wzegn-nHvQ` |
+
+One additional 2026-06-18 finding: the extracted current client-web bundle did not surface `itemFilter`, `authored_posts`, or `authored_replies` strings near the user-timeline operation inventory. Treat any runtime-side `itemFilter` as unproven until you confirm it in current bundle caller code.
 
 ## Discovery Checklist
 
@@ -155,3 +158,4 @@ These are examples from one bundle scan and can drift:
 - Sending a transaction ID for `/OperationName` instead of `/i/api/graphql/<queryId>/<OperationName>`.
 - Treating HTTP 200 as success without checking GraphQL `errors`, response path, and item count.
 - Treating one account or guest-token result as global endpoint behavior.
+- Assuming every write has a GraphQL `operationName`. X Chat (DM) sends are WebSocket frames, not mutations — no send query id exists to extract (see Structural limits above).

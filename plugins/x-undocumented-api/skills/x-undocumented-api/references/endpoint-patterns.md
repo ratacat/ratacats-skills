@@ -46,7 +46,8 @@ Useful observed query patterns:
 
 | Pattern | Notes |
 | --- | --- |
-| `from:<screen_name>` | User-authored post search. |
+| `from:<screen_name>` | User-authored corpus search; often stronger than native user timelines for bounded corpus collection. |
+| `from:<screen_name> filter:replies` | Author replies only; useful when native replies crawls have low lane yield. |
 | `from:user1 OR from:user2` | Multi-author search; query length is the practical constraint. |
 | `since_time:<unix_sec>` | Precise lower time boundary. |
 | `until_time:<unix_sec>` | Precise upper time boundary. |
@@ -56,6 +57,8 @@ Useful observed query patterns:
 | `community:<community_id>` | Not a reliable way to fetch posts inside a community. |
 
 For list recency, prefer `ListLatestTweetsTimeline`. For community posts, prefer `CommunityTweetsTimeline`.
+
+Live xpool probes on 2026-06-18 found that author-search lanes can be dramatically more page-efficient than native mixed timelines for profile corpus collection. Sampled results: `from:CosmicDude3000 -filter:replies -filter:retweets` reached 100 posts in 5 pages while `UserTweetsAndReplies` local post filtering hit 39 posts after 20 pages; `from:Presto_Research filter:replies` and `from:knust_src filter:replies` reached 100 replies in 5 pages while `UserTweetsAndReplies` local reply filtering stopped at 47 and 46 replies after 20 pages. Later the same day, direct comparisons also showed post-light accounts where native `UserTweets` recovered more root posts than author-search (`64` vs `20`, `100` vs `74`, `22` vs `2`, then `22` vs `2`, `1` vs `1`, and `18` vs `0` on three more post-light accounts). Treat that as dated evidence tied to X web behavior and re-check with your own access mode.
 
 ## ListLatestTweetsTimeline
 
@@ -106,6 +109,12 @@ Common operations:
 - `UserSuperFollowTweets`
 
 User timeline pagination is cursor-led. Do not assume cursors are stable partitions across time or accounts.
+
+Do not assume app-side `itemFilter` values are real GraphQL variables. In the 2026-06-18 client-web bundle scan, `itemFilter`, `authored_posts`, and `authored_replies` strings were absent, and live xpool probes showed that local-only filtering on `UserTweetsAndReplies` can spend 20 pages to emit fewer than 50 target lane items.
+
+For `SearchTimeline`, later-page cursors are risky under account rotation. In 2026-06-18 live xpool profile-sample probes, rotating-account continuation produced concentrated 404 / timeout / network failures on cursor-bearing pages; pinning one account per lane materially improved stability.
+
+`UserTweets` can include repost surfaces. If you need authored root posts only, verify or filter `surfaceSourceKind` rather than assuming the endpoint is already clean. Low-yield `UserTweets` cursor loops do not automatically mean search will do better; in fresh xpool profile-sample slices, many such cases were either truly sparse or reply-heavy accounts. On the same investigation, a larger live hybrid slice kept posts distributed across `target_items_reached`, `max_pages_reached`, and `cursor_loop`, while reply search mostly settled into `target_items_reached` and `source_exhausted`, which is a stronger argument for a hybrid lane choice than for a universal search fallback.
 
 ## Followers And Following
 

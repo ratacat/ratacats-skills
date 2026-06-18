@@ -46,7 +46,10 @@ Observed timeline behavior can include:
 - saved cursors decay or become invalid
 - two different cursor strings can return identical item sequences
 - the same starting point across accounts can overlap heavily
+- cursor continuation can depend on the viewing account or session; a later-page cursor that works on one account can fail on another
+- short bursts of `RUNNER_TERMINATED` / `runner_terminated` can be process-rollover artifacts from in-flight work rather than endpoint behavior; isolate restart windows before treating them as pagination evidence
 - requested `count` can be ignored
+- effective lane yield can diverge sharply from raw page count when local filtering sits above a broad timeline operation
 - `sortIndex` is useful evidence but not a caller-controlled range boundary
 
 ## Fan-Out Guidance
@@ -57,7 +60,9 @@ Before using cursors for parallel collection:
 2. Measure overlap by item ID sequence, not by cursor text.
 3. Keep global dedupe by item ID.
 4. Keep one serial traversal as a correctness anchor for important crawls.
-5. Re-check behavior after endpoint or query-ID drift.
+5. When probing search or user-corpus lanes, compare rotating-account continuation against one pinned-account traversal before concluding the cursor itself is bad.
+6. Re-check behavior after endpoint or query-ID drift.
+7. If stop reasons spike immediately after a worker restart, separate that rollover interval from the steady-state sample before drawing endpoint conclusions.
 
 Avoid treating same-start cursor requests as partitions; they can spend requests on duplicate pages.
 
@@ -73,6 +78,7 @@ Before documenting a cursor claim:
 
 Strong signal:
 
+- raw versus emitted item counts tracked per page when local filtering is involved
 - exact same item sequence when expected
 - stable page fingerprint reuse
 - preserved relative order
