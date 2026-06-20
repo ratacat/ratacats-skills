@@ -256,6 +256,20 @@
         "scaffolding",
         "provenance"
       ]
+    },
+    {
+      "name": "gpt-pro-loop",
+      "source": "./plugins/gpt-pro-loop",
+      "description": "Use when running a GPT Pro or pro-cli assisted project revision loop: build a context package, write a GPT Pro prompt, request adversarial review, map issues into a design map, run revision passes, verify locally, write goal assessments, and hand off the loop.",
+      "version": "0.1.0",
+      "category": "developer tools",
+      "keywords": [
+        "gpt",
+        "pro",
+        "loop",
+        "pro-cli",
+        "revision"
+      ]
     }
   ]
 }
