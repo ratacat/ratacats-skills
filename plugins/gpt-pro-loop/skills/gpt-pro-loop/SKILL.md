@@ -92,6 +92,7 @@ Keep the branch model simple. Run one main loop. Invoke the Pro review loop insi
 
 2. Write the gpt pro prompt.
    - Open with an outcome block: goal, success criteria, stop condition, and hard constraints.
+   - Set simplification as Pro's primary lens: ask it to favor the simplest, most elegant form that still meets every design requirement and goal in full, reducing complexity and code volume without losing capability or purpose.
    - Ask Pro to return issues in the workflow issue schema.
    - Request weak points, overlooked bugs, data or schema risks, test gaps, design contradictions, operating-mode concerns, and concrete improvements.
    - Completion: the prompt names the review target, requested output shape, and evidence standard.

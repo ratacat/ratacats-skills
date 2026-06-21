@@ -134,13 +134,19 @@ Stop condition: <condition>
 ## GPT Pro Prompt
 
 ````md
-Goal: Perform a deep adversarial review of the attached context package for <loop goal>.
+Goal: Perform a deep adversarial review of the attached context package for <loop goal>, with simplification as the primary lens.
+
+Primary lens — simplify:
+- Treat reducing complexity and code volume as the main objective.
+- For every issue and suggestion, prefer the simplest, most elegant form that still meets all design requirements and goals in full.
+- Look hard for code, abstractions, indirection, and state that can be removed, merged, or collapsed while capability and purpose are fully preserved.
+- Never trade away required capability, correctness, or purpose to make something smaller.
 
 Success means:
 - Return issues using the issue schema below.
 - Separate direct evidence from inference.
 - Identify weak points, oversights, bugs, data/schema risks, test gaps, design contradictions, and operating-mode concerns.
-- Suggest concrete revisions and local verification ideas.
+- Suggest concrete revisions and local verification ideas, biased toward simplification.
 
 Stop when: every material concern from the provided context is represented as an issue, open question, design tension, or summary note.
 
