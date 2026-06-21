@@ -1,0 +1,1 @@
+../../plugins/pm-research-methodologies/skills/pm-research-methodologies/SKILL.md

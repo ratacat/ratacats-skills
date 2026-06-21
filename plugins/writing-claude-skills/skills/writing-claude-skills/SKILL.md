@@ -1,5 +1,5 @@
 ---
-name: writing-skills
+name: writing-claude-skills
 description: Use when user asks to create, write, edit, or test a skill. Also use when documenting reusable techniques, patterns, or workflows for future Claude
   instances.
 ---

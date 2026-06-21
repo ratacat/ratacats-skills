@@ -1,4 +1,0 @@
-interface:
-  display_name: "GPT Pro Loop"
-  short_description: "Run Pro-backed revision loops"
-  default_prompt: "Use $gpt-pro-loop to build a context package, get an adversarial review, run revision passes, and write a goal assessment."
