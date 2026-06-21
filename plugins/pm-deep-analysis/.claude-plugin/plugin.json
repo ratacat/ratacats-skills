@@ -1,6 +1,6 @@
 {
   "name": "pm-deep-analysis",
-  "description": "Use when an agent needs price-blind deep research for a Polymarket or prediction-market event, market URL, event URL, market question set, or PMKNB situation, including fresh an...",
+  "description": "Use when an agent needs price-blind deep research for a Polymarket or prediction-market event, market URL, event URL, market question set, or PMKNB situation, including fresh analysis, updating existing deep research, resolution mechanics, source discovery, and 0-100 likelihood estimates independent of market odds.",
   "author": {
     "name": "Jared Smith",
     "url": "https://github.com/ratacat"

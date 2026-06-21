@@ -1,11 +1,11 @@
 ---
 name: kalshi-prediction-market
-description: Context and working knowledge for Calci’s prediction-market domain, which is powered by Kalshi. Use this skill whenever the user asks about Calci prediction markets, Kalshi markets, tickers, order books, pricing, settlement, or the Kalshi API/WebSocket.
+description: Context and working knowledge for the Kalshi prediction-market domain. Use this skill whenever the user asks about Kalshi markets, tickers, order books, pricing, settlement, or the Kalshi API/WebSocket.
 allowed-tools: Read, Grep, Glob
 ---
-# Calci Prediction Market (Kalshi)
+# Kalshi Prediction Market
 
-Calci’s prediction-market layer is built on **Kalshi**. This skill provides the domain model, trading mechanics, and API conventions you need to reason about Calci/Kalshi data and to explain it clearly to users.
+**Kalshi** is a regulated prediction-market exchange. This skill provides the domain model, trading mechanics, and API conventions you need to reason about Kalshi data and to explain it clearly to users.
 
 ## Core Mental Model
 
@@ -22,7 +22,7 @@ Calci’s prediction-market layer is built on **Kalshi**. This skill provides th
    - Users pay maximum loss up‑front. No margin/leverage.
    - You can never lose more than you spend on contracts.
 
-## Data Hierarchy (Kalshi → Calci)
+## Data Hierarchy
 
 Kalshi uses a strict hierarchy:
 
@@ -30,11 +30,11 @@ Kalshi uses a strict hierarchy:
 - **Event** → specific instance within a series (a real‑world occurrence).
 - **Market** → single binary contract within an event (one Yes/No outcome).
 
-Calci mirrors these objects. When you see “market” in Calci UI, clarify whether it’s an **event page** (container) or a **specific market outcome** (binary leg).
+When you see “market,” clarify whether it means an **event page** (container) or a **specific market outcome** (binary leg).
 
 ## Market Objects: What Fields Mean
 
-When interpreting Calci/Kalshi market JSON:
+When interpreting Kalshi market JSON:
 
 - **ticker**: unique identifier (string).
 - **event_ticker / series_ticker**: parent identifiers.
@@ -94,7 +94,7 @@ Real‑time updates arrive via **WebSocket** subscriptions to tickers.
 
 ## How to Apply This Skill When Answering
 
-1. **Map Calci terms → Kalshi terms** if the user is vague.
+1. **Identify the exact event or market** the user means if they’re vague.
 2. **Always distinguish Series/Event/Market** and restate which level you’re discussing.
 3. **Convert price to probability** explicitly when helpful.
 4. **Explain both sides (Yes/No) and spreads** when discussing pricing or order books.
@@ -103,8 +103,8 @@ Real‑time updates arrive via **WebSocket** subscriptions to tickers.
 
 ## Examples
 
-- “This Calci market is a Kalshi **market ticker**. It’s a binary contract paying $1 if Yes. At $0.62, the market implies ~62% Yes probability.”
+- “This is a Kalshi **market ticker** — a binary contract paying $1 if Yes. At $0.62, the market implies ~62% Yes probability.”
 - “The event is **mutually exclusive**, so each candidate outcome is a separate market. Exactly one can settle Yes.”
-- “To get real‑time prices, subscribe to the market tickers on the Kalshi WebSocket; Calci mirrors those updates.”
+- “To get real‑time prices, subscribe to the market tickers on the Kalshi WebSocket.”
 
 For more detail, see [reference.md](reference.md).

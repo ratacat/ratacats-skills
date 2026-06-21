@@ -1,4 +1,4 @@
-# Calci Prediction Market Reference (Kalshi)
+# Kalshi Prediction Market Reference
 
 This reference expands on SKILL.md with more complete domain context.
 

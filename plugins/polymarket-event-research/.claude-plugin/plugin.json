@@ -1,6 +1,6 @@
 {
   "name": "polymarket-event-research",
-  "description": "Use when the user asks for price-blind research on the real-world resolution mechanics of a specific Polymarket or prediction-market event, including actors, institutions, legal...",
+  "description": "Use when the user asks for price-blind research on the real-world resolution mechanics of a specific Polymarket or prediction-market event, including actors, institutions, legal/procedural paths, local context, source discovery, proof standards, structured research handoffs, or KNB world-mode mapping. Do not use for odds, prices, portfolios, trade decisions, market microstructure, or forecast/EV analysis.",
   "author": {
     "name": "Jared Smith",
     "url": "https://github.com/ratacat"

@@ -1,6 +1,6 @@
 {
   "name": "duris-group-combat",
-  "description": "Use when designing or operating Duris group combat with tanks, assists, assumed targets, caster memorization readiness, bash risk, tracking enemies, aggro adds, or command spam ...",
+  "description": "Use when designing or operating Duris group combat with tanks, assists, assumed targets, caster memorization readiness, bash risk, tracking enemies, aggro adds, or command spam risk.",
   "author": {
     "name": "Jared Smith",
     "url": "https://github.com/ratacat"

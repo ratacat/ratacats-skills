@@ -1,6 +1,6 @@
 {
   "name": "kalshi-prediction-market",
-  "description": "Context and working knowledge for Calci’s prediction-market domain, which is powered by Kalshi. Use this skill whenever the user asks about Calci prediction markets, Kalshi mark...",
+  "description": "Context and working knowledge for the Kalshi prediction-market domain. Use this skill whenever the user asks about Kalshi markets, tickers, order books, pricing, settlement, or the Kalshi API/WebSocket.",
   "author": {
     "name": "Jared Smith",
     "url": "https://github.com/ratacat"

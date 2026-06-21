@@ -1,6 +1,6 @@
 {
   "name": "failure-modes",
-  "description": "Use when reviewing a codebase, uncommitted changes, recent agent work, or one subsystem for hidden bugs, flawed assumptions, drift, duplication, weak tests, broken contracts, or...",
+  "description": "Use when reviewing a codebase, uncommitted changes, recent agent work, or one subsystem for hidden bugs, flawed assumptions, drift, duplication, weak tests, broken contracts, or other failure modes.",
   "author": {
     "name": "Jared Smith",
     "url": "https://github.com/ratacat"

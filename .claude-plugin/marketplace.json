@@ -13,7 +13,7 @@
     {
       "name": "annas-archive-ebooks",
       "source": "./plugins/annas-archive-ebooks",
-      "description": "Use when needing to look up book content, find a book by title/author, download an ebook, or reference material from a published book. Triggers on book lookups, ebook downloads,...",
+      "description": "Use when needing to look up book content, find a book by title/author, download an ebook, or reference material from a published book. Triggers on book lookups, ebook downloads, \"find the book\", \"get the PDF/EPUB of\". Downloads produce PDF/EPUB/MOBI files - use ebook-extractor skill to convert to text.",
       "version": "0.1.0",
       "category": "tools",
       "keywords": [
@@ -39,7 +39,7 @@
     {
       "name": "clarify",
       "source": "./plugins/clarify",
-      "description": "Run a chained clarity review across a target repo, plan, or work items. Use when the user asks to clarify, defuzz, audit, review, harden, distill, de-duplicate, inspect naming, ...",
+      "description": "Run a chained clarity review across a target repo, plan, or work items. Use when the user asks to clarify, defuzz, audit, review, harden, distill, de-duplicate, inspect naming, apply fresh eyes to recent code, or combine code review, plan refinement, deep-module architecture, DRY/cruft, and naming analysis into one reusable workflow.",
       "version": "0.1.0",
       "category": "developer tools",
       "keywords": [
@@ -72,7 +72,7 @@
     {
       "name": "duris-game-knowledge",
       "source": "./plugins/duris-game-knowledge",
-      "description": "Use whenever working on Duris MUD \u2014 connecting to the game, navigating, exploring, fighting, parsing game output, writing commands, understanding zones, combat mechanics, spellc...",
+      "description": "Use whenever working on Duris MUD \u2014 connecting to the game, navigating, exploring, fighting, parsing game output, writing commands, understanding zones, combat mechanics, spellcasting, geography, equipment, mobs, recovery, or any other gameplay question. Load this skill for any task involving Duris.",
       "version": "0.1.0",
       "category": "games",
       "keywords": [
@@ -84,7 +84,7 @@
     {
       "name": "duris-group-combat",
       "source": "./plugins/duris-group-combat",
-      "description": "Use when designing or operating Duris group combat with tanks, assists, assumed targets, caster memorization readiness, bash risk, tracking enemies, aggro adds, or command spam ...",
+      "description": "Use when designing or operating Duris group combat with tanks, assists, assumed targets, caster memorization readiness, bash risk, tracking enemies, aggro adds, or command spam risk.",
       "version": "0.1.0",
       "category": "games",
       "keywords": [
@@ -107,7 +107,7 @@
     {
       "name": "failure-modes",
       "source": "./plugins/failure-modes",
-      "description": "Use when reviewing a codebase, uncommitted changes, recent agent work, or one subsystem for hidden bugs, flawed assumptions, drift, duplication, weak tests, broken contracts, or...",
+      "description": "Use when reviewing a codebase, uncommitted changes, recent agent work, or one subsystem for hidden bugs, flawed assumptions, drift, duplication, weak tests, broken contracts, or other failure modes.",
       "version": "0.1.0",
       "category": "developer tools",
       "keywords": [
@@ -118,7 +118,7 @@
     {
       "name": "graph-researcher",
       "source": "./plugins/graph-researcher",
-      "description": "Deep web research with relevance scoring and knowledge graph storage. Use when researching topics, companies, people, or concepts. Performs Graph-of-Thoughts style exploration w...",
+      "description": "Deep web research with relevance scoring and knowledge graph storage. Use when researching topics, companies, people, or concepts. Performs Graph-of-Thoughts style exploration with parallel branching, relevance scoring, and synthesis into themed reports.",
       "version": "0.1.0",
       "category": "tools",
       "keywords": [
@@ -129,7 +129,7 @@
     {
       "name": "kalshi-prediction-market",
       "source": "./plugins/kalshi-prediction-market",
-      "description": "Context and working knowledge for Calci\u2019s prediction-market domain, which is powered by Kalshi. Use this skill whenever the user asks about Calci prediction markets, Kalshi mark...",
+      "description": "Context and working knowledge for the Kalshi prediction-market domain. Use this skill whenever the user asks about Kalshi markets, tickers, order books, pricing, settlement, or the Kalshi API/WebSocket.",
       "version": "0.1.0",
       "category": "prediction markets",
       "keywords": [
@@ -141,7 +141,7 @@
     {
       "name": "medium-paywall-bypass",
       "source": "./plugins/medium-paywall-bypass",
-      "description": "Use when user shares a Medium article URL behind a paywall and wants to read the full content. Also use for articles on Medium-hosted publications like towardsdatascience.com, b...",
+      "description": "Use when user shares a Medium article URL behind a paywall and wants to read the full content. Also use for articles on Medium-hosted publications like towardsdatascience.com, betterprogramming.pub, levelup.gitconnected.com, etc.",
       "version": "0.1.0",
       "category": "developer tools",
       "keywords": [
@@ -153,7 +153,7 @@
     {
       "name": "name-review",
       "source": "./plugins/name-review",
-      "description": "Use when reviewing or designing names for plans, beads, work items, architecture docs, codebases, APIs, schemas, modules, states, or domain vocabulary where terminology drift, o...",
+      "description": "Use when reviewing or designing names for plans, beads, work items, architecture docs, codebases, APIs, schemas, modules, states, or domain vocabulary where terminology drift, overloaded concepts, boundary ambiguity, or AI-confusing naming may exist.",
       "version": "0.1.0",
       "category": "developer tools",
       "keywords": [
@@ -164,7 +164,7 @@
     {
       "name": "pm-deep-analysis",
       "source": "./plugins/pm-deep-analysis",
-      "description": "Use when an agent needs price-blind deep research for a Polymarket or prediction-market event, market URL, event URL, market question set, or PMKNB situation, including fresh an...",
+      "description": "Use when an agent needs price-blind deep research for a Polymarket or prediction-market event, market URL, event URL, market question set, or PMKNB situation, including fresh analysis, updating existing deep research, resolution mechanics, source discovery, and 0-100 likelihood estimates independent of market odds.",
       "version": "0.1.0",
       "category": "prediction markets",
       "keywords": [
@@ -176,7 +176,7 @@
     {
       "name": "pm-market-analysis",
       "source": "./plugins/pm-market-analysis",
-      "description": "Use when Codex must analyze one prediction-market PM event for PMKNB: ingest subject/world research and market data, identify exact Polymarket or Kalshi instruments, assess mark...",
+      "description": "Use when Codex must analyze one prediction-market PM event for PMKNB: ingest subject/world research and market data, identify exact Polymarket or Kalshi instruments, assess market forces, resolution/oracle risk, liquidity, and platform/counterparty risk, then output a forecast, report, brief, proposal, or no-publish result. Triggers include prediction market, Polymarket, Kalshi, PM event, instrument identity, conditionId, token IDs, event_ticker, market ticker, YES/NO, PMKNB market_analysis, resolution risk, negative risk, or multi-market event analysis.",
       "version": "0.1.0",
       "category": "prediction markets",
       "keywords": [
@@ -188,7 +188,7 @@
     {
       "name": "pm-situation-framing",
       "source": "./plugins/pm-situation-framing",
-      "description": "PM Situation Framing. Use when explicitly invoked to create or update a PMKNB situation frame. Direct-invocation-only; not a general market-analysis trigger.",
+      "description": "Use when the user or router explicitly names PM Situation Framing or pm-situation-framing to create or update a PMKNB situation frame. This skill is direct-invocation-only and must never be automatically loaded for general market, forecasting, research, or news-analysis requests.",
       "version": "0.1.0",
       "category": "prediction markets",
       "keywords": [
@@ -200,7 +200,7 @@
     {
       "name": "polymarket-event-research",
       "source": "./plugins/polymarket-event-research",
-      "description": "Use when the user asks for price-blind research on the real-world resolution mechanics of a specific Polymarket or prediction-market event, including actors, institutions, legal...",
+      "description": "Use when the user asks for price-blind research on the real-world resolution mechanics of a specific Polymarket or prediction-market event, including actors, institutions, legal/procedural paths, local context, source discovery, proof standards, structured research handoffs, or KNB world-mode mapping. Do not use for odds, prices, portfolios, trade decisions, market microstructure, or forecast/EV analysis.",
       "version": "0.1.0",
       "category": "prediction markets",
       "keywords": [
@@ -212,7 +212,7 @@
     {
       "name": "tdd",
       "source": "./plugins/tdd",
-      "description": "Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions \"red-green-refactor\", wants integration tests, or ask...",
+      "description": "Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions \"red-green-refactor\", wants integration tests, or asks for test-first development.",
       "version": "0.1.0",
       "category": "developer tools",
       "keywords": [
@@ -234,7 +234,7 @@
     {
       "name": "x-undocumented-api",
       "source": "./plugins/x-undocumented-api",
-      "description": "Manual-only skill. Never automatically load or select this skill from task context. Use only when the user explicitly asks to manually reference this skill or names `x-undocumen...",
+      "description": "Manual-only skill. Never automatically load or select this skill from task context. Use only when the user explicitly asks to manually reference this skill or names `x-undocumented-api` / `x-api-skill`.",
       "version": "0.1.0",
       "category": "developer tools",
       "keywords": [
@@ -246,7 +246,7 @@
     {
       "name": "pm-research-methodologies",
       "source": "./plugins/pm-research-methodologies",
-      "description": "Manual-only. Load only when the user explicitly names pm-research-methodologies or asks for the general research methodology framework for deep research on a subject with no dedicated methodology skill.",
+      "description": "Manual-only. Never auto-load or auto-select this skill from task context. Load only when the user explicitly names pm-research-methodologies, or asks for the general research methodology framework, to structure deep research on a subject that has no dedicated methodology skill.",
       "version": "0.2.0",
       "category": "prediction markets",
       "keywords": [

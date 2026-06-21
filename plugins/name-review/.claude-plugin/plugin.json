@@ -1,6 +1,6 @@
 {
   "name": "name-review",
-  "description": "Use when reviewing or designing names for plans, beads, work items, architecture docs, codebases, APIs, schemas, modules, states, or domain vocabulary where terminology drift, o...",
+  "description": "Use when reviewing or designing names for plans, beads, work items, architecture docs, codebases, APIs, schemas, modules, states, or domain vocabulary where terminology drift, overloaded concepts, boundary ambiguity, or AI-confusing naming may exist.",
   "author": {
     "name": "Jared Smith",
     "url": "https://github.com/ratacat"
