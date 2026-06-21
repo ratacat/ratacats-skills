@@ -14,6 +14,20 @@ Good fits:
 
 It stops when the goal assessment chooses `satisfied`, `pivot`, `handoff`, or `blocked`.
 
+## Install
+
+```sh
+# skills.sh CLI — Claude Code, Codex, Cursor, OpenCode, and more
+npx skills add ratacat/ratacats-skills --skill gpt-pro-loop
+
+# direct path to just this skill
+npx skills add https://github.com/ratacat/ratacats-skills/tree/main/skills/gpt-pro-loop
+
+# or the Claude plugin marketplace
+/plugin marketplace add ratacat/ratacats-skills
+/plugin install gpt-pro-loop
+```
+
 ## Setup (required)
 
 This skill drives GPT Pro through [`pro-cli`](https://github.com/ratacat/pro-cli), which must be installed and logged in to your ChatGPT account. You do not have to do this by hand: when you run the skill, the agent checks `pro-cli doctor --json` and, if it is missing or not logged in, installs it and walks you through the one-time browser login. The full flow is in [references/pro-cli-setup.md](references/pro-cli-setup.md).
