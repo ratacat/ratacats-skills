@@ -16,11 +16,15 @@ It stops when the goal assessment chooses `satisfied`, `pivot`, `handoff`, or `b
 
 ## Setup (required)
 
-This skill drives GPT Pro through [`pro-cli`](https://github.com/ratacat/pro-cli). Before the loop can run, two things must be true:
+This skill drives GPT Pro through [`pro-cli`](https://github.com/ratacat/pro-cli), which must be installed and logged in to your ChatGPT account. You do not have to do this by hand: when you run the skill, the agent checks `pro-cli doctor --json` and, if it is missing or not logged in, installs it and walks you through the one-time browser login. The full flow is in [references/pro-cli-setup.md](references/pro-cli-setup.md).
 
-1. **`pro-cli` is installed.**
-2. **`pro-cli` is authenticated to your account** so reviews can be submitted.
+Quick version:
 
-> **TODO:** ship a single `setup` command that installs `pro-cli` if missing and walks through connecting it to the user's account. The exact mechanism is still being worked out — for now, install and authenticate `pro-cli` manually before using the skill.
+```sh
+pro-cli doctor --json    # health check (no Pro quota): installed + logged in?
+# if missing (requires Bun):
+curl -fsSL https://raw.githubusercontent.com/ratacat/pro-cli/main/scripts/install.sh | bash
+# then authenticate one logged-in ChatGPT Chrome window and re-run doctor
+```
 
-Never send secrets, raw cookies, tokens, `.env` files, or private keys through `pro-cli`. The skill redacts these from the context package.
+`pro-cli` runs on your ChatGPT subscription via your own logged-in web session. Never send secrets, raw cookies, tokens, `.env` files, or private keys through it — the skill redacts these from the context package, and `pro-cli` stores only scoped auth under `~/.pro-cli`.

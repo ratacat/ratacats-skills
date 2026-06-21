@@ -84,6 +84,8 @@ Keep the branch model simple. Run one main loop. Invoke the Pro review loop insi
 
 ### Pro Review Loop
 
+Preflight: before the first review round, confirm `pro-cli` is ready with `pro-cli doctor --json`. If it is missing or unhealthy, install and authenticate it using [pro-cli-setup.md](references/pro-cli-setup.md) — the agent can run the install and verification and walk the user through the one-time browser login. Re-run `pro-cli doctor --json` until it reports healthy before sending a review.
+
 1. Build the context package.
    - Rebuild it for the current iteration from repo instructions, design map state, current code, schemas, tests, data samples, validation, prior reviews, and known omissions.
    - Redact secrets, credentials, private keys, cookies, tokens, and raw environment files.
