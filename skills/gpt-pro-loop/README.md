@@ -25,7 +25,7 @@ npx skills add https://github.com/ratacat/ratacats-skills/tree/main/skills/gpt-p
 
 # or the Claude plugin marketplace
 /plugin marketplace add ratacat/ratacats-skills
-/plugin install gpt-pro-loop
+/plugin install gpt-pro-loop@ratacats-skills
 ```
 
 ## Setup (required)

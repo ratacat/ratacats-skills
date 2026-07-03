@@ -11,4 +11,3 @@ Good fits:
 - Verifying that failures are loud, recorded, and recoverable
 - Producing an evidence-backed issue report with fixes and residual risks
 
-Plugin source: [`plugins/conjecture-cascade`](../../plugins/conjecture-cascade/)

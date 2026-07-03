@@ -1,1 +1,3 @@
-../../plugins/ebook-extractor/skills/ebook-extractor/requirements.txt
+ebooklib
+beautifulsoup4
+PyMuPDF

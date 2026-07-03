@@ -1,3 +1,0 @@
-ebooklib
-beautifulsoup4
-PyMuPDF

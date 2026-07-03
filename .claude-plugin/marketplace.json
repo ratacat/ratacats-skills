@@ -5,28 +5,37 @@
     "url": "https://github.com/ratacat"
   },
   "metadata": {
-    "description": "Claude and Codex skills authored or locally maintained by Ratacat.",
-    "version": "0.1.0",
-    "homepage": "https://github.com/ratacat/ratacats-skills"
+    "description": "Claude and Codex skills authored or locally maintained by Ratacat."
   },
   "plugins": [
     {
       "name": "annas-archive-ebooks",
-      "source": "./plugins/annas-archive-ebooks",
+      "source": "./skills/annas-archive-ebooks",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
       "description": "Use when needing to look up book content, find a book by title/author, download an ebook, or reference material from a published book. Triggers on book lookups, ebook downloads, \"find the book\", \"get the PDF/EPUB of\". Downloads produce PDF/EPUB/MOBI files - use ebook-extractor skill to convert to text.",
-      "version": "0.1.0",
       "category": "tools",
       "keywords": [
         "annas",
         "archive",
         "ebooks"
-      ]
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
     },
     {
       "name": "ansi-art",
-      "source": "./plugins/ansi-art",
+      "source": "./skills/ansi-art",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
       "description": "Use when creating, reviewing, converting, or embedding terminal text art: ASCII art, ANSI art, CP437/code page 437 glyph art, block ASCII, BBS-style logos, CLI banners, NFOs, fixed-width art, or SAUCE/XBIN/BIN/ANS output.",
-      "version": "0.1.0",
       "category": "art",
       "keywords": [
         "ansi",
@@ -34,234 +43,156 @@
         "cp437",
         "terminal",
         "art"
-      ]
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
     },
     {
       "name": "clarify",
-      "source": "./plugins/clarify",
+      "source": "./skills/clarify",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
       "description": "Run a chained clarity review across a target repo, plan, or work items. Use when the user asks to clarify, defuzz, audit, review, harden, distill, de-duplicate, inspect naming, apply fresh eyes to recent code, or combine code review, plan refinement, deep-module architecture, DRY/cruft, and naming analysis into one reusable workflow.",
-      "version": "0.1.0",
       "category": "developer tools",
       "keywords": [
         "clarify"
-      ]
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
     },
     {
       "name": "conjecture-cascade",
-      "source": "./plugins/conjecture-cascade",
+      "source": "./skills/conjecture-cascade",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
       "description": "Use when inspecting a software target for hidden bugs, dropped behavior, missing records, stale state, unclear failures, broad reliability risks, or likely issue classes across a bounded scope.",
-      "version": "0.1.0",
       "category": "developer tools",
       "keywords": [
         "bugs",
         "review",
         "reliability",
         "audit"
-      ]
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
     },
     {
       "name": "dianalokada",
-      "source": "./plugins/dianalokada",
+      "source": "./skills/dianalokada",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
       "description": "Become Diana. Ukrainian software engineer in NYC. KGB accent. Zero filter. Real corpus mode with full main tweets and top-ranked replies. Once invoked there is no going back.",
-      "version": "0.1.0",
       "category": "writing",
       "keywords": [
         "dianalokada"
-      ]
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
     },
     {
       "name": "duris-game-knowledge",
-      "source": "./plugins/duris-game-knowledge",
-      "description": "Use whenever working on Duris MUD \u2014 connecting to the game, navigating, exploring, fighting, parsing game output, writing commands, understanding zones, combat mechanics, spellcasting, geography, equipment, mobs, recovery, or any other gameplay question. Load this skill for any task involving Duris.",
-      "version": "0.1.0",
+      "source": "./skills/duris-game-knowledge",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Use whenever working on Duris MUD — connecting to the game, navigating, exploring, fighting, parsing game output, writing commands, understanding zones, combat mechanics, spellcasting, geography, equipment, mobs, recovery, or any other gameplay question. Load this skill for any task involving Duris.",
       "category": "games",
       "keywords": [
         "duris",
         "game",
         "knowledge"
-      ]
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
     },
     {
       "name": "duris-group-combat",
-      "source": "./plugins/duris-group-combat",
+      "source": "./skills/duris-group-combat",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
       "description": "Use when designing or operating Duris group combat with tanks, assists, assumed targets, caster memorization readiness, bash risk, tracking enemies, aggro adds, or command spam risk.",
-      "version": "0.1.0",
       "category": "games",
       "keywords": [
         "duris",
         "group",
         "combat"
-      ]
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
     },
     {
       "name": "ebook-extractor",
-      "source": "./plugins/ebook-extractor",
+      "source": "./skills/ebook-extractor",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
       "description": "Use when user wants to extract text from ebooks (EPUB, MOBI, PDF). Use for converting ebooks to plain text for analysis, processing, or reading. Handles all common ebook formats.",
-      "version": "0.1.0",
       "category": "developer tools",
       "keywords": [
         "ebook",
         "extractor"
-      ]
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
     },
     {
       "name": "failure-modes",
-      "source": "./plugins/failure-modes",
+      "source": "./skills/failure-modes",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
       "description": "Use when reviewing a codebase, uncommitted changes, recent agent work, or one subsystem for hidden bugs, flawed assumptions, drift, duplication, weak tests, broken contracts, or other failure modes.",
-      "version": "0.1.0",
       "category": "developer tools",
       "keywords": [
         "failure",
         "modes"
-      ]
-    },
-    {
-      "name": "graph-researcher",
-      "source": "./plugins/graph-researcher",
-      "description": "Deep web research with relevance scoring and knowledge graph storage. Use when researching topics, companies, people, or concepts. Performs Graph-of-Thoughts style exploration with parallel branching, relevance scoring, and synthesis into themed reports.",
-      "version": "0.1.0",
-      "category": "tools",
-      "keywords": [
-        "graph",
-        "researcher"
-      ]
-    },
-    {
-      "name": "kalshi-prediction-market",
-      "source": "./plugins/kalshi-prediction-market",
-      "description": "Context and working knowledge for the Kalshi prediction-market domain. Use this skill whenever the user asks about Kalshi markets, tickers, order books, pricing, settlement, or the Kalshi API/WebSocket.",
-      "version": "0.1.0",
-      "category": "prediction markets",
-      "keywords": [
-        "kalshi",
-        "prediction",
-        "market"
-      ]
-    },
-    {
-      "name": "medium-paywall-bypass",
-      "source": "./plugins/medium-paywall-bypass",
-      "description": "Use when user shares a Medium article URL behind a paywall and wants to read the full content. Also use for articles on Medium-hosted publications like towardsdatascience.com, betterprogramming.pub, levelup.gitconnected.com, etc.",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "medium",
-        "paywall",
-        "bypass"
-      ]
-    },
-    {
-      "name": "name-review",
-      "source": "./plugins/name-review",
-      "description": "Use when reviewing or designing names for plans, beads, work items, architecture docs, codebases, APIs, schemas, modules, states, or domain vocabulary where terminology drift, overloaded concepts, boundary ambiguity, or AI-confusing naming may exist.",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "name",
-        "review"
-      ]
-    },
-    {
-      "name": "pm-deep-analysis",
-      "source": "./plugins/pm-deep-analysis",
-      "description": "Use when an agent needs price-blind deep research for a Polymarket or prediction-market event, market URL, event URL, market question set, or PMKNB situation, including fresh analysis, updating existing deep research, resolution mechanics, source discovery, and 0-100 likelihood estimates independent of market odds.",
-      "version": "0.1.0",
-      "category": "prediction markets",
-      "keywords": [
-        "pm",
-        "deep",
-        "analysis"
-      ]
-    },
-    {
-      "name": "pm-market-analysis",
-      "source": "./plugins/pm-market-analysis",
-      "description": "Use when Codex must analyze one prediction-market PM event for PMKNB: ingest subject/world research and market data, identify exact Polymarket or Kalshi instruments, assess market forces, resolution/oracle risk, liquidity, and platform/counterparty risk, then output a forecast, report, brief, proposal, or no-publish result. Triggers include prediction market, Polymarket, Kalshi, PM event, instrument identity, conditionId, token IDs, event_ticker, market ticker, YES/NO, PMKNB market_analysis, resolution risk, negative risk, or multi-market event analysis.",
-      "version": "0.1.0",
-      "category": "prediction markets",
-      "keywords": [
-        "pm",
-        "market",
-        "analysis"
-      ]
-    },
-    {
-      "name": "pm-situation-framing",
-      "source": "./plugins/pm-situation-framing",
-      "description": "Use when the user or router explicitly names PM Situation Framing or pm-situation-framing to create or update a PMKNB situation frame. This skill is direct-invocation-only and must never be automatically loaded for general market, forecasting, research, or news-analysis requests.",
-      "version": "0.1.0",
-      "category": "prediction markets",
-      "keywords": [
-        "pm",
-        "situation",
-        "framing"
-      ]
-    },
-    {
-      "name": "polymarket-event-research",
-      "source": "./plugins/polymarket-event-research",
-      "description": "Use when the user asks for price-blind research on the real-world resolution mechanics of a specific Polymarket or prediction-market event, including actors, institutions, legal/procedural paths, local context, source discovery, proof standards, structured research handoffs, or KNB world-mode mapping. Do not use for odds, prices, portfolios, trade decisions, market microstructure, or forecast/EV analysis.",
-      "version": "0.1.0",
-      "category": "prediction markets",
-      "keywords": [
-        "polymarket",
-        "event",
-        "research"
-      ]
-    },
-    {
-      "name": "tdd",
-      "source": "./plugins/tdd",
-      "description": "Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions \"red-green-refactor\", wants integration tests, or asks for test-first development.",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "tdd"
-      ]
-    },
-    {
-      "name": "writing-claude-skills",
-      "source": "./plugins/writing-claude-skills",
-      "description": "Use when user asks to create, write, edit, or test a skill. Also use when documenting reusable techniques, patterns, or workflows for future Claude instances.",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "writing",
-        "claude",
-        "skills"
-      ]
-    },
-    {
-      "name": "x-undocumented-api",
-      "source": "./plugins/x-undocumented-api",
-      "description": "Manual-only skill. Never automatically load or select this skill from task context. Use only when the user explicitly asks to manually reference this skill or names `x-undocumented-api` / `x-api-skill`.",
-      "version": "0.1.0",
-      "category": "developer tools",
-      "keywords": [
-        "x",
-        "undocumented",
-        "api"
-      ]
-    },
-    {
-      "name": "pm-research-methodologies",
-      "source": "./plugins/pm-research-methodologies",
-      "description": "Manual-only. Never auto-load or auto-select this skill from task context. Load only when the user explicitly names pm-research-methodologies, or asks for the general research methodology framework, to structure deep research on a subject that has no dedicated methodology skill.",
-      "version": "0.2.0",
-      "category": "prediction markets",
-      "keywords": [
-        "pm",
-        "research",
-        "methodology",
-        "scaffolding",
-        "provenance"
-      ]
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
     },
     {
       "name": "gpt-pro-loop",
-      "source": "./plugins/gpt-pro-loop",
+      "source": "./skills/gpt-pro-loop",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
       "description": "Use when running a GPT Pro or pro-cli assisted project revision loop: build a context package, write a GPT Pro prompt, request adversarial review, map issues into a design map, run revision passes, verify locally, write goal assessments, and hand off the loop.",
-      "version": "0.1.0",
       "category": "developer tools",
       "keywords": [
         "gpt",
@@ -269,7 +200,250 @@
         "loop",
         "pro-cli",
         "revision"
-      ]
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "graph-researcher",
+      "source": "./skills/graph-researcher",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Deep web research with relevance scoring and knowledge graph storage. Use when researching topics, companies, people, or concepts. Performs Graph-of-Thoughts style exploration with parallel branching, relevance scoring, and synthesis into themed reports.",
+      "category": "tools",
+      "keywords": [
+        "graph",
+        "researcher"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "kalshi-prediction-market",
+      "source": "./skills/kalshi-prediction-market",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Context and working knowledge for the Kalshi prediction-market domain. Use this skill whenever the user asks about Kalshi markets, tickers, order books, pricing, settlement, or the Kalshi API/WebSocket.",
+      "category": "prediction markets",
+      "keywords": [
+        "kalshi",
+        "prediction",
+        "market"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "medium-paywall-bypass",
+      "source": "./skills/medium-paywall-bypass",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Use when user shares a Medium article URL behind a paywall and wants to read the full content. Also use for articles on Medium-hosted publications like towardsdatascience.com, betterprogramming.pub, levelup.gitconnected.com, etc.",
+      "category": "developer tools",
+      "keywords": [
+        "medium",
+        "paywall",
+        "bypass"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "name-review",
+      "source": "./skills/name-review",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Use when reviewing or designing names for plans, beads, work items, architecture docs, codebases, APIs, schemas, modules, states, or domain vocabulary where terminology drift, overloaded concepts, boundary ambiguity, or AI-confusing naming may exist.",
+      "category": "developer tools",
+      "keywords": [
+        "name",
+        "review"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "pm-deep-analysis",
+      "source": "./skills/pm-deep-analysis",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Use when an agent needs price-blind deep research for a Polymarket or prediction-market event, market URL, event URL, market question set, or PMKNB situation, including fresh analysis, updating existing deep research, resolution mechanics, source discovery, and 0-100 likelihood estimates independent of market odds.",
+      "category": "prediction markets",
+      "keywords": [
+        "pm",
+        "deep",
+        "analysis"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "pm-market-analysis",
+      "source": "./skills/pm-market-analysis",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Use when Codex must analyze one prediction-market PM event for PMKNB: ingest subject/world research and market data, identify exact Polymarket or Kalshi instruments, assess market forces, resolution/oracle risk, liquidity, and platform/counterparty risk, then output a forecast, report, brief, proposal, or no-publish result. Triggers include prediction market, Polymarket, Kalshi, PM event, instrument identity, conditionId, token IDs, event_ticker, market ticker, YES/NO, PMKNB market_analysis, resolution risk, negative risk, or multi-market event analysis.",
+      "category": "prediction markets",
+      "keywords": [
+        "pm",
+        "market",
+        "analysis"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "pm-research-methodologies",
+      "source": "./skills/pm-research-methodologies",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Manual-only. Never auto-load or auto-select this skill from task context. Load only when the user explicitly names pm-research-methodologies, or asks for the general research methodology framework, to structure deep research on a subject that has no dedicated methodology skill.",
+      "category": "prediction markets",
+      "keywords": [
+        "pm",
+        "research",
+        "methodology",
+        "scaffolding",
+        "provenance"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "pm-situation-framing",
+      "source": "./skills/pm-situation-framing",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Use when the user or router explicitly names PM Situation Framing or pm-situation-framing to create or update a PMKNB situation frame. This skill is direct-invocation-only and must never be automatically loaded for general market, forecasting, research, or news-analysis requests.",
+      "category": "prediction markets",
+      "keywords": [
+        "pm",
+        "situation",
+        "framing"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "polymarket-event-research",
+      "source": "./skills/polymarket-event-research",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Use when the user asks for price-blind research on the real-world resolution mechanics of a specific Polymarket or prediction-market event, including actors, institutions, legal/procedural paths, local context, source discovery, proof standards, structured research handoffs, or KNB world-mode mapping. Do not use for odds, prices, portfolios, trade decisions, market microstructure, or forecast/EV analysis.",
+      "category": "prediction markets",
+      "keywords": [
+        "polymarket",
+        "event",
+        "research"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "tdd",
+      "source": "./skills/tdd",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions \"red-green-refactor\", wants integration tests, or asks for test-first development.",
+      "category": "developer tools",
+      "keywords": [
+        "tdd"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "writing-claude-skills",
+      "source": "./skills/writing-claude-skills",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Use when user asks to create, write, edit, or test a skill. Also use when documenting reusable techniques, patterns, or workflows for future Claude instances.",
+      "category": "developer tools",
+      "keywords": [
+        "writing",
+        "claude",
+        "skills"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "x-undocumented-api",
+      "source": "./skills/x-undocumented-api",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Manual-only skill. Never automatically load or select this skill from task context. Use only when the user explicitly asks to manually reference this skill or names `x-undocumented-api` / `x-api-skill`.",
+      "category": "developer tools",
+      "keywords": [
+        "x",
+        "undocumented",
+        "api"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
     }
   ]
 }

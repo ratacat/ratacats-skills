@@ -2,7 +2,7 @@
 
 Claude and Codex skills authored or locally maintained by Ratacat.
 
-This repository is a Claude marketplace-style collection. Each plugin lives in `plugins/<name>`, and `skills/<name>` is a GitHub-friendly skill page that symlinks back to the plugin source.
+This repository is a flat skill collection. Each skill lives in `skills/<name>/`, where `SKILL.md` is canonical and `README.md` is the GitHub-facing page.
 
 ## Install
 
@@ -12,7 +12,7 @@ Skills here are installable two ways.
 
 ```sh
 /plugin marketplace add ratacat/ratacats-skills
-/plugin install <name>
+/plugin install <name>@ratacats-skills
 ```
 
 ### Any agent (skills.sh)
@@ -29,6 +29,7 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 
 ## Skills
 
+<!-- skills:start -->
 | Skill | Description |
 | --- | --- |
 | [`annas-archive-ebooks`](skills/annas-archive-ebooks/) | Use when needing to look up book content, find a book by title/author, download an ebook, or reference material from a published book. Triggers on book lookups, ebook downloads, "find the book", "get the PDF/EPUB of". Downloads produce PDF/EPUB/MOBI files - use ebook-extractor skill to convert to text. |
@@ -53,13 +54,14 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 | [`tdd`](skills/tdd/) | Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions "red-green-refactor", wants integration tests, or asks for test-first development. |
 | [`writing-claude-skills`](skills/writing-claude-skills/) | Use when user asks to create, write, edit, or test a skill. Also use when documenting reusable techniques, patterns, or workflows for future Claude instances. |
 | [`x-undocumented-api`](skills/x-undocumented-api/) | Manual-only skill. Never automatically load or select this skill from task context. Use only when the user explicitly asks to manually reference this skill or names `x-undocumented-api` / `x-api-skill`. |
+<!-- skills:end -->
 
 ## Layout
 
-- `plugins/<name>/.claude-plugin/plugin.json` — plugin manifest.
-- `plugins/<name>/skills/<name>/SKILL.md` — the canonical skill (Claude marketplace shape).
-- `skills/<name>/README.md` — the GitHub-facing skill page (a real file).
-- `skills/<name>/SKILL.md` and helper files — symlinks back to the plugin source.
-- `.claude-plugin/marketplace.json` — registers every plugin.
+- `skills/<name>/SKILL.md` — the canonical skill body and frontmatter.
+- `skills/<name>/README.md` — the GitHub-facing skill page.
+- `skills/<name>/...` — companion files used by the skill.
+- `.claude-plugin/marketplace.json` — generated from skill frontmatter by `bun scripts/sync.ts`.
+- `scripts/sync.ts` — regenerates the marketplace and this README's skills table, and enforces the flat-tree gates.
 
-Every skill must satisfy the gates in [AGENTS.md](AGENTS.md). The directory name, plugin name, marketplace name, and `SKILL.md` frontmatter `name` are kept identical so the skill installs under one stable handle.
+There is no `plugins/` tree and no symlink layer. Every skill must satisfy the gates in [AGENTS.md](AGENTS.md). The directory name, marketplace name, and `SKILL.md` frontmatter `name` are kept identical so the skill installs under one stable handle.
