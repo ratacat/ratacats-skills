@@ -3,6 +3,7 @@ name: duris-group-combat
 description: Use when designing or operating Duris group combat with tanks, assists, assumed targets, caster memorization readiness, bash risk, tracking enemies, aggro adds, or command spam risk.
 metadata:
   category: games
+  blurb: "Models Duris group fights around roles, assists, caster readiness, adds, flee risk, and survival-first command pacing."
   keywords:
     - duris
     - group

@@ -15,3 +15,14 @@ Good fits:
 - Deciding whether a rename is worth it
 
 The skill should not rename first. It should map meaning, boundaries, and tradeoffs, then suggest the smallest useful change.
+
+## Install
+
+```sh
+# skills.sh CLI — Claude Code, Codex, Cursor, OpenCode, and more
+npx skills add ratacat/ratacats-skills --skill name-review
+
+# or the Claude plugin marketplace
+/plugin marketplace add ratacat/ratacats-skills
+/plugin install name-review@ratacats-skills
+```

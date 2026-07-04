@@ -1,16 +1,24 @@
 # Clarify
 
-This skill is for turning fuzzy work into crisp work. It helps when a plan, code change, issue set, or repo feels close but not quite solid.
+This skill turns fuzzy work into crisp work. It helps when a plan, code change, issue set, or repo feels close but not solid enough to implement or trust.
 
-Use it when the next step is hidden by vague names, overlapping tasks, duplicated logic, soft assumptions, or "I think this is right" energy. The skill asks the agent to slow down, inspect evidence, and tighten the shape of the work before more code gets piled on.
-
-Most project drift starts small. A term gets reused in two ways. A plan says "sync" but means three different things. A patch fixes one path and leaves two nearby paths stale. Clarify catches those little bends before they become architecture.
+Clarify runs a chained review: frame the target, inspect evidence, review likely correctness failures, defuzz plans or work items, look for deep-module opportunities, audit DRY/cruft, tighten naming, and consolidate the result into edits, issues, or a clear report. The goal is not taste; it is fewer loose parts and clearer next actions.
 
 Good fits:
 
 - Defuzzing a plan before implementation
-- Reviewing recent agent work
-- Finding naming and boundary drift
-- Turning a loose idea into clear issues
+- Reviewing recent agent work or uncommitted changes
+- Finding naming, boundary, and concept drift
+- Turning loose ideas or beads into concrete issues
+- Combining code review, DRY/cruft, and naming passes in one workflow
 
-The output should feel like a clean bench: fewer loose parts, clearer next actions. It should ask questions only when blocked; otherwise it should state assumptions and move the work forward.
+## Install
+
+```sh
+# skills.sh CLI — Claude Code, Codex, Cursor, OpenCode, and more
+npx skills add ratacat/ratacats-skills --skill clarify
+
+# or the Claude plugin marketplace
+/plugin marketplace add ratacat/ratacats-skills
+/plugin install clarify@ratacats-skills
+```

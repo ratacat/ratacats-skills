@@ -4,6 +4,7 @@ import path from "node:path";
 interface SkillMetadata {
   category?: string;
   keywords?: string[];
+  blurb?: string;
 }
 
 interface SkillFrontmatter {
@@ -17,6 +18,7 @@ interface SkillEntry {
   description: string;
   category: string;
   keywords: string[];
+  blurb: string;
 }
 
 const root = path.resolve(import.meta.dirname, "..");
@@ -102,6 +104,14 @@ function frontmatterFor(skillPath: string): SkillFrontmatter {
       continue;
     }
 
+    const blurb = line.match(/^  blurb:\s*(.*)$/);
+    if (blurb) {
+      frontmatter.metadata ??= {};
+      frontmatter.metadata.blurb = scalar(blurb[1]);
+      activeMetadataKey = undefined;
+      continue;
+    }
+
     if (/^  keywords:\s*$/.test(line)) {
       frontmatter.metadata ??= {};
       frontmatter.metadata.keywords = [];
@@ -162,15 +172,17 @@ function skillEntries(): SkillEntry[] {
     const description = frontmatter.description?.trim() ?? "";
     const category = frontmatter.metadata?.category?.trim() ?? "";
     const keywords = frontmatter.metadata?.keywords?.map((keyword) => keyword.trim()).filter(Boolean) ?? [];
+    const blurb = frontmatter.metadata?.blurb?.trim() ?? "";
 
     if (!name) fail(`skills/${dirName}/SKILL.md frontmatter name is required`);
     if (!description) fail(`skills/${dirName}/SKILL.md frontmatter description is required`);
     if (name && name !== dirName) fail(`skills/${dirName}/SKILL.md frontmatter name must equal directory name`);
     if (!category) fail(`skills/${dirName}/SKILL.md metadata.category is required`);
     if (keywords.length === 0) fail(`skills/${dirName}/SKILL.md metadata.keywords is required`);
+    if (!blurb) fail(`skills/${dirName}/SKILL.md metadata.blurb is required (one plain-language sentence for the README table)`);
 
-    if (!name || !description || !category || keywords.length === 0) return [];
-    return [{ name, description, category, keywords }];
+    if (!name || !description || !category || keywords.length === 0 || !blurb) return [];
+    return [{ name, description, category, keywords, blurb }];
   });
 }
 
@@ -204,9 +216,24 @@ function marketplace(entries: SkillEntry[]): string {
   }, null, 2)}\n`;
 }
 
+const CATEGORY_ORDER = ["developer tools", "prediction markets", "tools", "writing", "games", "art"];
+
 function skillTable(entries: SkillEntry[]): string {
-  const rows = entries.map((entry) => `| [\`${entry.name}\`](skills/${entry.name}/) | ${entry.description.replace(/\|/g, "\\|")} |`);
-  return ["<!-- skills:start -->", "| Skill | Description |", "| --- | --- |", ...rows, "<!-- skills:end -->"].join("\n");
+  const categories = [...new Set(entries.map((entry) => entry.category))].sort((a, b) => {
+    const ai = CATEGORY_ORDER.indexOf(a);
+    const bi = CATEGORY_ORDER.indexOf(b);
+    return (ai === -1 ? CATEGORY_ORDER.length : ai) - (bi === -1 ? CATEGORY_ORDER.length : bi) || a.localeCompare(b);
+  });
+
+  const sections = categories.map((category) => {
+    const rows = entries
+      .filter((entry) => entry.category === category)
+      .map((entry) => `| [\`${entry.name}\`](skills/${entry.name}/) | ${entry.blurb.replace(/\|/g, "\\|")} |`);
+    const header = category.replace(/\b[a-z]/g, (c) => c.toUpperCase());
+    return [`### ${header}`, "", "| Skill | What it does |", "| --- | --- |", ...rows].join("\n");
+  });
+
+  return ["<!-- skills:start -->", ...sections.join("\n\n").split("\n"), "<!-- skills:end -->"].join("\n");
 }
 
 function readme(entries: SkillEntry[]): string {

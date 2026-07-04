@@ -4,6 +4,7 @@ description: Use when user asks to create, write, edit, or test a skill. Also us
   instances.
 metadata:
   category: developer tools
+  blurb: "TDD-style skill authoring guide that turns repeatable workflows into focused, tested Claude/Codex skills with clear triggers and resources."
   keywords:
     - writing
     - claude

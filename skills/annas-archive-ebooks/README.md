@@ -1,16 +1,44 @@
 # Anna's Archive Ebooks
 
-This skill helps an agent find a book, pick the right edition, and locate useful metadata or files when the user needs source material.
+This skill helps an agent find a published book, compare editions and formats, and use the local `annas.py` script to search or download a file when the user has lawful access. Search works without an Anna's Archive key; automated fast downloads need a membership key, and free slow downloads still require the user to solve a captcha in a browser.
 
-Use it when someone asks for a PDF, EPUB, MOBI, or a book lookup by title and author. It is also useful when a build or research task needs book text as raw material, because the skill pairs naturally with `ebook-extractor`.
-
-Books are messy to search for. Titles have editions, translations, bad metadata, and duplicate scans. This skill gives the agent a calm way to search, compare, and explain what it found before downloading anything.
+It is useful when a request starts as a vague title, author, or format preference and needs to become a concrete PDF, EPUB, MOBI, AZW3, or DJVU file. Downloads stay on your machine at the output path you choose; the skill does not publish files, and this skill directory has its own `.gitignore` for local `.env` and Python cache files.
 
 Good fits:
 
-- Finding the right edition of a technical book
-- Getting source text for analysis
-- Turning a vague book request into a concrete file
-- Handing the downloaded file to another skill for extraction
+- Finding the right edition of a technical or reference book
+- Searching by title, author, expected title, or preferred format
+- Downloading with a configured Anna's Archive membership key
+- Renaming downloaded files into clean `title-author.ext` names
+- Handing PDF, EPUB, or MOBI files to `ebook-extractor` for text conversion
 
-Use it with care. Search works without a key, but automated fast downloads need the configured Anna's Archive membership key. Do not download, reproduce, or redistribute copyrighted material unless the user has lawful access.
+## Install
+
+```sh
+# skills.sh CLI — Claude Code, Codex, Cursor, OpenCode, and more
+npx skills add ratacat/ratacats-skills --skill annas-archive-ebooks
+
+# or the Claude plugin marketplace
+/plugin marketplace add ratacat/ratacats-skills
+/plugin install annas-archive-ebooks@ratacats-skills
+```
+
+## Setup / Requirements
+
+The skill uses Python 3 and the bundled `annas.py` script:
+
+```sh
+python3 annas.py search "Clean Code Robert Martin" --format pdf --limit 5
+python3 annas.py details <md5>
+python3 annas.py download <md5> --output ./books/
+```
+
+Set `ANNAS_ARCHIVE_KEY` only if you have an Anna's Archive membership key and want automated fast downloads:
+
+```sh
+export ANNAS_ARCHIVE_KEY="your-membership-key"
+```
+
+Without a key, the skill shows the book page for manual download and explains that free slow downloads require a captcha. After every download, rename the file immediately with a clean lowercase `title-author.ext` filename; the original Anna's Archive filenames can contain Unicode punctuation that breaks shell commands.
+
+On macOS, Python installs that cannot find system certificates may need `certifi` and `SSL_CERT_FILE` as described in the skill. Downloaded ebooks remain in their original format until another tool, such as `ebook-extractor`, converts them to text.

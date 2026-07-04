@@ -1,17 +1,24 @@
 # Duris Game Knowledge
 
-This skill gives the agent a working map of Duris: the MUD, the world, the combat loop, the danger, and the little rules that matter when commands become real.
+This skill gives an agent a working map of Duris: Land of Bloodlust, a full-loot PvP racewar MUD at `mud.durismud.com:7777`. Duris has old-school command parsing, dangerous travel, corpse looting, spell memorization, and no truly safe rooms.
 
-Use it for anything involving Duris: navigation, zones, classes, spellcasting, equipment, recovery, fighting, parsing prompts, or writing helper commands. It is the general background skill that keeps the agent from treating Duris like a normal game with safe assumptions.
-
-Duris is old, sharp-edged, and full of risk. A wrong move can mean death, lost gear, wasted prep, or a messy walk back. This skill helps the agent reason with the game's actual texture.
+Use it for anything involving Duris: navigation, zones, classes, spellcasting, equipment, recovery, fighting, parsing prompts, or writing helper commands. The skill keeps the agent from treating Duris like a modern game with safe assumptions, invented commands, or forgiving retries.
 
 Good fits:
 
-- Understanding live game output
-- Planning a route or recovery
-- Explaining mechanics
-- Designing MUD automation
-- Pairing with `duris-group-combat`
+- Understanding live game output and prompt text
+- Planning a route, recovery, or exploration pass
+- Explaining combat, spells, equipment, racewar, or loot risk
+- Designing MUD automation around real parser patterns
+- Pairing with `duris-group-combat` for party fights
 
-Use this before making Duris decisions that touch movement, combat, spells, or equipment. Do not invent commands, exits, or safe paths when live output is ambiguous.
+## Install
+
+```sh
+# skills.sh CLI — Claude Code, Codex, Cursor, OpenCode, and more
+npx skills add ratacat/ratacats-skills --skill duris-game-knowledge
+
+# or the Claude plugin marketplace
+/plugin marketplace add ratacat/ratacats-skills
+/plugin install duris-game-knowledge@ratacats-skills
+```

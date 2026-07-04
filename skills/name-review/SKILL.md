@@ -3,6 +3,7 @@ name: name-review
 description: Use when reviewing or designing names for plans, beads, work items, architecture docs, codebases, APIs, schemas, modules, states, or domain vocabulary where terminology drift, overloaded concepts, boundary ambiguity, or AI-confusing naming may exist.
 metadata:
   category: developer tools
+  blurb: "Boundary-first naming review that maps concepts before recommending small, evidence-backed renames for code, plans, schemas, and docs."
   keywords:
     - name
     - review

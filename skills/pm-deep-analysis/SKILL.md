@@ -3,6 +3,7 @@ name: pm-deep-analysis
 description: Use when an agent needs price-blind deep research for a Polymarket or prediction-market event, market URL, event URL, market question set, or PMKNB situation, including fresh analysis, updating existing deep research, resolution mechanics, source discovery, and 0-100 likelihood estimates independent of market odds.
 metadata:
   category: prediction markets
+  blurb: "Price-blind prediction-market research: builds evidence-first world reports and 0-100 resolution estimates without using odds or prices."
   keywords:
     - pm
     - deep

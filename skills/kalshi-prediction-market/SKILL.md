@@ -3,6 +3,7 @@ name: kalshi-prediction-market
 description: Context and working knowledge for the Kalshi prediction-market domain. Use this skill whenever the user asks about Kalshi markets, tickers, order books, pricing, settlement, or the Kalshi API/WebSocket.
 metadata:
   category: prediction markets
+  blurb: "A Kalshi domain primer for understanding series, events, markets, Yes/No pricing, settlement, order books, and API or WebSocket data."
   keywords:
     - kalshi
     - prediction

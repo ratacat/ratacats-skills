@@ -4,14 +4,23 @@ This skill is for deep, price-blind research on prediction-market questions.
 
 Use it when the important work is understanding the world: rules, actors, institutions, dates, proof standards, resolution mechanics, open questions, and evidence quality. It produces structured likelihood estimates without looking at prices or letting market odds steer the research.
 
-Market prices are useful in other modes, but they can contaminate the first pass. This skill gives the agent a clean room for broad prediction-market world research before any market-aware analysis happens.
+Market prices are useful in other modes, but they can contaminate the first pass. This skill gives the agent a clean room for broad prediction-market world research before any market-aware analysis happens. Family role: use `pm-situation-framing` to frame the situation first, `pm-deep-analysis` or `polymarket-event-research` for price-blind world research, and `pm-market-analysis` when market facts matter.
 
 Good fits:
 
-- Building a durable research report
-- Updating old research with fresh facts
-- Estimating resolution likelihoods from sources
-- Separating world probability from market probability
-- Feeding PMKNB records with evidence-first outputs
+- Building or updating a durable research report
+- Estimating 0-100 resolution likelihoods from sources, rules, actors, and deadlines
+- Separating world outcomes from market-resolution mechanics
+- Feeding PMKNB records with evidence-first sources, claims, reports, and run traces
+- Keeping a first-pass analysis clean of odds, prices, order books, or trader positioning
 
-Use this when the question deserves patience. It is broader than `polymarket-event-research`: it can cover whole event sets, updates to existing research, and structured likelihood tables. It is not for trades, odds, order books, or wallet decisions.
+## Install
+
+```sh
+# skills.sh CLI — Claude Code, Codex, Cursor, OpenCode, and more
+npx skills add ratacat/ratacats-skills --skill pm-deep-analysis
+
+# or the Claude plugin marketplace
+/plugin marketplace add ratacat/ratacats-skills
+/plugin install pm-deep-analysis@ratacats-skills
+```

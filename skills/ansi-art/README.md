@@ -11,6 +11,16 @@ Good fits:
 - Choosing `.ANS`, BIN/XBIN, or app-native storage
 - Converting art for UTF-8 terminal output
 - Reviewing fixed-width art for spacing and glyph issues
-- Teaching an agent how to compose shade, light, and texture in textmode
 
-The skill should produce original artwork. When it studies references, it should reuse techniques such as density ramps, framing, palette economy, and lettering structure rather than copying a source piece.
+For deeper work, use the bundled references: [research notes](references/research-notes.md), [glyphs and palette](references/glyphs-and-palette.md), [formats and rendering](references/formats-and-rendering.md), and the [creation playbook](references/creation-playbook.md).
+
+## Install
+
+```sh
+# skills.sh CLI — Claude Code, Codex, Cursor, OpenCode, and more
+npx skills add ratacat/ratacats-skills --skill ansi-art
+
+# or the Claude plugin marketplace
+/plugin marketplace add ratacat/ratacats-skills
+/plugin install ansi-art@ratacats-skills
+```

@@ -3,6 +3,7 @@ name: conjecture-cascade
 description: Use when inspecting a software target for hidden bugs, dropped behavior, missing records, stale state, unclear failures, broad reliability risks, or likely issue classes across a bounded scope.
 metadata:
   category: developer tools
+  blurb: "Evidence-driven bug hunt: fires dozens of falsifiable probes at a bounded target and reports what is actually broken, with proof."
   keywords:
     - bugs
     - review

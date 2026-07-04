@@ -1,17 +1,24 @@
 # Duris Group Combat
 
-This skill helps an agent reason about Duris combat when several characters, roles, targets, and risks are moving at once.
+This skill helps an agent reason about group fights in Duris: Land of Bloodlust, a full-loot PvP racewar MUD where bad combat decisions can cost gear, corpses, and group position. It assumes `duris-game-knowledge` for the game's prompt, posture, spell, flee, aggro, and tracking rules.
 
-Use it when the question is not "what is Duris?" but "what should the group do now?" It focuses on tanks, assists, caster readiness, adds, bash risk, command pacing, and survival-first decision making.
-
-This keeps the agent from spamming commands or choosing a clever action when a boring survival action matters more. Group combat rewards timing, shared targets, and clear role bindings. This skill makes those priorities explicit.
+Use it when several characters, roles, targets, and risks are moving at once. It binds live names to roles, prioritizes survival interrupts over routine actions, and keeps the agent from spamming commands or inventing unsafe targeted spell syntax.
 
 Good fits:
 
 - Designing group combat behavior
-- Parsing a fight log
-- Choosing assist or rescue logic
-- Handling adds and target swaps
-- Preventing duplicate casts or panic spam
+- Parsing a fight log with tanks, enemies, and adds
+- Choosing assist, rescue, pet, heal, or caster actions
+- Handling caster readiness and spent spell slots
+- Preventing duplicate casts, panic flee loops, and chat spam
 
-Use it with `duris-game-knowledge`. The game-knowledge skill explains the world; this skill handles the group fight. When combat state is unclear, observe, parse, and update state before acting.
+## Install
+
+```sh
+# skills.sh CLI — Claude Code, Codex, Cursor, OpenCode, and more
+npx skills add ratacat/ratacats-skills --skill duris-group-combat
+
+# or the Claude plugin marketplace
+/plugin marketplace add ratacat/ratacats-skills
+/plugin install duris-group-combat@ratacats-skills
+```

@@ -3,6 +3,7 @@ name: polymarket-event-research
 description: Use when the user asks for price-blind research on the real-world resolution mechanics of a specific Polymarket or prediction-market event, including actors, institutions, legal/procedural paths, local context, source discovery, proof standards, structured research handoffs, or KNB world-mode mapping. Do not use for odds, prices, portfolios, trade decisions, market microstructure, or forecast/EV analysis.
 metadata:
   category: prediction markets
+  blurb: "Price-blind event-resolution research that maps people, offices, procedures, deadlines, and proof sources behind a Polymarket-style outcome."
   keywords:
     - polymarket
     - event

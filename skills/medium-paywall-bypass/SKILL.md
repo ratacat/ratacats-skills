@@ -3,6 +3,7 @@ name: medium-paywall-bypass
 description: Use when user shares a Medium article URL behind a paywall and wants to read the full content. Also use for articles on Medium-hosted publications like towardsdatascience.com, betterprogramming.pub, levelup.gitconnected.com, etc.
 metadata:
   category: developer tools
+  blurb: "Fetch readable Medium or Medium-hosted article text through mirror routes so an agent can summarize, compare, or discuss the content."
   keywords:
     - medium
     - paywall

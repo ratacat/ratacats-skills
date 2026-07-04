@@ -15,8 +15,8 @@ One skill has exactly one handle. For a skill named `<name>`, these must be iden
 
 Every skill must have:
 
-1. **Canonical skill** — `skills/<name>/SKILL.md` with frontmatter `name`, `description`, `metadata.category`, and non-empty `metadata.keywords`.
-2. **README** — `skills/<name>/README.md`.
+1. **Canonical skill** — `skills/<name>/SKILL.md` with frontmatter `name`, `description`, `metadata.category`, non-empty `metadata.keywords`, and `metadata.blurb` (one plain-language sentence; it becomes the root README table row). `description` is the agent trigger — write it for skill routing, not for humans; `blurb` is for humans.
+2. **README** — `skills/<name>/README.md`: what it does, good fits, install commands, real setup requirements only.
 3. **No symlinks** — every file under `skills/` is real.
 4. **Generated index** — `.claude-plugin/marketplace.json` and the root `README.md` skills table are generated. Never hand-edit generated blocks.
 5. **No plugins tree** — `plugins/` must not exist.
@@ -27,6 +27,6 @@ Run `bun scripts/sync.ts` after any skill change. Run `bun scripts/sync.ts --che
 
 Delete `skills/<name>/`, then run `bun scripts/sync.ts`.
 
-## Adding CI later
+## CI
 
-Use `bun scripts/sync.ts --check` as the gate.
+`.github/workflows/check.yml` runs `bun scripts/sync.ts --check` on every push and PR.

@@ -3,6 +3,7 @@ name: failure-modes
 description: Use when reviewing a codebase, uncommitted changes, recent agent work, or one subsystem for hidden bugs, flawed assumptions, drift, duplication, weak tests, broken contracts, or other failure modes.
 metadata:
   category: developer tools
+  blurb: "A systematic code-review checklist for finding hidden bugs, stale contracts, weak tests, drift, duplication, and quiet failure paths."
   keywords:
     - failure
     - modes

@@ -3,6 +3,7 @@ name: pm-research-methodologies
 description: Manual-only. Never auto-load or auto-select this skill from task context. Load only when the user explicitly names pm-research-methodologies, or asks for the general research methodology framework, to structure deep research on a subject that has no dedicated methodology skill.
 metadata:
   category: prediction markets
+  blurb: "General deep-research scaffold that turns a broad subject into named nodes, sourced claims, provenance checks, synthesis, and open questions."
   keywords:
     - pm
     - research

@@ -1,12 +1,12 @@
 # Ratacat's Skills
 
-Claude and Codex skills authored or locally maintained by Ratacat.
+Agent skills I use every day, shared. A skill is a folder with a `SKILL.md` — instructions an AI coding agent (Claude Code, Codex, Cursor, OpenCode, …) loads when the task calls for it, plus whatever reference docs and scripts the workflow needs. Install one and your agent picks up the workflow automatically; no prompting ceremony.
 
-This repository is a flat skill collection. Each skill lives in `skills/<name>/`, where `SKILL.md` is canonical and `README.md` is the GitHub-facing page.
+The collection leans toward evidence-first engineering (bug hunts, reviews, naming), prediction-market research, and a few sharp tools. Each skill's folder has a README explaining what it does and when to reach for it — click through the table below.
 
 ## Install
 
-Skills here are installable two ways.
+Every skill installs two ways. Pick whichever fits your setup:
 
 ### Claude Code (plugin marketplace)
 
@@ -30,37 +30,67 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 ## Skills
 
 <!-- skills:start -->
-| Skill | Description |
+### Developer Tools
+
+| Skill | What it does |
 | --- | --- |
-| [`annas-archive-ebooks`](skills/annas-archive-ebooks/) | Use when needing to look up book content, find a book by title/author, download an ebook, or reference material from a published book. Triggers on book lookups, ebook downloads, "find the book", "get the PDF/EPUB of". Downloads produce PDF/EPUB/MOBI files - use ebook-extractor skill to convert to text. |
-| [`ansi-art`](skills/ansi-art/) | Use when creating, reviewing, converting, or embedding terminal text art: ASCII art, ANSI art, CP437/code page 437 glyph art, block ASCII, BBS-style logos, CLI banners, NFOs, fixed-width art, or SAUCE/XBIN/BIN/ANS output. |
-| [`clarify`](skills/clarify/) | Run a chained clarity review across a target repo, plan, or work items. Use when the user asks to clarify, defuzz, audit, review, harden, distill, de-duplicate, inspect naming, apply fresh eyes to recent code, or combine code review, plan refinement, deep-module architecture, DRY/cruft, and naming analysis into one reusable workflow. |
-| [`conjecture-cascade`](skills/conjecture-cascade/) | Use when inspecting a software target for hidden bugs, dropped behavior, missing records, stale state, unclear failures, broad reliability risks, or likely issue classes across a bounded scope. |
-| [`dianalokada`](skills/dianalokada/) | Become Diana. Ukrainian software engineer in NYC. KGB accent. Zero filter. Real corpus mode with full main tweets and top-ranked replies. Once invoked there is no going back. |
-| [`duris-game-knowledge`](skills/duris-game-knowledge/) | Use whenever working on Duris MUD — connecting to the game, navigating, exploring, fighting, parsing game output, writing commands, understanding zones, combat mechanics, spellcasting, geography, equipment, mobs, recovery, or any other gameplay question. Load this skill for any task involving Duris. |
-| [`duris-group-combat`](skills/duris-group-combat/) | Use when designing or operating Duris group combat with tanks, assists, assumed targets, caster memorization readiness, bash risk, tracking enemies, aggro adds, or command spam risk. |
-| [`ebook-extractor`](skills/ebook-extractor/) | Use when user wants to extract text from ebooks (EPUB, MOBI, PDF). Use for converting ebooks to plain text for analysis, processing, or reading. Handles all common ebook formats. |
-| [`failure-modes`](skills/failure-modes/) | Use when reviewing a codebase, uncommitted changes, recent agent work, or one subsystem for hidden bugs, flawed assumptions, drift, duplication, weak tests, broken contracts, or other failure modes. |
-| [`gpt-pro-loop`](skills/gpt-pro-loop/) | Use when running a GPT Pro or pro-cli assisted project revision loop: build a context package, write a GPT Pro prompt, request adversarial review, map issues into a design map, run revision passes, verify locally, write goal assessments, and hand off the loop. |
-| [`graph-researcher`](skills/graph-researcher/) | Deep web research with relevance scoring and knowledge graph storage. Use when researching topics, companies, people, or concepts. Performs Graph-of-Thoughts style exploration with parallel branching, relevance scoring, and synthesis into themed reports. |
-| [`kalshi-prediction-market`](skills/kalshi-prediction-market/) | Context and working knowledge for the Kalshi prediction-market domain. Use this skill whenever the user asks about Kalshi markets, tickers, order books, pricing, settlement, or the Kalshi API/WebSocket. |
-| [`medium-paywall-bypass`](skills/medium-paywall-bypass/) | Use when user shares a Medium article URL behind a paywall and wants to read the full content. Also use for articles on Medium-hosted publications like towardsdatascience.com, betterprogramming.pub, levelup.gitconnected.com, etc. |
-| [`name-review`](skills/name-review/) | Use when reviewing or designing names for plans, beads, work items, architecture docs, codebases, APIs, schemas, modules, states, or domain vocabulary where terminology drift, overloaded concepts, boundary ambiguity, or AI-confusing naming may exist. |
-| [`pm-deep-analysis`](skills/pm-deep-analysis/) | Use when an agent needs price-blind deep research for a Polymarket or prediction-market event, market URL, event URL, market question set, or PMKNB situation, including fresh analysis, updating existing deep research, resolution mechanics, source discovery, and 0-100 likelihood estimates independent of market odds. |
-| [`pm-market-analysis`](skills/pm-market-analysis/) | Use when Codex must analyze one prediction-market PM event for PMKNB: ingest subject/world research and market data, identify exact Polymarket or Kalshi instruments, assess market forces, resolution/oracle risk, liquidity, and platform/counterparty risk, then output a forecast, report, brief, proposal, or no-publish result. Triggers include prediction market, Polymarket, Kalshi, PM event, instrument identity, conditionId, token IDs, event_ticker, market ticker, YES/NO, PMKNB market_analysis, resolution risk, negative risk, or multi-market event analysis. |
-| [`pm-research-methodologies`](skills/pm-research-methodologies/) | Manual-only. Never auto-load or auto-select this skill from task context. Load only when the user explicitly names pm-research-methodologies, or asks for the general research methodology framework, to structure deep research on a subject that has no dedicated methodology skill. |
-| [`pm-situation-framing`](skills/pm-situation-framing/) | Use when the user or router explicitly names PM Situation Framing or pm-situation-framing to create or update a PMKNB situation frame. This skill is direct-invocation-only and must never be automatically loaded for general market, forecasting, research, or news-analysis requests. |
-| [`polymarket-event-research`](skills/polymarket-event-research/) | Use when the user asks for price-blind research on the real-world resolution mechanics of a specific Polymarket or prediction-market event, including actors, institutions, legal/procedural paths, local context, source discovery, proof standards, structured research handoffs, or KNB world-mode mapping. Do not use for odds, prices, portfolios, trade decisions, market microstructure, or forecast/EV analysis. |
-| [`writing-claude-skills`](skills/writing-claude-skills/) | Use when user asks to create, write, edit, or test a skill. Also use when documenting reusable techniques, patterns, or workflows for future Claude instances. |
-| [`x-undocumented-api`](skills/x-undocumented-api/) | Manual-only skill. Never automatically load or select this skill from task context. Use only when the user explicitly asks to manually reference this skill or names `x-undocumented-api` / `x-api-skill`. |
+| [`clarify`](skills/clarify/) | Turns fuzzy repos, plans, diffs, or issue sets into clearer findings, fixes, names, and acceptance criteria using an evidence-first review chain. |
+| [`conjecture-cascade`](skills/conjecture-cascade/) | Evidence-driven bug hunt: fires dozens of falsifiable probes at a bounded target and reports what is actually broken, with proof. |
+| [`ebook-extractor`](skills/ebook-extractor/) | Extract plain text from EPUB, MOBI, and PDF files with local Python tools so agents can search, quote, or analyze book content. |
+| [`failure-modes`](skills/failure-modes/) | A systematic code-review checklist for finding hidden bugs, stale contracts, weak tests, drift, duplication, and quiet failure paths. |
+| [`gpt-pro-loop`](skills/gpt-pro-loop/) | Run a local revision loop that packages project context for GPT Pro review, maps critiques into issues, verifies fixes, and assesses the goal. |
+| [`medium-paywall-bypass`](skills/medium-paywall-bypass/) | Fetch readable Medium or Medium-hosted article text through mirror routes so an agent can summarize, compare, or discuss the content. |
+| [`name-review`](skills/name-review/) | Boundary-first naming review that maps concepts before recommending small, evidence-backed renames for code, plans, schemas, and docs. |
+| [`writing-claude-skills`](skills/writing-claude-skills/) | TDD-style skill authoring guide that turns repeatable workflows into focused, tested Claude/Codex skills with clear triggers and resources. |
+| [`x-undocumented-api`](skills/x-undocumented-api/) | Safe guide to X.com's private web API: verifies current GraphQL operations, request headers, cursors, and secret-safe evidence. |
+
+### Prediction Markets
+
+| Skill | What it does |
+| --- | --- |
+| [`kalshi-prediction-market`](skills/kalshi-prediction-market/) | A Kalshi domain primer for understanding series, events, markets, Yes/No pricing, settlement, order books, and API or WebSocket data. |
+| [`pm-deep-analysis`](skills/pm-deep-analysis/) | Price-blind prediction-market research: builds evidence-first world reports and 0-100 resolution estimates without using odds or prices. |
+| [`pm-market-analysis`](skills/pm-market-analysis/) | Market-aware prediction-market analysis that verifies exact instruments, rules, liquidity, and risks before producing a forecast, report, or no-publish call. |
+| [`pm-research-methodologies`](skills/pm-research-methodologies/) | General deep-research scaffold that turns a broad subject into named nodes, sourced claims, provenance checks, synthesis, and open questions. |
+| [`pm-situation-framing`](skills/pm-situation-framing/) | Reusable PMKNB situation frame: separates facts from hypotheses, maps actors, gates, clocks, cruxes, observables, and update rules. |
+| [`polymarket-event-research`](skills/polymarket-event-research/) | Price-blind event-resolution research that maps people, offices, procedures, deadlines, and proof sources behind a Polymarket-style outcome. |
+
+### Tools
+
+| Skill | What it does |
+| --- | --- |
+| [`annas-archive-ebooks`](skills/annas-archive-ebooks/) | Finds book records, checks editions and formats, and uses a local Anna's Archive script to download ebooks when a membership key is available. |
+| [`graph-researcher`](skills/graph-researcher/) | Deep web research that stores sources, findings, relationships, contradictions, and open leads in a SQLite knowledge graph. |
+
+### Writing
+
+| Skill | What it does |
+| --- | --- |
+| [`dianalokada`](skills/dianalokada/) | Switches the agent into Diana's sharp, blunt social voice, grounded in a real tweet corpus for posts, replies, roasts, and punchy takes. |
+
+### Games
+
+| Skill | What it does |
+| --- | --- |
+| [`duris-game-knowledge`](skills/duris-game-knowledge/) | Gives practical Duris MUD knowledge for navigation, combat, spells, gear, recovery, and parsing live game output without inventing commands. |
+| [`duris-group-combat`](skills/duris-group-combat/) | Models Duris group fights around roles, assists, caster readiness, adds, flee risk, and survival-first command pacing. |
+
+### Art
+
+| Skill | What it does |
+| --- | --- |
+| [`ansi-art`](skills/ansi-art/) | Guides terminal-safe CP437/ANSI art from first sketch to validated fixed-width output, with glyph, palette, format, and rendering references. |
 <!-- skills:end -->
 
-## Layout
+## How this repo works
 
-- `skills/<name>/SKILL.md` — the canonical skill body and frontmatter.
-- `skills/<name>/README.md` — the GitHub-facing skill page.
-- `skills/<name>/...` — companion files used by the skill.
-- `.claude-plugin/marketplace.json` — generated from skill frontmatter by `bun scripts/sync.ts`.
-- `scripts/sync.ts` — regenerates the marketplace and this README's skills table, and enforces the flat-tree gates.
+- `skills/<name>/SKILL.md` — the skill itself: frontmatter (name, trigger description, metadata) plus the workflow the agent follows.
+- `skills/<name>/README.md` — the human-facing page: what it does, when to use it, how to install it.
+- `skills/<name>/...` — reference docs and scripts the skill uses.
+- `.claude-plugin/marketplace.json` and the skills table above are **generated** from skill frontmatter by `bun scripts/sync.ts` — edit the skill, run sync, never hand-edit the generated parts. CI fails if they drift.
 
-There is no `plugins/` tree and no symlink layer. Every skill must satisfy the gates in [AGENTS.md](AGENTS.md). The directory name, marketplace name, and `SKILL.md` frontmatter `name` are kept identical so the skill installs under one stable handle.
+No `plugins/` tree, no symlinks: what you browse is exactly what installs. Contributor gates live in [AGENTS.md](AGENTS.md); one stable handle per skill — directory name, frontmatter `name`, and install name are always identical.
+
+## License
+
+[MIT](LICENSE).
