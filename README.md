@@ -21,7 +21,7 @@ Works with Claude Code, Codex, Cursor, OpenCode, and [others](https://skills.sh)
 
 ```sh
 npx skills add ratacat/ratacats-skills              # choose interactively
-npx skills add ratacat/ratacats-skills --skill tdd  # install one skill
+npx skills add ratacat/ratacats-skills --skill conjecture-cascade  # install one skill
 npx skills add ratacat/ratacats-skills --list       # list everything
 ```
 
@@ -51,7 +51,6 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 | [`pm-research-methodologies`](skills/pm-research-methodologies/) | Manual-only. Never auto-load or auto-select this skill from task context. Load only when the user explicitly names pm-research-methodologies, or asks for the general research methodology framework, to structure deep research on a subject that has no dedicated methodology skill. |
 | [`pm-situation-framing`](skills/pm-situation-framing/) | Use when the user or router explicitly names PM Situation Framing or pm-situation-framing to create or update a PMKNB situation frame. This skill is direct-invocation-only and must never be automatically loaded for general market, forecasting, research, or news-analysis requests. |
 | [`polymarket-event-research`](skills/polymarket-event-research/) | Use when the user asks for price-blind research on the real-world resolution mechanics of a specific Polymarket or prediction-market event, including actors, institutions, legal/procedural paths, local context, source discovery, proof standards, structured research handoffs, or KNB world-mode mapping. Do not use for odds, prices, portfolios, trade decisions, market microstructure, or forecast/EV analysis. |
-| [`tdd`](skills/tdd/) | Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions "red-green-refactor", wants integration tests, or asks for test-first development. |
 | [`writing-claude-skills`](skills/writing-claude-skills/) | Use when user asks to create, write, edit, or test a skill. Also use when documenting reusable techniques, patterns, or workflows for future Claude instances. |
 | [`x-undocumented-api`](skills/x-undocumented-api/) | Manual-only skill. Never automatically load or select this skill from task context. Use only when the user explicitly asks to manually reference this skill or names `x-undocumented-api` / `x-api-skill`. |
 <!-- skills:end -->

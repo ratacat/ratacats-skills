@@ -7,6 +7,9 @@
   "metadata": {
     "description": "Claude and Codex skills authored or locally maintained by Ratacat."
   },
+  "renames": {
+    "tdd": null
+  },
   "plugins": [
     {
       "name": "annas-archive-ebooks",
@@ -380,24 +383,6 @@
         "polymarket",
         "event",
         "research"
-      ],
-      "author": {
-        "name": "Jared Smith",
-        "url": "https://github.com/ratacat"
-      },
-      "license": "MIT"
-    },
-    {
-      "name": "tdd",
-      "source": "./skills/tdd",
-      "strict": false,
-      "skills": [
-        "./"
-      ],
-      "description": "Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions \"red-green-refactor\", wants integration tests, or asks for test-first development.",
-      "category": "developer tools",
-      "keywords": [
-        "tdd"
       ],
       "author": {
         "name": "Jared Smith",

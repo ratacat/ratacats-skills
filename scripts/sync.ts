@@ -184,6 +184,9 @@ function marketplace(entries: SkillEntry[]): string {
     metadata: {
       description: "Claude and Codex skills authored or locally maintained by Ratacat.",
     },
+    renames: {
+      tdd: null,
+    },
     plugins: entries.map((entry) => ({
       name: entry.name,
       source: `./skills/${entry.name}`,
