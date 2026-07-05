@@ -35,7 +35,6 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 | Skill | What it does |
 | --- | --- |
 | [`clarify`](skills/clarify/) | Turns fuzzy repos, plans, diffs, or issue sets into clearer findings, fixes, names, and acceptance criteria using an evidence-first review chain. |
-| [`conjecture-cascade`](skills/conjecture-cascade/) | Evidence-driven bug hunt: fires dozens of falsifiable probes at a bounded target and reports what is actually broken, with proof. |
 | [`ebook-extractor`](skills/ebook-extractor/) | Extract plain text from EPUB, MOBI, and PDF files with local Python tools so agents can search, quote, or analyze book content. |
 | [`failure-modes`](skills/failure-modes/) | A systematic code-review checklist for finding hidden bugs, stale contracts, weak tests, drift, duplication, and quiet failure paths. |
 | [`gpt-pro-loop`](skills/gpt-pro-loop/) | Run a local revision loop that packages project context for GPT Pro review, maps critiques into issues, verifies fixes, and assesses the goal. |
@@ -60,6 +59,7 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 | Skill | What it does |
 | --- | --- |
 | [`annas-archive-ebooks`](skills/annas-archive-ebooks/) | Finds book records, checks editions and formats, and uses a local Anna's Archive script to download ebooks when a membership key is available. |
+| [`conjecture-cascade`](skills/conjecture-cascade/) | Directional thinking engine: fires batches of probes through any bounded target — code, claims, plans, or ideas — and closes each probe with evidence or yield. |
 | [`graph-researcher`](skills/graph-researcher/) | Deep web research that stores sources, findings, relationships, contradictions, and open leads in a SQLite knowledge graph. |
 
 ### Writing

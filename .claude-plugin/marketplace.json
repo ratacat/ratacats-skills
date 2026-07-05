@@ -78,13 +78,17 @@
       "skills": [
         "./"
       ],
-      "description": "Use when inspecting a software target for hidden bugs, dropped behavior, missing records, stale state, unclear failures, broad reliability risks, or likely issue classes across a bounded scope.",
-      "category": "developer tools",
+      "description": "Use when probing a bounded target from many directions at once: auditing software for hidden bugs, dropped behavior, stale state, or reliability risks; stress-testing a claim, plan, argument, or decision; or brainstorming a topic across a wide space of angles. Runs falsifiable or generative probes through explicit lenses and closes every probe with evidence or yield.",
+      "category": "tools",
       "keywords": [
         "bugs",
         "review",
         "reliability",
-        "audit"
+        "audit",
+        "brainstorming",
+        "thinking",
+        "lenses",
+        "probes"
       ],
       "author": {
         "name": "Jared Smith",

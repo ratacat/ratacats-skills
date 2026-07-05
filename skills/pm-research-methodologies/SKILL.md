@@ -16,198 +16,123 @@ metadata:
 
 ## Overview
 
-A generalized framework for researching any subject deeply. This is the default methodology: reach for it when no domain-specific methodology skill exists. When one does exist (`middle-east-research`, `pmw-forecast`, `pm-deep-analysis` for price-blind event work), follow that skill and use this one only to fill its gaps.
+The fallback methodology for researching any subject deeply. When a dedicated skill covers the domain (in this repo: `pm-situation-framing`, `pm-deep-analysis`, `polymarket-event-research`, `pm-market-analysis`; where installed: `middle-east-research`, the `pmw-*` weather family), follow it and use this skill only to fill its gaps.
 
 ```
-Goal: produce explanatory understanding of a subject — why it is like this,
-how it became like this — captured so further research can build on it.
+Inputs: subject/question · run budget in queries or time (ask if not given) ·
+price-blind? (if yes, follow the governing skill's price-blind protocol,
+including what may be browsed) · output destination for the run's artifacts.
 
-Success means:
-  - a scaffold of named, individually researchable entities exists for the subject
-  - findings are recorded as sourced claims, each with a provenance-chain judgment
-  - a synthesis answers "why is it like this / how did it become like this,"
-    not just "what is it like"
-  - unresearched scaffold nodes survive as specific open questions
+Goal: explanatory understanding — why it is like this, how it became like
+this — captured so the next run can build on it.
 
-Stop when: another round of node research stops changing the synthesis,
-or the run budget is reached — record what remains as open questions.
+Deliverables: synthesis · scaffold with dark nodes marked · claim ledger ·
+open questions. Ledger mode (claims + scaffold, no narrative) when the
+output feeds another agent — a narrative bakes in one framing prematurely.
+
+Stop: a full pass changed no load-bearing claim and minted no node worth
+researching, or the budget is spent. File what remains as open questions.
 ```
 
-The framework has four stages: **build the scaffold → research along it → judge the chain of knowing → synthesize and climb**. The stages loop; synthesis exposes where the scaffold needs another descent.
+Surface research describes a subject; deep research explains it. Two questions drive every move: **why is it like this?** and **how did it become like this?** The core discipline is specificity — "the 2027 French presidential election" yields surface takes; "Hénin-Beaumont, the RN federation secretary there, the shuttered Metaleurop smelter" yields understanding. A list of categories is a template; a list of searchable keys is a plan.
 
-## The Core Move: Get Under the Subject
+## Stage 0 — Root the Question
 
-Surface research describes a subject. Deep research explains it. Two questions drive every descent:
+The question arrives wrapped in context, and the context is part of the subject.
 
-- **Why is it like this?**
-- **How did it become like this?**
-
-Every stage below is a way of getting under the subject — finding the specific people, places, organizations, records, and histories that the surface generalization is made of, and researching those directly.
+- **Resolution first (markets).** Read the rules text; identify the resolver; retrieve how earlier versions of the series actually resolved — resolver precedent outweighs textual analysis. Precedent lives in the platform's resolved-market pages and the resolver's archive; retrieve it, don't recall it.
+- **Key assumptions check.** List the premises the question rests on; tag each solid / caveated / questionable. Questionable premises become scaffold nodes.
+- **Reference class.** Before any inside-view research, write: what counts as an instance of this event (one sentence), how many opportunities existed, and the resulting base rate. Findings adjust this anchor; they never replace it.
+- **Seed map.** Draft a scaffold from what is already at hand — parametric knowledge plus the Wikipedia article's entities and footnotes — with every claim tagged `unverified`. Three to five orientation queries are licensed here; their only job is harvesting names.
+- **Skip conditions.** A single-document or single-entity subject needs no scaffold: read the artifact end to end, then scaffold only its references. A short-clock breaking question gets the quick pass (below) first; scaffold what remains.
 
 ## Stage 1 — Build the Scaffold
 
-A **scaffold** is a high-specificity list or graph of named entities whose individual investigation compounds into understanding of the whole. Models research far better when crawling named nodes than when circling a broad topic: "the 2027 French presidential election" yields surface takes; "Pas-de-Calais, Hénin-Beaumont, the RN federation secretary there, the shuttered Metaleurop smelter" yields understanding.
+A **scaffold** is the list of searchable keys whose individual investigation compounds into understanding of the whole; it is the research plan. A **node** is one key: an entity (person, place, organization, event), an instrument (statute, docket number, data series), or a term of art — anything that drops into a specific document stratum. The specificity test: a node naming a category ("local industries") must descend until it names a key ("the CGT local at the former Metaleurop site").
 
-Build the scaffold **before** running research queries. The scaffold is the research plan.
+Node types: people · places · organizations · economic structures · events and precedents · rules and instruments.
 
-### Root into the question's context
+Descent moves — most subjects reward two or three:
 
-A research question arrives wrapped in context, and the context is part of the subject. Before researching the world, understand the question: who is asking, what would actually settle it, and whether its premises still hold. For prediction markets, resolution context is central — read the rules text, learn who or what resolves the market, what counts and what is excluded, and what has counted before. For re-issued or series markets, how earlier versions actually resolved outweighs textual analysis: the resolver's past behavior is the best evidence of how the rules will be read. The world and the resolution can diverge; research serves the question as it will actually be settled, not the question as it appears.
+- **Spatial** — nation → region → county → town. Each level has its own actors, records, and press; where the local press is dead, substitute the actors who must still know: the clerk, the chamber of commerce, the planning office.
+- **Institutional** — government → ministry → agency → the named officials who sign the documents.
+- **Money** — industries → employers → owners: ownership registries, campaign-finance filings, grant and contract awards, procurement notices. Every payment names two nodes, dated and budgeted.
+- **Social** — demographics, congregations, unions, schools, local media. Who gathers whom.
+- **Temporal** — prior analogous events, base rates, the moment the trajectory bent.
+- **Network** — walk the edges of known nodes: who funds, owns, employs, regulates, opposes, succeeded whom. Personnel churn — job postings, executive exits — is an organizational X-ray.
 
-### Node types
+Sizing and order: quick pass = 3 nodes (resolver, top actor, closest precedent); standard run = 8–25 nodes in 2–3 levels; a bigger subject federates into multiple runs. Rank nodes by decision-relevance × expected surprise × findability and work in that order. The scaffold is revisable: Stage 2 mints new nodes; triage them against the same ranking instead of following every edge. Keep each node record self-contained (key, handles, open question) — ready to hand to a parallel worker.
 
-| type | examples |
+## Stage 2 — Research the Nodes
+
+Work in triage order, one bounded pass per node:
+
+1. **Harvest handles at the first good source**: names, machine identifiers (dockets, tickers, registration numbers, series IDs), and terms of art. Every later query pivots on a harvested handle, never the lay topic — insider vocabulary unlocks strata lay terms cannot reach.
+2. **Documents first.** Search the node's primary-record genre before its press; use press as an index that points to documents.
+3. **2–5 queries per node**, logged verbatim with hit or miss — a node is only dark relative to the queries actually run. Date-restrict for live subjects. Non-English nodes: translate the query out, search native engines, translate results back. A dead link is not dark until archive.org has been checked.
+4. **Ledger claims as found**, never reconstructed at synthesis:
+
+   `claim | node | source + pub date | origin (traced?) | interest note | confidence (confirmed / probable / reported / rumor)`
+
+   Open before citing — no source enters the ledger from a search snippet. Record negative evidence: the docket entry or agenda item that should exist and doesn't. When five or more findings share a shape (dates, votes, slip rates), tabulate them and compute.
+5. **Going-deeper juncture** — a report cites a dataset, a story quotes a person, a filing names a docket. Take it only for load-bearing claims, at most two levels deep per node; ledger other leads as open questions.
+6. **Stop the node** after two consecutive queries yield no new claims, or when its findings repeat another node's.
+
+Node states:
+
+- **Dark** — declare only after a term-of-art retry, a local-language retry, and an edge approach (query the node's relationship to a lit neighbor) all fail. Then darkness is a finding; record it. Nodes cut for budget are not dark — file them straight to open questions.
+- **Flooded** — thousands of hits are the surface takes the scaffold exists to avoid: pivot to identifiers and terms of art, date-restrict, read only primary records until the noise drops.
+
+Source genres:
+
+| genre | examples |
 |---|---|
-| people | candidates, officials, negotiators, executives, judges, local power brokers |
-| places | regions, departments/counties, cities, districts, facilities |
-| organizations | parties, companies, unions, churches, nonprofits, militias, courts, agencies |
-| economic structures | industries, major employers, supply chains, ownership networks |
-| events | past elections, strikes, scandals, rulings, defaults — the precedent record |
-| rules & instruments | statutes, treaties, procedures, charters, resolution criteria |
+| primary records | filings, dockets, registries, budgets, transcripts, datasets, returns |
+| institutional output | agency reports, minutes, inspection records, procurement notices |
+| local press | county papers, radio, municipal newsletters — in the local language |
+| trade & practitioner | industry press, conference talks, job postings, technical forums |
+| social listening | X/Reddit/Telegram — search node names, not the topic; one early crowd pass harvests the consensus narrative, named skeptics, and terms of art |
+| adversarial | opposition research, short-seller reports, litigation discovery |
+| admissions | one query per key actor for concessions: "X admits / acknowledges / concedes" — the densest evidence per query of any search form |
 
-### Descent moves
+At any node, two discovery questions: **lateral** — who else would have to know this (regulators, suppliers, former employees, opposing counsel, the losing bidder)? **spatial** — what exists at the place (the paper, the chamber, the parish bulletin, the planning office)?
 
-Apply whichever moves fit the subject; most subjects reward two or three:
+## Stage 3 — Judge the Chain of Knowing
 
-- **Spatial descent** — nation → region → county/department → city → neighborhood. Each level has its own actors, records, and press. A national election is millions of people and pure noise; a county has a newspaper, a dominant employer, a mayor, a history.
-- **Institutional descent** — government → ministry → agency → office → the named officials who sign the documents.
-- **Economic slice** — what do the people there actually do? Industries → major employers → owners → whether those livelihoods are growing or dying, and since when.
-- **Social slice** — demographics, congregations, unions, clubs, schools, local media. Who gathers whom.
-- **Temporal descent** — how did it become like this? Prior analogous events, base rates, turning points, the moment the trajectory bent.
-- **Network expansion** — from each node, walk the edges: who funds, owns, employs, regulates, opposes, succeeded, or married whom. New nodes come from edges of old ones.
+Every statement arrives through a chain: event → witness → reporter → editor → aggregator → you. Each link has interests and can transform the statement. Judge in proportion: load-bearing and contested claims get the full treatment; uncontested mechanical facts (calendars, rules text, registry entries) pass on one good source.
 
-### Right-sizing the scaffold
-
-Descend until nodes become individually researchable; ascend when they stop being findable.
-
-- A node that returns only national-level commentary sits too high to learn from — descend a level.
-- A node that returns nothing at all is a **dark node** — ascend one level or approach it through a neighboring node's edges.
-- The **specificity test**: scaffold nodes are proper nouns or near-proper nouns. A list of categories ("local industries, key politicians") is a template, not a scaffold. A list of names ("Hénin-Beaumont; Steeve Briois; the CGT local at the former Metaleurop site") is a scaffold.
-
-Size the scaffold to the run budget: 8–25 nodes for a bounded run, organized in 2–3 levels. Record nodes you cut — they become open questions.
-
-## Stage 2 — Research Along the Scaffold
-
-Work node by node, with bounded passes:
-
-1. Run 2–5 queries per node. Vary the query form: the node's name alone, the name + the subject question, the name + each slice (economic, political, historical).
-2. Capture findings as atomic claims with the source attached. One claim, one statement, one provenance.
-3. Mark dark nodes and move on. Darkness is information: absence of coverage is itself a finding worth one line.
-4. At every finding, take the **going-deeper juncture**: a report cites a dataset — get the dataset. A story quotes a person — that person is a new node. A filing references a docket — open the docket.
-
-### Insider vocabulary
-
-Every domain has an insider vocabulary, and the insider terms unlock a stratum of sources the lay terms can never reach. Search the lay term, harvest the terms of art from the first good source, then re-search with the terms of art. That single move is often worth more than ten additional lay-term queries.
-
-Examples: "election lawsuit" → the docket number and the legal doctrine name; "weather forecast" → "MOS guidance", the station identifier; "Fed decision" → the specific facility, the dot plot, the named alternates. Each one drops you into trade press, dockets, registries, and practitioner forums.
-
-### Slices
-
-Run the same scaffold through different lenses and compare what each lens returns: the economic story of a place, the political story, the historical story. Where the slices disagree — a town whose press is optimistic while its largest employer's filings show decline — the disagreement is the finding.
-
-## Stage 3 — The Chain of Knowing
-
-Every statement reaches you through a chain: event → witness → reporter → editor → publisher → aggregator → you. Each link has interests, and each link can transform the statement. *Where did this come from?* is always the question. Trace reports back to their origin — apparent corroboration often launders a single origin, one leaker's claim quoted by an aggregator quoted by three more outlets. Credit corroboration only across independent origins.
-
-Treat every source as answering two questions at once: *what does this say about the subject?* and *what does this say about the speaker?* A statement is evidence about its speaker at least as much as about its subject.
-
-### Interest mapping
-
-For each load-bearing source, write one line: **who benefits if this is believed?** Campaign-adjacent outlets, state media, short sellers, litigants, officials managing expectations — their statements are moves in a game, and the game is often more informative than the statement. Sources with no visible stake in the claim earn more weight; sources whose stake aligns with the claim earn a discount; sources speaking **against** their own interest earn a premium.
-
-### Actor reads
-
-For recurring public actors, the historical record supports a precedent-grounded theory of mind — an **actor read**. Build it from the record and use it to weight statements:
-
-- Example: Trump's record establishes that his positions are instantaneous and reversible, his statements frequently conflict, and he treats prior commitments as non-binding. Therefore weight any single Trump statement as a move, not a commitment — and weight markets that resolve on his *actions* very differently from markets that resolve on his *words*.
-- Build the same kind of read for any actor who appears repeatedly in your subject: does this institution pre-announce or surprise? Does this CEO ship on announced dates? Does this ministry's spokesman ever contradict the leader?
-
-### Knowability tiers
-
-Calibrate how much chain-judgment is even possible:
-
-- **Tracked actors** (politicians, agencies, listed companies, established outlets): long public records — build real actor reads.
-- **Identifiable but thin** (local figures, small outlets, named analysts): judge from affiliation and incentive structure.
-- **Anonymous or new** (unattributed claims, fresh accounts, single-source stories): the chain is dark — weight the claim by its checkability, and check it.
-
-Trust is also **claim-type specific**: an outlet can be reliable on schedules and unreliable on causes; a ministry can be honest about numbers and dishonest about reasons. Assign trust per claim type, never per source as a whole.
+- **Trace to origin.** Find the earliest appearance: first online timestamp, wire attribution, whose quotes these actually are. Apparent corroboration usually launders one origin through many outlets — credit corroboration only across independent origins, and record the origin in the ledger so the count is auditable.
+- **Origins can be manufactured.** Content farms and sockpuppet outlets forge "independent" corroboration cheaply. An origin counts only if it demonstrably existed and covered the beat before the claim — archived snapshots anchor this. On social sources: young accounts and near-identical phrasing across accounts equal one origin. Judge the page before the chain: real byline, domain age, any information the other results lack.
+- **Time axis.** Record when the source spoke relative to the event; contemporaneous accounts and later retellings weigh differently.
+- **Interest map.** For each load-bearing source, one line: who benefits if this is believed? Discount stake-aligned sources; premium for statements against interest — after asking who benefits from appearing candid, since small confessions buy credibility for large claims. "No visible stake" means no discoverable stake after looking. A checkable claim gets checked no matter who said it.
+- **Actor reads.** For recurring actors, build a precedent-grounded theory of mind from the record: does this institution pre-announce or surprise? Do this CEO's announced ship dates hold? Weight what resolves on an actor's *actions* differently from what resolves on their *words*. Validate reads against outcomes; they stale.
+- **Knowability tiers.** Tracked actors (long public records) support real actor reads; identifiable-but-thin sources are judged from affiliation and incentives; anonymous or new sources leave the chain dark — weight the claim by its checkability, and check it. Trust is claim-type specific: an outlet reliable on schedules can be unreliable on causes.
+- **Media.** A load-bearing photo or video gets a reverse-image search for its first appearance; recycled footage is an origin finding.
 
 ## Stage 4 — Synthesize and Climb
 
-Climb back up the scaffold. Node-level findings answer level-above questions: what twenty county findings say about the region, what the region says about the nation.
+- Build a dated timeline from the ledger before writing causal prose; ordering errors surface mechanically.
+- Write the synthesis as explanation — why it is like this, how it became like this — citing ledger claims inline. Only `confirmed` and `probable` claims may load-bear.
+- State the consensus narrative, where the findings diverge from it, and the trigger observation that would prove the divergence.
+- Preserve contradictions between well-sourced claims — after checking they share timeframe, referent, and genre priors (filings are systematically pessimistic, press optimistic). A surviving contradiction is a finding: record both sides and what would settle them.
+- Premortem, three lines: assume the synthesis is wrong — which chain link most likely failed, and what rival hypothesis fits the same evidence? Audit before shipping: how many load-bearing claims rest on a single origin? Zero preserved contradictions is suspicious.
+- Convert "what would change my mind" into named signals: the observation, where it will appear, which way it cuts.
+- Lead the report with the answer to the question as asked; then the synthesis, the scaffold with dark nodes marked, the ledger as an annex, and open questions specific enough for the next run to execute directly.
+- Persist scaffold + ledger + open questions to the output destination. A re-run starts there: diff the world since the last run date; re-research only changed nodes and open questions.
 
-- Write the synthesis as explanation: *why it is like this, how it became like this*, with the claims that carry the explanation cited inline.
-- Preserve contradictions as contradictions. Two well-sourced claims that disagree are a finding; pick neither, record both, and state what evidence would settle them.
-- State what would change your mind: the specific observation that would break the synthesis. That sentence becomes a signal worth monitoring.
-- Include the scaffold you actually used in the report, with dark nodes marked. The research plan is part of the deliverable; it makes the run auditable and gives the next run its starting map.
-- Convert every dark node into a specific open question, phrased so a future bounded run can execute it directly.
+## Quick Pass
 
-## Source Genres and Discovery Moves
+The floor version, for short clocks and tiny budgets — five queries: (1) resolution rules and resolver precedent, (2) subject plus its best term of art, (3) top actor plus recent record, (4) closest precedent event, (5) local or trade press at the decisive place. One-paragraph synthesis, one signal, open questions. Label the output as a quick pass.
 
-Conceptualize sources by genre, and use lateral and spatial questions to find them:
+## Execution Loop
 
-| genre | examples | reach them via |
-|---|---|---|
-| primary records | filings, dockets, registries, budgets, transcripts, datasets, election returns | insider terms of art; institutional descent |
-| institutional output | agency reports, minutes, inspection records, procurement notices | the issuing office, found by descent |
-| local press & media | county papers, local radio, regional TV, municipal newsletters | spatial descent; search in local language |
-| trade & practitioner | industry press, conference talks, job postings, technical forums | search with the insider lexicon |
-| social listening | X/Twitter questions and chatter (`x-questions` skill via xpool), Reddit, local Facebook groups, Telegram | search the node names, not the topic |
-| adversarial | opposition research, short-seller reports, litigation discovery, leaked documents | search the node + "lawsuit / investigation / report" |
+1. Root the question: resolution context, key assumptions, reference class, seed map. (Stage 0)
+2. Scaffold: searchable keys, two or three descent moves, sized to budget, triage-ranked. (Stage 1)
+3. Per node: harvest handles → documents first → bounded logged queries → ledger claims with origin and confidence → bounded junctures → stop on two dry queries. (Stage 2)
+4. Judge load-bearing chains: origin, time axis, interest map, actor read, per-claim-type trust. (Stage 3)
+5. Synthesize: timeline → explanation → consensus/divergence/trigger → contradictions kept → premortem → signals. (Stage 4)
+6. Loop to Stage 1 if the pass changed a load-bearing claim or minted a node worth researching; otherwise stop and file open questions.
 
-The two discovery questions to ask at any node:
+## Domain Directions
 
-- **Lateral:** who else would *have* to know this? (regulators, suppliers, neighbors, former employees, opposing counsel, the losing bidder)
-- **Spatial:** what exists *at the place*? (the local paper, the chamber of commerce, the parish bulletin, the planning office)
-
-## Polymarket Domain Directions
-
-Leading directions per genre of the active Polymarket board. These are pointers; when a domain accumulates real craft, promote it into its own methodology skill and trim this table.
-
-On price-blind runs, market prices, odds, and order books are out-of-scope inputs; the market's rules text is always in scope.
-
-- **Elections & domestic politics** (US races, primaries, appointments, "will X happen by date"): descend spatially to the decisive jurisdictions; research named local actors and machines; pull precedent base rates for the event class; map the procedural mechanics — who certifies, who counts, what deadlines and legal challenges exist. Polling is one source genre, never the scaffold.
-- **Global elections** (Sweden, France, by-elections): same descent plus local-language press, coalition arithmetic, and the country's specific electoral law (thresholds, rounds, seat formulas — markets often resolve on these mechanics).
-- **Geopolitics & conflict** (Iran, Israel, Ukraine, Hormuz, ceasefires, treaties): actor reads and interest mapping carry the most weight here — most sources are parties to the conflict. Find local and regional media in original languages; name the actual negotiators and commanders; map the procedural path a deal must travel (ratification, cabinet votes, oversight). Defer to `middle-east-research` for its region.
-- **Macro & rates** (Fed, global central banks, inflation prints): the calendar is the scaffold — meetings, release dates, blackout periods; named voters and their speech records; revision history of the data series; the resolution source's exact print (which index, which release).
-- **Equities & company events** (price levels, valuations, IPOs, M&A): filings over news — 8-Ks, S-1s, prospectuses; precedent behavior of the specific company; the mechanics of the trigger (whose print resolves it, intraday or close).
-- **Tech & AI** (model releases, benchmarks, product launches): the company's release precedent (announced vs shipped dates); insider telemetry — job postings, GitHub activity, app-store metadata, conference schedules; benchmark mechanics (who scores it, what counts as a result).
-- **Legal & courts** (rulings, confirmations, criminal cases): dockets are primary — CourtListener/PACER equivalents; procedural timelines set hard date floors; judge and panel histories; named-party incentives to settle, delay, or appeal.
-- **Science, health & space** (launches, trials, approvals): registries and regulators — launch licenses, trial registries, approval calendars; the named facility and vehicle; precedent slip rates for the specific program.
-- **Culture & social-count** (mentions, tweets, celebrity actions): normally blocked in PMKNB discovery; when explicitly user-directed, research the resolution mechanics first — the counting source defines the market, and the subject's posting/behavior base rate is the only real signal.
-- **Sports, crypto, weather**: out of scope — blocked in PMKNB discovery or owned by a dedicated system (pm-weather).
-
-## Domain Lexicon
-
-Shared terms for this framework, usable across prompts, reports, and discussion:
-
-| term | meaning |
-|---|---|
-| **scaffold** | the named-entity list/graph built before querying; the research plan |
-| **node** | one individually researchable entity on the scaffold |
-| **descent** | moving down a specificity level (nation → county → town) |
-| **slice** | one lens run across the whole scaffold (economic, social, temporal) |
-| **dark node** | a node left unlit — searched and empty, or cut for budget; itself a finding |
-| **chain of knowing** | the transmission path of a statement from event to reader |
-| **interest map** | the one-line answer to "who benefits if this is believed?" |
-| **actor read** | a precedent-grounded theory of mind for a named actor or group |
-
-## Quick Reference
-
-1. Root into the question's context — for markets, the resolution context: rules, resolver, series precedent — and write the outcome block.
-2. Build the scaffold: pick 2–3 descent moves, list 8–25 proper-noun nodes.
-3. Research node by node: bounded queries, atomic sourced claims, deeper at every juncture, re-search with insider terms of art when they show themselves.
-4. Judge each load-bearing source's chain: where it came from, independent origins, interest map, actor read, knowability tier, per-claim-type trust.
-5. Synthesize upward: explain why/how-it-became, keep contradictions, show the scaffold, state what would change your mind, file dark nodes as open questions.
-
-## Rules
-
-- Root into the question's context before researching the subject; for markets, resolution context comes first.
-- Build the scaffold before running queries; queries without a scaffold produce surface takes.
-- Make every node a proper noun; descend until that is true.
-- Trace reports to their origin; credit corroboration only across independent origins.
-- Take the going-deeper juncture every time a source cites something more primary.
-- Write the interest map for every source that carries weight in the synthesis.
-- Treat statements by tracked actors through their actor reads, and statements against interest as premium evidence.
-- Keep contradictions; resolving them prematurely destroys the most valuable finding.
-- End every run with open questions specific enough to execute directly.
+Per-genre scaffold strategies for the active Polymarket board live in [references/polymarket-directions.md](references/polymarket-directions.md); read it when the subject is a PM market genre (elections, geopolitics, macro, legal, tech, …).
