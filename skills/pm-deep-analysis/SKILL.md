@@ -3,18 +3,35 @@ name: pm-deep-analysis
 description: Use when an agent needs price-blind deep research for a Polymarket or prediction-market event, market URL, event URL, market question set, or PMKNB situation, including fresh analysis, updating existing deep research, resolution mechanics, source discovery, and 0-100 likelihood estimates independent of market odds.
 metadata:
   category: prediction markets
-  blurb: "Price-blind prediction-market research: builds evidence-first world reports and 0-100 resolution estimates without using odds or prices."
+  blurb: "Price-blind prediction-market research: builds evidence-first world reports and calibrated 0-100 resolution estimates without using odds or prices."
   keywords:
     - pm
     - deep
     - analysis
+    - likelihood
+    - estimation
+    - resolution
+    - price-blind
+    - polymarket
+    - kalshi
 ---
 
 # PM Deep Analysis
 
 ## Overview
 
-Use this skill for high-effort, price-blind world research on a prediction-market event. The output is a durable research report plus structured per-market likelihood estimates that can feed PMKNB records and HTML/projection views.
+This skill is event-shaped estimation. Given a prediction-market event, it produces a durable price-blind research report plus a calibrated 0-100 likelihood per market question. It answers "will this exact predicate fire by this deadline?" — not "what is true about this subject?"; world research is an input, not the deliverable.
+
+A defensible likelihood requires six things, and the method below is organized around them:
+
+1. the exact resolution predicate
+2. the causal paths to YES and to NO
+3. a reference-class base rate
+4. current-state evidence
+5. the estimation horizon — time-to-deadline dynamics
+6. a resolver behavior model
+
+Vocabulary contract: **estimation** is the activity; **likelihood** is the 0-100 value; the **likelihood table** is the artifact. A **forecast** is a PMKNB market-aware record this skill must never write.
 
 This is not PM market analysis. It does not use prices, odds, order books, liquidity, volume, positions, PnL, or market-implied probabilities.
 
@@ -74,7 +91,7 @@ Do not create a named run type for the branch. Use it only as `research_mode` in
 
 ## Update Branch
 
-When updating existing research, spend time where reality could have changed. Do not re-research stable foundations unless the original report was weak, uncited, contradicted, or the market rules changed.
+An update is a diff of the world since the last run date: re-research only changed nodes and open questions. Do not re-research stable foundations unless the original report was weak, uncited, contradicted, or the market rules changed.
 
 Classify prior material:
 
@@ -97,42 +114,80 @@ Ask these questions of the existing research:
 
 The update pass should produce a compact change map: unchanged foundations, changed facts, newly answered questions, still-open questions, and revised likelihoods. Do not mutate an old `deep_dive` report. When a new report replaces prior deep analysis, link it to the prior report with `rel="supersedes"` or set `supersedes_report_ids`; use `linked_report_ids` only for related reports that are not replaced. For changed claims, write new claims and link, support, contradict, or supersede as appropriate.
 
-## Fresh Branch
+## Identify The Input
 
-For fresh research, build the foundation before estimating likelihoods.
+- Extract the event name and child market questions without using odds.
+- If the user gives only a title, infer the subject but mark the exact PM identity as unverified.
+- If multiple child markets exist, keep them separate.
+- Extract event and child-market lifecycle timestamps when available: `createdAt`, `creationDate`, `startDate`, `acceptingOrdersTimestamp`, `active`, `closed`, `archived`, and deadline/end-date fields. Keep these as allowed identity/resolution fields, not market-sentiment fields.
+- Route the event to a domain playbook (below) before researching.
 
-1. Identify the input.
-   - Extract the Polymarket event name and child market questions without using odds.
-   - If the user gives only a title, infer the subject but mark the exact PM identity as unverified.
-   - If multiple child markets exist, keep them separate.
-   - Extract event and child-market lifecycle timestamps when available: `createdAt`, `creationDate`, `startDate`, `acceptingOrdersTimestamp`, `active`, `closed`, `archived`, and deadline/end-date fields. Keep these as allowed identity/resolution fields, not market-sentiment fields.
+## Resolution Mechanics
 
-2. Build a resolution predicate for each market question.
-   - State what must happen for YES or the named outcome to resolve.
-   - Identify resolver, proof source, deadline, timezone, challenge/dispute process, and edge cases.
-   - Separate "what happens in the world" from "how the market resolves."
-   - Build a market live-time gate before considering historical events as resolution triggers:
-     - Define `market_live_at` for each child market from the best available lifecycle timestamp. Prefer the earliest verified time the child market was actually live/accepting orders; otherwise use child `startDate`; otherwise child `createdAt`; otherwise event `startDate`/`createdAt`.
-     - Treat events whose underlying action and required confirmation window were fully completed before `market_live_at` as background context, not as already-triggered resolution events, unless the rule text explicitly says retroactive/pre-live events count.
-     - For ongoing-state markets that reference a state beginning before market launch, distinguish the pre-launch state baseline from post-launch break/confirmation events. The baseline may matter; stale pre-launch break events normally should not settle the market.
-     - If the rules are ambiguous about retroactive coverage, surface that as a resolution uncertainty and do not make it the dominant driver without explaining why a resolver would count pre-live evidence.
-     - When a report discusses a pre-live event, label it `pre_live_context` or `pre_live_ambiguity`, not `already_triggered`, unless retroactivity is explicit.
+Per market question, in order:
 
-3. Build the world model.
-   - Identify relevant actors, institutions, procedural paths, constraints, incentives, and timelines.
-   - Prefer primary sources, official records, direct statements, datasets, transcripts, filings, and high-signal reporting.
-   - Use secondary sources mainly for discovery and context unless they are the best available evidence.
+1. **Resolution predicate.** State exactly what must happen for YES or the named outcome. Decompose the predicate into elements — the action, the actor, the timeframe, the confirmation source — each an independently necessary condition. Elements that can fail independently get estimated separately.
 
-4. Create evidence before synthesis.
-   - Capture material sources with provenance.
-   - Extract atomic claims with confidence, caveats, and `as_of` when time-sensitive.
-   - Preserve conflicting evidence as separate claims rather than smoothing it away.
+2. **Resolver, proof source, deadline.** Identify the resolver, the proof source it will consult, the deadline with timezone, and the challenge/dispute process.
 
-5. Estimate each market question.
-   - Start from base rates or structural priors when relevant.
-   - Adjust using current evidence, procedural mechanics, timing, actor incentives, and resolution rules.
-   - Account for source quality, missing evidence, and ambiguity.
-   - Output a 0-100 likelihood for the question resolving YES or for the named outcome happening, depending on the market wording.
+3. **Live-time gate.** Build a market live-time gate before considering historical events as resolution triggers:
+   - Define `market_live_at` for each child market from the best available lifecycle timestamp. Prefer the earliest verified time the child market was actually live/accepting orders; otherwise use child `startDate`; otherwise child `createdAt`; otherwise event `startDate`/`createdAt`.
+   - Treat events whose underlying action and required confirmation window were fully completed before `market_live_at` as background context, not as already-triggered resolution events, unless the rule text explicitly says retroactive/pre-live events count.
+   - For ongoing-state markets that reference a state beginning before market launch, distinguish the pre-launch state baseline from post-launch break/confirmation events. The baseline may matter; stale pre-launch break events normally should not settle the market.
+   - If the rules are ambiguous about retroactive coverage, surface that as a resolution uncertainty and do not make it the dominant driver without explaining why a resolver would count pre-live evidence.
+   - When a report discusses a pre-live event, label it `pre_live_context` or `pre_live_ambiguity`, not `already_triggered`, unless retroactivity is explicit.
+
+4. **Resolver precedent.** Retrieve how this resolver actually decided prior and edge cases — UMA dispute history, Kalshi settlement record, platform clarifications, the resolver's archive. Resolver precedent outweighs textual analysis of the rules; retrieve it, don't recall it.
+
+5. **Series precedent.** When the market belongs to a series (monthly prints, recurring events, numbered instances), retrieve how prior instances resolved, especially the contested ones. Series conventions often override a naive reading of this instance's rules.
+
+6. **Resolution-gap analysis.** Separate "what happens in the world" from "what fires the predicate," and name each gap: definitional ambiguity, confirmation-source lag, deadline vs event timing, resolver discretion. Resolution gaps are why `world_event_likelihood_0_100` and `resolution_true_likelihood_0_100` can diverge; every named gap belongs in the question's uncertainties.
+
+## World Research
+
+Build the world model that the paths to YES and NO run through: actors, institutions, procedural paths, constraints, incentives, timelines.
+
+If the `pm-research-methodologies` skill is available, load it and run its execution loop for this stage, with these overrides: this skill's price-blind protocol governs what may be browsed; scaffold nodes are ranked by their power to move a likelihood, not by general interest; outputs land in this skill's report and PMKNB records.
+
+If it is not available, use this fallback loop:
+
+1. **Scaffold.** List the searchable keys whose investigation compounds into understanding: named people, institutions, instruments (statutes, dockets, data series), precedents, places. Descend from categories to keys — "the certifying official in the decisive county," not "election officials." 8–25 nodes for a full run; rank by decision-relevance to the market questions.
+2. **Per node.** Harvest handles at the first good source — names, machine identifiers, terms of art — and pivot every later query on a handle, never the lay topic. Search primary records (filings, dockets, registries, transcripts, datasets) before press; use press as an index pointing to documents. 2–5 queries per node; stop after two consecutive dry queries.
+3. **Ledger claims as found**, never reconstructed at synthesis: claim, source with publication date, whether the origin was traced, and confidence (`confirmed` / `probable` / `reported` / `rumor`). Preserve conflicting evidence as separate claims rather than smoothing it away.
+4. **Judge load-bearing chains.** Trace the claim to its earliest origin; apparent corroboration usually launders one origin through many outlets, so count corroboration only across independent origins. Map who benefits if the claim is believed; premium for statements against interest; record when the source spoke relative to the event.
+
+Either way: prefer primary sources, official records, direct statements, datasets, transcripts, and filings; use secondary sources mainly for discovery and context unless they are the best available evidence. Capture material sources with provenance and extract atomic claims with confidence, caveats, and `as_of` when time-sensitive — evidence before synthesis.
+
+## Estimation
+
+Complete an estimation worksheet per market question before writing the likelihood. The worksheet is the rationale's skeleton; it lives in the report body, not in new schema fields.
+
+| Worksheet field | Content |
+| --- | --- |
+| Predicate | one sentence, element-decomposed |
+| Reference class + base rate | what counts as an instance, how many opportunities existed, the resulting rate |
+| Paths to YES | enumerated, rough weight each |
+| Paths to NO | failure modes, same treatment |
+| Horizon pressure | time remaining vs time the YES paths need |
+| Resolution gap | named world-vs-predicate divergences |
+| Likelihood + confidence | the output row |
+
+**Outside view first.** The base rate is the starting number. Each adjustment away from it must name its evidence; findings adjust the anchor, they never replace it. A narrative with no base rate behind it is a red flag in your own rationale.
+
+**Estimation horizon.**
+
+- Short horizon (days): state-tracking dominates — current state, what is scheduled, what can mechanically still change before the deadline.
+- Long horizon (months+): base rates and hazard dominate — inside-view narratives decay; weight structural constraints and calendars over statements.
+
+**Techniques** — pick by question shape:
+
+- **Deadline markets** ("will X happen by date Y"): estimate a per-period hazard of the trigger and integrate to the deadline. A steady 2%/month hazard over ten months is ~18, not "unlikely, call it 10." State the hazard and the periods.
+- **Procedural events** (votes, confirmations, certifications, rulings): enumerate the discrete paths to YES, assign a probability per path, likelihood = sum over YES paths. Procedural date floors trump narrative urgency.
+- **Bucket markets** (counts, ranges, dates split across child markets): estimate the underlying quantity's distribution once — e.g., a rate-based count as Poisson — then read each bucket's likelihood off that distribution. Never estimate buckets independently.
+- **Multi-outcome contests**: build a competing-hypotheses matrix (ACH) — outcomes as columns, evidence as rows, score each cell for consistency; weight the outcomes that survive the most evidence.
+- **Quantitative markets** get an explicit model: a computed number with stated inputs, not prose-only rationale. Prose is where sloppy numbers hide.
+
+**Coherence across child markets.** After estimating rows independently, check the implied joint picture: verified mutually-exclusive-and-exhaustive sets should sum near 100; nested deadlines must be monotone ("X by March" ≤ "X by June"); the same world assumption must not appear on both sides of two rows. A contradiction means at least one worksheet is wrong — fix the worksheet, not just the number.
 
 ## Likelihood Rules
 
@@ -150,197 +205,73 @@ Calibration:
 - `95`: very likely, only exceptional failure paths remain.
 - `100`: logically certain or already definitively true.
 
-Prefer 5-point increments unless there is unusually strong quantitative support. Include `confidence` separately from likelihood. Do not force probabilities across child markets to sum to 100 unless the child markets are verified mutually exclusive and exhaustive under the same rules.
+Prefer 5-point increments unless there is unusually strong quantitative support (a computed model output justifies finer values). Include `confidence` separately from likelihood. Do not force probabilities across child markets to sum to 100 unless the child markets are verified mutually exclusive and exhaustive under the same rules.
 
 When resolution mechanics differ from the intuitive world event, estimate `resolution_true_likelihood_0_100` and optionally include `world_event_likelihood_0_100` as a supporting field. `likelihood_0_100` must equal `resolution_true_likelihood_0_100` when both are present. `resolution_yes_likelihood_0_100` is accepted only as a transitional alias for YES/NO markets.
 
+In `main_uncertainties`, label each entry as world uncertainty (the event itself is uncertain) or resolution uncertainty (the predicate/resolver behavior is uncertain) — plain text in the entry, no new fields.
+
 These likelihoods are price-blind resolution assessments, not PMKNB forecasts. This skill must not write `forecast` records.
 
-## Output Shape
+## Domain Playbooks
 
-Produce both readable report content and structured fields. The structured fields are what make the output useful to PMKNB projections and the HTML cockpit.
+Route the event to its domain, apply the playbook's deltas, then run the standard method. Playbooks carry deltas only — world directions and recurring resolution gaps — never full research guides. Defer to dedicated skills where installed: `middle-east-research` for its region; the `pmw-*` family owns weather; sports and crypto are out of scope.
 
-```yaml
-schema_version: pm_deep_analysis.v1
-research_mode: fresh | update
-status: completed | blocked | skipped | failed
-price_blind: true
-as_of: "ISO-8601 timestamp"
-price_blind_audit:
-  status: clean | allowed_identity_only | contaminated_blocked
-  allowed_market_fields_used:
-    - platform
-    - event_title
-    - event_url
-    - event_slug
-    - market_url
-    - market_title
-    - market_slug
-    - market_id
-    - outcome_label
-    - resolution_text
-    - rules_url
-    - resolution_source_url
-    - deadline
-    - resolver_or_source
-    - event_created_at
-    - event_start_date
-    - market_created_at
-    - market_start_date
-    - accepting_orders_timestamp
-    - active_closed_archived_status
-    - kalshi_event_ticker
-    - kalshi_market_ticker
-  forbidden_fields_used: []
-  notes:
-input_identity:
-  platform: polymarket | kalshi | other | unknown
-  event_url:
-  event_title:
-  event_slug:
-  event_created_at:
-  event_start_date:
-  market_slug:
-  market_id:
-  market_created_at:
-  market_start_date:
-  accepting_orders_timestamp:
-  kalshi_event_ticker:
-  kalshi_market_ticker:
-  identity_status: verified | partial | unverified
-existing_research:
-  report_ids: []
-  carried_forward_claim_ids: []
-  changed_claim_ids: []
-  stale_or_open_question_ids: []
-update_change_map:
-  carried_forward_static_claim_ids: []
-  refreshed_dynamic_claim_ids: []
-  superseded_claim_ids: []
-  contradicted_claim_ids: []
-  newly_answered_question_ids: []
-  still_open_question_ids: []
-  likelihood_changes:
-    - market_question_id:
-      previous_likelihood_0_100:
-      revised_likelihood_0_100:
-      reason:
-market_questions:
-  - market_question_id:
-    target_open_question_id:
-    question_fingerprint:
-      venue:
-      event_slug:
-      market_slug:
-      title_hash:
-      resolution_text_hash:
-      deadline:
-      resolver_or_source:
-      outcome_label:
-      selection_label:
-    market_title:
-    outcome_label:
-    selection_label:
-    market_live_at:
-    live_time_basis:
-      event_created_at:
-      event_start_date:
-      market_created_at:
-      market_start_date:
-      accepting_orders_timestamp:
-    pre_live_events_considered:
-      - event:
-        occurred_at:
-        confirmation_window_closed_at:
-        treatment: background_context | retroactive_trigger | ambiguous
-        reason:
-    resolution_predicate:
-    resolver_or_source:
-    deadline:
-    likelihood_0_100:
-    resolution_true_likelihood_0_100:
-    confidence: low | medium | high
-    rationale:
-    key_supporting_claim_ids: []
-    key_contrary_claim_ids: []
-    main_uncertainties: []
-    what_could_change: []
-    next_sources_to_check:
-      - source_name:
-        source_kind:
-        expected_update_time:
-        check_reason:
-        linked_signal_candidate: true | false
-    source_basis:
-      source_ids: []
-      claim_ids: []
-report:
-  pmknb_type: report
-  fields:
-    schema_version: pm_deep_analysis.v1
-    report_kind: deep_dive
-    title:
-    situation_id:
-    context_mode: world
-    format_id: pm.world.report.deep_analysis.v1
-    price_blind: true
-    research_mode: fresh | update
-    as_of: "ISO-8601 timestamp"
-    generated_at: "ISO-8601 timestamp"
-    event_title:
-    input_identity: {}
-    body_markdown:
-    sections:
-      event_frame:
-      resolution_predicates:
-      evidence_ledger:
-      likelihood_table:
-        rows: []
-      change_map:
-      open_questions:
-      next_checks:
-    market_questions: []
-    price_blind_audit: {}
-    update_change_map: {}
-    basis_record_ids: []
-    basis_run_ids: []
-    linked_report_ids: []
-    supersedes_report_ids: []
-    open_questions: []
-    status: draft | current
-apply_batch:
-  records:
-    - kind: source | claim | entity | report | signal | proposal | run_trace
-      id:
-      client_id:
-      qualifiers:
-        pmknb_type:
-        fields: {}
-  links: []
-  patches:
-    - target_id:
-      patch: []
-  open_question_patches:
-    - owner_record_id:
-      question_id:
-      disposition: answered | partial | refined | retired | still_open
-      last_pursued_at:
-      answer_claim_ids: []
-      report_id:
-      next_action:
-      priority:
-      depth:
-```
+**Elections & domestic politics** (races, primaries, appointments, "will X happen by date")
+- World: descend to the decisive jurisdictions; named local actors and machines; procedural mechanics — who certifies, who counts, deadlines, legal challenge paths. Polling is one input, never the scaffold.
+- Gaps: certification vs media call; recount and challenge windows; "wins" vs "takes office."
+- Technique: path-sum over procedural outcomes; for margins, a distribution around polling with historical polling error.
 
-Inside PMKNB, `apply_batch.records` must contain the canonical report and run trace writes that the runner can commit. Every record must have a stable `id` or `client_id`, and links, basis IDs, and patches must reference those IDs. Do not emit only a separate report sidecar and assume it will become durable. The readable `report` block may be repeated for human readability, but the apply batch is authoritative.
+**Global elections** (national elections, by-elections, coalition outcomes)
+- World: the domestic-politics playbook plus local-language press, coalition arithmetic, and the country's electoral law — thresholds, rounds, seat formulas.
+- Gaps: seat formula vs vote share; coalition formation vs election result; markets often resolve on the legal mechanics, not the headline.
+- Technique: path-sum over coalition/round outcomes.
 
-Use `report.fields.status="current"` for a completed deep-analysis report. Use `run_trace.fields.status="completed"`, `"blocked"`, `"skipped"`, or `"failed"` for the run trace. Blocked, skipped, or failed runs should write a diagnostic run trace and no likelihood rows; a diagnostic report may be written only with empty `market_questions`.
+**Geopolitics & conflict** (ceasefires, treaties, strikes, territorial control)
+- World: actor reads and interest mapping carry the most weight — most sources are parties to the conflict. Local and regional media in original languages; name the actual negotiators and commanders; map the procedural path a deal must travel (ratification, cabinet votes, oversight).
+- Gaps: who confirms a ceasefire "holds"; definitional ambiguity ("strike," "invasion," "control"); confirmation lag vs deadline.
+- Technique: hazard for by-date questions; path-sum for negotiated outcomes.
 
-Use `market_question_id` for a row in the deep-analysis likelihood table. Use `target_open_question_id` or `apply_batch.open_question_patches[].question_id` only for embedded PMKNB open questions. Never reuse one embedded open-question id for multiple child market rows unless every row is explicitly answering that same open question.
+**Macro & rates** (central banks, inflation prints, jobs numbers)
+- World: the calendar is the spine — meetings, release dates, blackout periods; named voters and their speech records; revision history of the data series.
+- Gaps: which print resolves it — exact index, exact release, first print vs revision; rounding conventions.
+- Technique: distribution over the print; bucket likelihoods read off the distribution.
 
-For `question_fingerprint`, use normalized identity fields: platform, event slug or Kalshi event ticker, market slug/id or Kalshi market ticker, normalized title, normalized resolution text, deadline, and resolver/source. Hash text fields with SHA-256 of lowercase whitespace-collapsed text when tools are available; otherwise include the normalized text in `fingerprint_basis`.
+**Equities & company events** (price levels, IPOs, M&A)
+- World: filings over news — 8-Ks, S-1s, prospectuses; the specific company's precedent behavior.
+- Gaps: whose print resolves it (which source, intraday vs close); announcement vs completion for M&A.
+- Technique: hazard for by-date announcements; distribution for price levels.
 
-Include `outcome_label` or `selection_label` in every `question_fingerprint`; multi-outcome events must not collapse distinct outcomes into one assessment row.
+**Tech & AI** (model releases, benchmarks, product launches)
+- World: the company's release precedent — announced vs shipped dates; insider telemetry: job postings, GitHub activity, app-store metadata, conference schedules.
+- Gaps: what counts as "released" — public, API-only, waitlist; benchmark scoring authority and what counts as a result.
+- Technique: hazard with the company's historical slip rate as the base rate.
+
+**Legal & courts** (rulings, confirmations, criminal cases)
+- World: dockets are primary — CourtListener/PACER equivalents; procedural timelines; judge and panel histories; named-party incentives to settle, delay, or appeal.
+- Gaps: ruling vs mandate issuance; stay mechanics; "convicted" vs "sentenced" vs "final."
+- Technique: path-sum over procedural outcomes, with docket-derived hard date floors.
+
+**Science, health & space** (launches, trials, approvals)
+- World: registries and regulators — launch licenses, trial registries, approval calendars; the named facility and vehicle; the specific program's slip history.
+- Gaps: "launch" vs "success"; approval vs availability.
+- Technique: hazard from the program's precedent slip rate.
+
+**Culture & social-count** (mentions, tweets, celebrity actions)
+- World: the counting source defines the market — research its mechanics first; the subject's posting/behavior base rate is the only real signal.
+- Gaps: counting-source methodology changes; deleted or edited posts; timezone of the counting window.
+- Technique: Poisson or empirical distribution from the subject's base rate.
+
+**No-domain fallback** (novel one-offs with no reference class)
+- Construct a reference class by analogy: name the analogy and its disanalogies explicitly. Widen confidence downward. Weight resolution mechanics research more heavily — for novel markets, how it resolves is often less knowable than whether the event happens.
+
+## Quick Estimate
+
+The floor version, for short clocks: five lookups — (1) rules text plus resolver/series precedent, (2) reference-class base rate, (3) top actor's current state and record, (4) closest precedent event, (5) deadline math. Complete the worksheet from these alone, emit likelihood rows with `confidence: low`, and label the report a quick estimate in the body. Same output contract; nothing changes in the schema.
+
+## Output
+
+Produce both readable report content and structured fields. Before emitting output, read [references/output-contract.md](references/output-contract.md) — it defines the `pm_deep_analysis.v1` schema, apply-batch rules, ID and fingerprint conventions, projection fit, and PMKNB write discipline. The schema is unchanged.
 
 For plain-English answers, still include the per-question likelihood table near the end:
 
@@ -349,49 +280,17 @@ For plain-English answers, still include the per-question likelihood table near 
 | --- | --- | ---: | --- | --- | --- |
 ```
 
-## HTML And Projection Fit
-
-Shape the output for PMKNB's view layer:
-
-- Keep the report self-contained in `body_markdown`, but expose table-ready `market_questions`.
-- Use stable IDs for sources, claims, reports, and run traces when available.
-- Put each market question on its own row with title, likelihood, confidence, source basis, uncertainty, and next checks.
-- Keep provenance visible: source title/domain, published or observed time, captured time, actor/model, confidence, and basis ids.
-- Put unresolved items in `open_questions` fields or proposals so the research queue can surface them.
-- Do not create UI-only canonical records. HTML is a disposable presentation over projections.
-
-Useful PMKNB projection targets:
-
-- `report_index`: the authored report and section summaries.
-- `deep_analysis_index`: table-ready price-blind resolution assessment rows from clean deep-analysis reports.
-- `record_search`: sources, claims, entities, signals, proposals, and report records.
-- `question_backlog`: unresolved questions and next checks.
-- `run_trace_index`: what the run read, wrote, skipped, and produced.
-
-## PMKNB Write Discipline
-
-When working inside a PMKNB runner:
-
-- Use world context only.
-- Create `source` records before durable `claim` records.
-- Keep claims atomic and cited.
-- Write a `report` for the standalone research artifact.
-- Write signals only for specific future world data points worth monitoring.
-- Do not create price or volume signals. If research suggests a price/volume watch would be useful, create a proposal for market-mode handling instead.
-- Use proposals for uncertain claims, instrument attachments, guidance, or operator decisions.
-- If `target.question_id` was supplied, include an `apply_batch.open_question_patches` entry that marks it answered, partial, refined, retired, or still open.
-- Also produce the canonical JSON Patch entry in `apply_batch.patches` against `target.question_owner_record_id`, or mark the run blocked with the reason the owning record could not be patched. `open_question_patches` is explanatory metadata unless mirrored by canonical patch entries.
-- If `next_sources_to_check.linked_signal_candidate=true`, create a `signal` record or a proposal/open question explaining why no signal was written.
-- Include exactly one `run_trace`.
-- Put all writes in the runner's apply batch. Do not call `knb apply` or `knb add` yourself.
-
-Do not write forecasts, positions, orders, executions, dense market snapshots, or market-aware analyses from this skill.
-
 ## Common Mistakes
 
 - Using Polymarket odds as a prior or sanity check.
 - Treating a market title as the resolution rule.
+- Reasoning only from rules text when resolver or series precedent is retrievable.
 - Treating pre-launch events as already-triggered resolution events without first applying the child market's `market_live_at` gate and checking whether the rules explicitly allow retroactive coverage.
+- Letting an inside-view narrative replace the base rate instead of adjusting it.
+- "Unlikely, call it 10" on a long-horizon deadline market instead of hazard math.
+- Estimating bucket markets independently instead of from one underlying distribution.
+- Child-market rows that contradict each other — non-monotone nested deadlines, MECE sets far from 100.
+- Skipping the worksheet and writing rationale prose that hides where the number came from.
 - Re-researching static foundations during an update pass while ignoring dynamic sources.
 - Giving one event-level likelihood when the PM event has several distinct child questions.
 - Hiding likelihood estimates in prose instead of a structured table.

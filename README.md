@@ -48,7 +48,7 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 | Skill | What it does |
 | --- | --- |
 | [`kalshi-prediction-market`](skills/kalshi-prediction-market/) | A Kalshi domain primer for understanding series, events, markets, Yes/No pricing, settlement, order books, and API or WebSocket data. |
-| [`pm-deep-analysis`](skills/pm-deep-analysis/) | Price-blind prediction-market research: builds evidence-first world reports and 0-100 resolution estimates without using odds or prices. |
+| [`pm-deep-analysis`](skills/pm-deep-analysis/) | Price-blind prediction-market research: builds evidence-first world reports and calibrated 0-100 resolution estimates without using odds or prices. |
 | [`pm-market-analysis`](skills/pm-market-analysis/) | Market-aware prediction-market analysis that verifies exact instruments, rules, liquidity, and risks before producing a forecast, report, or no-publish call. |
 | [`pm-research-methodologies`](skills/pm-research-methodologies/) | General deep-research scaffold that turns a broad subject into named nodes, sourced claims, provenance checks, synthesis, and open questions. |
 | [`pm-situation-framing`](skills/pm-situation-framing/) | Reusable PMKNB situation frame: separates facts from hypotheses, maps actors, gates, clocks, cruxes, observables, and update rules. |

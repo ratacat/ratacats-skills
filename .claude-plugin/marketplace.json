@@ -304,7 +304,13 @@
       "keywords": [
         "pm",
         "deep",
-        "analysis"
+        "analysis",
+        "likelihood",
+        "estimation",
+        "resolution",
+        "price-blind",
+        "polymarket",
+        "kalshi"
       ],
       "author": {
         "name": "Jared Smith",

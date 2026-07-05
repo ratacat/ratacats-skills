@@ -1,6 +1,6 @@
 # Polymarket Domain Directions
 
-Leading scaffold strategies per genre of the active Polymarket board. These are pointers: when a domain accumulates real craft, promote it into its own methodology skill and trim this table. Where `polymarket-event-research` is in play, its Domain Checks table is authoritative for elections and legal mechanics; these bullets are the summary.
+Leading scaffold strategies per domain of the active Polymarket board. These are pointers: when a domain accumulates real craft, promote it into its own methodology skill and trim this table. Where `pm-deep-analysis` is installed, its Domain Playbooks section is the operational version of this table (world directions plus per-domain resolution gaps and estimation techniques); use these bullets as the fallback summary. Where `polymarket-event-research` is in play, its Domain Checks table is authoritative for elections and legal mechanics.
 
 On price-blind runs, market prices, odds, and order books are out-of-scope inputs. The market's rules text is in scope unless the governing skill's price-blind protocol says it cannot be obtained without exposure — then follow that protocol.
 
