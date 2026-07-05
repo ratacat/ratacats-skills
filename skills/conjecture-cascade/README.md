@@ -1,15 +1,20 @@
 # Conjecture Cascade
 
-This skill runs a structured bug hunt over a bounded software target by sending many small, falsifiable probes, called conjectures, through it. Each conjecture closes with evidence and a status: disproved, fixed, confirmed, intentional, or incomplete.
+A directional thinking engine. It covers a bounded target — a codebase, a claim, a plan, a topic, an idea — with batches of small probes fired through explicit lenses, and closes every probe with a status backed by evidence or yield.
 
-Use it when inspecting code for hidden bugs, dropped behavior, missing records, stale state, unclear failures, or broad reliability risks across a defined scope. The lens list keeps coverage visible, and the final report leads with confirmed issues, proof, incomplete checks, and residual risks.
+Two closure regimes:
+
+- **Falsify mode** — probes are conjectures: testable claims closed against evidence (`confirmed`, `disproved`, `fixed`, `intentional`, `incomplete`). For bug hunts, claim audits, and plan stress-tests.
+- **Explore mode** — probes are directional questions closed on what they produce (`fertile`, `barren`, `merged`, `parked`). For brainstorming and angle-finding.
+
+Lenses come from prebuilt packs — `software-audit` (the original bug-hunt lens set), `inquiry` (claims, arguments, plans), `ideation` (brainstorming) — plus a table of composable direction operators (inversion, negation, scale shift, time shift, stakeholder rotation, analogy transfer, constraint mutation, extremization, recombination, modality shift) that derive fresh lenses for any target. Spread discipline keeps probes genuinely different directions, volume tiers (spot-check, sweep, dragnet, saturation) scale the run from 10 to 1000+ probes, and surprising closures branch into child probes — the cascade.
 
 Good fits:
 
 - Auditing a subsystem or recent changes for hidden defects
-- Surfacing likely issue classes before a release
-- Verifying that failures are loud, recorded, and recoverable
-- Producing an evidence-backed issue report with fixes and residual risks
+- Stress-testing an argument, spec, or plan before committing to it
+- Brainstorming a topic or product idea from dozens of deliberate directions
+- Producing an evidence-backed report with findings, proof, and residual risks
 
 ## Install
 

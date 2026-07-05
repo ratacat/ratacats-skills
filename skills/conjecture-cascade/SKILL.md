@@ -1,139 +1,167 @@
 ---
 name: conjecture-cascade
-description: Use when inspecting a software target for hidden bugs, dropped behavior, missing records, stale state, unclear failures, broad reliability risks, or likely issue classes across a bounded scope.
+description: Use when probing a bounded target from many directions at once: auditing software for hidden bugs, dropped behavior, stale state, or reliability risks; stress-testing a claim, plan, argument, or decision; or brainstorming a topic across a wide space of angles. Runs falsifiable or generative probes through explicit lenses and closes every probe with evidence or yield.
 metadata:
-  category: developer tools
-  blurb: "Evidence-driven bug hunt: fires dozens of falsifiable probes at a bounded target and reports what is actually broken, with proof."
+  category: tools
+  blurb: "Directional thinking engine: fires batches of probes through any bounded target — code, claims, plans, or ideas — and closes each probe with evidence or yield."
   keywords:
     - bugs
     - review
     - reliability
     - audit
+    - brainstorming
+    - thinking
+    - lenses
+    - probes
 ---
 
 # Conjecture Cascade
 
-Goal: Find and surface issues in a bounded software target by testing many plausible failure claims against evidence.
+Goal: Cover a bounded target with many small directed probes so that what is broken, false, missing, or unexplored becomes visible — with proof or yield, not vibes.
 
 Success means:
 - The target scope is explicit.
 - Every selected lens receives a real pass.
-- Every conjecture closes with evidence and a status.
-- Confirmed and unexpected issues appear before lower-value notes.
+- Every probe closes with a status and its supporting evidence or yield.
+- Confirmed findings and surprises appear before lower-value notes.
 
-Stop when: Each selected lens and conjecture has a status, every confirmed issue has evidence, and the final report identifies fixes, residual risks, and incomplete checks.
+Stop when: every lens and probe has a status, every confirmed finding has evidence, every fertile direction has captured yield, and the final report identifies findings, residual risks, and incomplete checks.
 
 ## Core Idea
 
-A Conjecture Cascade sends many small, falsifiable probes through a software target. Each probe becomes evidence: disproved, fixed, confirmed, intentional, or incomplete.
+A cascade sends many small probes through a target from deliberately different directions. A **probe** is one shot along one **lens** (an aimed direction of attention). Lenses come from prebuilt **packs** or are derived fresh with **direction operators**. Every probe closes with a status.
 
-Use the conjecture list as a search map. Surface unrelated or unanticipated issues when evidence reveals them.
+Two closure regimes exist:
+- **Falsify mode** — probes are conjectures: testable claims closed against evidence.
+- **Explore mode** — probes are directional questions closed on yield: the distinct material they produce.
+
+Never blur the regimes. Explore-mode output is raw material, not verified findings. Falsify-mode output is verified or it is `incomplete`.
+
+The probe list is a search map, not a cage. Surface unrelated or unanticipated findings as first-class results whenever a probe turns them up.
 
 ## Targets
 
-A software target can be a repo, feature, module, diff, runtime path, data pipeline, UI surface, API route, background job, integration, plan, or any bounded slice of a system.
+A target is any bounded subject: a repo, feature, module, diff, runtime path, data pipeline, API surface, plan, spec, essay, argument, business idea, product concept, decision, research question, or topic.
 
-Infer the target from the user request. Ask one blocking question when the context lacks a bounded target.
+Infer the target from the user request. Ask one blocking question only when no bounded target can be inferred.
 
-## Tooling
+## Modes
 
-Check available tools once near the start:
+| | Falsify mode | Explore mode |
+|---|---|---|
+| Probe grammar | Conjecture: a specific, testable claim ("X drops records when Y") | Directional question ("what lives in this direction?") |
+| Closes on | Evidence | Yield — concrete distinct ideas, framings, options, risks |
+| Statuses | `confirmed`, `disproved`, `fixed`, `intentional`, `incomplete` | `fertile`, `barren`, `merged`, `parked` |
+| Good for | Bug hunts, claim audits, plan stress-tests, argument checks | Brainstorming, option generation, reframing, angle-finding |
 
-```sh
-command -v codedb rg colgrep
-```
+Pick the mode from intent: "find what's wrong / is this true" → falsify; "find what's possible / what am I missing" → explore. Mixed requests may run one round in each mode over the same target; keep the matrices separate.
 
-Use `codedb` when installed:
-- `codedb tree` maps files and symbol density.
-- `codedb search <query>` finds broad text matches.
-- `codedb word <identifier>` finds exact identifiers.
-- `codedb find <name>` locates definitions.
-- `codedb outline <path>` summarizes symbols in a file.
-- `codedb read <path> -L FROM-TO --compact` reads focused file ranges.
+## Lenses and Packs
 
-Use `rg` for exact text, file enumeration, and project-wide confirmation.
+A lens is one aimed direction. Get lenses two ways, and use both:
 
-Use `colgrep` for semantic searches such as "retry logic", "cache invalidation", "permission scope", or "feed filtering" when exact words are unknown.
+1. **Prebuilt packs** — curated lens sets for a domain. Read the pack file before the first pass:
+   - `packs/software-audit.md` — falsify mode, code targets: bugs, dropped data, stale state, races, contract drift. Includes code-search tooling guidance.
+   - `packs/inquiry.md` — falsify mode, non-code targets: claims, plans, arguments, decisions.
+   - `packs/ideation.md` — explore mode: brainstorming and option generation.
+2. **Operator-derived lenses** — when no pack fits, or to widen a pack's coverage, derive lenses by applying direction operators to the target's main facets.
 
-When `codedb` is unavailable, combine `rg` for exact coverage with `colgrep` for conceptual coverage.
+Every cascade MUST include at least a few operator-derived lenses beyond the pack. Packs are the floor; operators are the ceiling.
+
+## Direction Operators
+
+Composable transforms that generate lenses from any target. Apply an operator to the target (or to an earlier probe's result) to mint a new direction:
+
+| Operator | Move |
+|---|---|
+| Inversion | Assume the opposite; argue the anti-thesis; run the flow backward |
+| Negation | Hunt what is absent: the missing case, unsaid assumption, unrepresented actor |
+| Scale shift | Zoom to one concrete instance; zoom out to the systemic pattern |
+| Time shift | Trace origins; project decay; chase second-order future consequences |
+| Stakeholder rotation | Re-see the target through each actor's incentives and failure costs |
+| Analogy transfer | Map structure from a distant domain onto the target |
+| Constraint mutation | Remove, tighten, or swap a load-bearing constraint; see what breaks or opens |
+| Extremization | Push a variable to its limit — zero, one, infinity, worst case |
+| Recombination | Cross two earlier probes or findings into a hybrid direction |
+| Modality shift | Re-express the target as a diagram, number, narrative, or counterexample; probe the gap between representations |
+
+Operators compose: invert a stakeholder's view, extremize a time-shifted projection. Name the operator(s) behind each derived lens so spread stays auditable.
 
 ## Cascade Discipline
 
-Treat the lens list as the coverage contract. Walk the lenses top to bottom and give each lens a real pass.
+Treat the lens list as the coverage contract. Walk it top to bottom; give each lens a real pass.
 
 For each lens:
-1. Name the lens.
-2. Generate its conjecture batch, or mark the lens `not-applicable` with a concrete reason.
-3. Investigate every conjecture in that batch.
-4. Close each conjecture with one status: `disproved`, `fixed`, `confirmed-issue`, `intentional`, or `incomplete`.
-5. Record the evidence that supports the status.
+1. Name the lens (and its source: pack or operator).
+2. Generate its probe batch, or mark the lens `not-applicable` with a concrete reason.
+3. Investigate every probe in the batch.
+4. Close each probe with one status.
+5. Record the evidence or yield behind the status.
 
-Move to the next lens after every conjecture in the current lens has a status and evidence note.
+**Branch on surprise.** This is what makes it a cascade: when a probe closes with an unexpected result — a surprising confirmation, a weird disproof, an unusually fertile direction — spawn a child batch aimed at that surprise. Apply a fresh operator to the surprise to pick the child direction. Bound branching to 2 levels of depth unless the volume tier allows more.
 
-If the scope exceeds one pass, split the cascade into numbered rounds and preserve the unfinished lens/conjecture position in a ledger or handoff note. Resume from that exact position.
+If the scope exceeds one pass, split the cascade into numbered rounds and preserve the unfinished lens/probe position in a ledger or handoff note. Resume from that exact position.
 
-## Conjecture Count
+## Spread Discipline
 
-Generate 10-100 conjectures depending on scope:
+Volume without spread is just one direction repeated. Enforce spread, not count:
 
-| Scope | Count |
-|---|---:|
-| Narrow function, diff, or bug report | 10-20 |
-| Feature, module, or runtime path | 20-40 |
-| Broad subsystem or repo sweep | 50-100 |
+- Each round must span multiple distinct lens sources — pack lenses plus at least two distinct operators.
+- No two probes closable by the same evidence, or likely to produce the same yield. When two probes collapse into one, `merge` them and mint a replacement in an unused direction.
+- Spread check before investigating a batch: if the batch clusters (all inversions, all near-synonyms, all one subsystem), regenerate the redundant probes with unused operators.
+- In explore mode, judge each probe's yield against the yield of *other* probes: material that repeats an earlier direction's output marks the probe `merged`, not `fertile`.
 
-Honor a user-requested count when provided. Distribute conjectures across lenses so coverage is visible.
+## Volume
 
-## Lenses
+The unit is the probe. Scale by tier — a requested probe count selects the tier and the tier sets the behavior:
 
-Generate conjectures in batches by lens. Use 1-5 conjectures per applicable lens unless the user requests a different distribution.
+| Tier | Probes | Behavior |
+|---|---:|---|
+| Spot-check | 10–20 | One round, 3–6 lenses, deep closure on every probe, branch depth 1 |
+| Sweep | 20–50 | One round, full pack + a few operator lenses, branch depth 2 |
+| Dragnet | 50–150 | Numbered rounds with a ledger; full pack + broad operator derivation; branch depth 2 |
+| Saturation | 150+ | Multiple rounds; delegate lens groups to parallel subagents, each returning a closed matrix segment; merge and dedupe centrally; branch depth 3 |
 
-1. Core execution flow
-2. Core data flow
-3. Data loss / dropped records
-4. Freshness / cache / invalidation
-5. Filter / query / predicate mismatch
-6. Pagination / cursor / ordering
-7. Race / retry / backoff / queueing
-8. Permission / ownership / visibility scope
-9. Serialization / schema / contract drift
-10. Source-of-truth confusion
-11. UI state hiding backend truth
-12. Background job / async worker failure
-13. Partial failure treated as success
-14. Metrics / telemetry / observability blind spots
-15. Compatibility cruft / stale branches
-16. Naming drift / concept drift
-17. Boundary leakage / caller burden
-18. Test blind spots
+Default tier by scope: narrow function, diff, or single question → spot-check; feature, module, or one topic → sweep; subsystem, repo, or multi-facet topic → dragnet. Honor a user-requested count exactly; distribute probes across lenses so coverage stays visible.
 
-## Falsification Standard
+Evidence depth never scales down: at every tier, prefer fewer well-closed probes over a larger list with shallow closure. Higher tiers get more probes by adding rounds and parallelism, not by cheapening closure.
 
-Close a conjecture with direct evidence from code, tests, logs, runtime output, data, docs, or controlled execution.
+## Closure Standards
 
-Accept absence evidence only when the search method is named and the searched scope covers the mechanism. Mark the conjecture `incomplete` when evidence access is missing, the search scope is weak, or runtime behavior remains untested.
+**Falsify mode.** Close a conjecture with direct evidence: code, tests, logs, runtime output, data, documents, sources, or controlled execution. Accept absence evidence only when the search method is named and the searched scope covers the mechanism. Mark the probe `incomplete` when evidence access is missing, the search scope is weak, or the behavior remains untested.
 
-## Status Meanings
+**Explore mode.** Close a probe on yield. `fertile` requires captured, concrete material — ideas, framings, options, named risks — distinct from every other probe's yield. `barren` requires an honest pass, not a skipped one: state what was tried in that direction. Yield is judged on distinctness and usefulness, never on truth; explore mode makes no truth claims.
+
+## Statuses
+
+Falsify mode:
 
 | Status | Meaning |
 |---|---|
-| `disproved` | Evidence excludes the failure mechanism in the scoped conditions. |
-| `fixed` | Evidence confirmed the issue and the current session corrected it. |
-| `confirmed-issue` | Evidence confirmed the issue and it remains open or needs user decision. |
-| `intentional` | Evidence shows the behavior is a deliberate product or architecture rule. |
-| `incomplete` | Evidence is insufficient to close the conjecture. |
+| `confirmed` | Evidence confirms the conjecture; the finding stands open or needs a decision. |
+| `disproved` | Evidence excludes the mechanism in the scoped conditions. |
+| `fixed` | Evidence confirmed the finding and the current session corrected it. |
+| `intentional` | Evidence shows the behavior or state is a deliberate choice. |
+| `incomplete` | Evidence is insufficient to close the probe. |
+
+Explore mode:
+
+| Status | Meaning |
+|---|---|
+| `fertile` | The direction produced distinct, captured yield. |
+| `barren` | An honest pass produced nothing distinct; the attempt is recorded. |
+| `merged` | The probe collapsed into another probe's direction or yield. |
+| `parked` | Promising but out of scope now; noted for a future round. |
 
 ## Output Matrix
 
-Use a visible matrix so coverage stays inspectable:
+Keep coverage inspectable with a visible matrix:
 
-| Lens | ID | Conjecture | Evidence Checked | Status | Issue/Fix |
+| Lens (source) | ID | Probe | Evidence / Yield | Status | Finding |
 |---|---|---|---|---|---|
 
-Lead the final answer with confirmed issues and fixes. Then include the matrix summary, incomplete checks, and residual risks.
+Lead the final answer with confirmed findings and fixes (falsify) or the strongest yield, clustered by theme (explore). Then the matrix summary, incomplete or parked items, and residual risks.
 
 ## Quality Bar
 
-Give every lens and conjecture enough attention to produce evidence. Prefer fewer well-investigated conjectures over a larger list with shallow closure.
-
-Treat unexpected findings as first-class issues. The cascade exists to find problems, not to defend the original conjecture list.
+Give every lens and probe enough attention to produce real evidence or real yield. Treat unexpected findings as first-class results. The cascade exists to find what you were not looking for — never to defend the original probe list.
