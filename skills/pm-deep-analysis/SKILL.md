@@ -1,6 +1,6 @@
 ---
 name: pm-deep-analysis
-description: Use when an agent needs price-blind deep research for a Polymarket or prediction-market event, market URL, event URL, market question set, or PMKNB situation, including fresh analysis, updating existing deep research, resolution mechanics, source discovery, and 0-100 likelihood estimates independent of market odds.
+description: "Price-blind deep research for a Polymarket/prediction-market event or PMKNB situation — fresh or updated analysis, resolution mechanics, mechanism-only briefs, source discovery, 0-100 likelihood independent of market odds."
 metadata:
   category: prediction markets
   blurb: "Price-blind prediction-market research: builds evidence-first world reports and calibrated 0-100 resolution estimates without using odds or prices."
@@ -20,7 +20,7 @@ metadata:
 
 ## Overview
 
-This skill is event-shaped estimation. Given a prediction-market event, it produces a durable price-blind research report plus a calibrated 0-100 likelihood per market question. It answers "will this exact predicate fire by this deadline?" — not "what is true about this subject?"; world research is an input, not the deliverable.
+This skill is event-shaped research with two output modes. **Estimation**, the default: given a prediction-market event, produce a durable price-blind research report plus a calibrated 0-100 likelihood per market question — the answer to "will this exact predicate fire by this deadline?". **Mechanism-only**: when the ask is to explain how the event resolves — resolution mechanics, proof channels, actor and veto maps, source discovery — rather than to estimate it, produce the same report with no likelihood rows and no forecast language. Either way, it does not answer "what is true about this subject?"; world research is an input, not the deliverable.
 
 A defensible likelihood requires six things, and the method below is organized around them:
 
@@ -132,9 +132,11 @@ Per market question, in order:
 
 3. **Live-time gate.** Build a market live-time gate before considering historical events as resolution triggers:
    - Define `market_live_at` for each child market from the best available lifecycle timestamp. Prefer the earliest verified time the child market was actually live/accepting orders; otherwise use child `startDate`; otherwise child `createdAt`; otherwise event `startDate`/`createdAt`.
-   - Treat events whose underlying action and required confirmation window were fully completed before `market_live_at` as background context, not as already-triggered resolution events, unless the rule text explicitly says retroactive/pre-live events count.
+   - Platform lifecycle timestamps are not always accurate. Polymarket slug datestamps, `createdAt`, `startDate`, and `acceptingOrdersTimestamp` can disagree or be backfilled. Cross-check at least two fields plus the event's news context; when they conflict, say so and reason from the most conservative (earliest-plausible-live) reading for NO paths and the latest for YES paths.
+   - Treat events whose underlying action and required confirmation window were fully completed before `market_live_at` as background context, not as already-triggered resolution events, unless the rule text explicitly says retroactive/pre-live events count. A market created *after* a widely reported action is presumptively asking whether it happens *again* (or gets post-live confirmation of a genuinely new kind) — venues create these markets in reaction to news, and the pre-creation occurrence is out of scope.
+   - The ACTION timestamp governs, not the report timestamp. Post-live coverage, official confirmations, anniversaries, or the actor's own later account of a pre-live action do not convert it into a post-live event. Do not launder a pre-live action through its post-live reporting.
    - For ongoing-state markets that reference a state beginning before market launch, distinguish the pre-launch state baseline from post-launch break/confirmation events. The baseline may matter; stale pre-launch break events normally should not settle the market.
-   - If the rules are ambiguous about retroactive coverage, surface that as a resolution uncertainty and do not make it the dominant driver without explaining why a resolver would count pre-live evidence.
+   - If the rules are ambiguous about retroactive coverage, surface that as a resolution uncertainty and do not make it the dominant driver without explaining why a resolver would count pre-live evidence. An "already happened before creation" YES case caps out as a rules-interpretation bet, never a near-lock: the likelihood should anchor on the post-live re-occurrence path plus a discounted retroactive-resolution term, and the report must say which term dominates.
    - When a report discusses a pre-live event, label it `pre_live_context` or `pre_live_ambiguity`, not `already_triggered`, unless retroactivity is explicit.
 
 4. **Resolver precedent.** Retrieve how this resolver actually decided prior and edge cases — UMA dispute history, Kalshi settlement record, platform clarifications, the resolver's archive. Resolver precedent outweighs textual analysis of the rules; retrieve it, don't recall it.
@@ -157,6 +159,16 @@ If it is not available, use this fallback loop:
 4. **Judge load-bearing chains.** Trace the claim to its earliest origin; apparent corroboration usually launders one origin through many outlets, so count corroboration only across independent origins. Map who benefits if the claim is believed; premium for statements against interest; record when the source spoke relative to the event.
 
 Either way: prefer primary sources, official records, direct statements, datasets, transcripts, and filings; use secondary sources mainly for discovery and context unless they are the best available evidence. Capture material sources with provenance and extract atomic claims with confidence, caveats, and `as_of` when time-sensitive — evidence before synthesis.
+
+### Geographic And Foreign-Language Forcing
+
+Do not stop at national-level, English-only sourcing when a local body controls, enforces, litigates, counts, certifies, or reports the outcome. Descend to the controlling subdivision — county, municipality, court, election board, regulator, gazette, docket, clerk — and name it in the scaffold. Local-language research is required when the controlling institution, official records, or media are not primarily English: translate the actor, office, locality, procedure, and ambiguous predicate terms, and search in that language. It is optional only when the relevant channels are entirely English-language or unavailable after a documented search. English-only research on a non-English event is a tripwire, not a style choice — the decisive evidence usually lives in local press and official registers.
+
+### Search Tooling
+
+Prefer `wideband` when installed: `wideband scan "<query>"` for fast source discovery, `wideband research "<query>"` for richer retrieval; it fans out across providers and merges unique sources. If unavailable, use another embedding/neural search provider such as `exa-cli`; otherwise plain web search. Read the tool's `--help` once per environment and record the tool used in the run trace.
+
+For institution- or procedure-heavy events, load [references/world-research-craft.md](references/world-research-craft.md): mechanism chain cards, formal-vs-practical power maps, search packs, X/xpool source classification, evidence-ledger discipline, and per-event-type Domain Checks.
 
 ## Estimation
 
@@ -191,7 +203,7 @@ Complete an estimation worksheet per market question before writing the likeliho
 
 ## Likelihood Rules
 
-The likelihood table is required whenever the input contains one or more market questions.
+The likelihood table is required whenever the input contains one or more market questions and the run is in estimation mode. Choose mechanism-only mode when the ask is to explain how the event resolves without an estimate; emit the full report — predicate, resolver, mechanism map, sources, open questions — with no likelihood rows and no forecast language, set `output_mode: mechanism_brief` (top level and `report.fields`), and label it a mechanism-only brief in the body. `research_mode` stays the fresh/update axis. When in doubt, estimate.
 
 Use `likelihood_0_100` as a price-blind resolution assessment of the market question resolving true. It is not a trading forecast and not a market-aware fair value.
 
@@ -271,9 +283,9 @@ The floor version, for short clocks: five lookups — (1) rules text plus resolv
 
 ## Output
 
-Produce both readable report content and structured fields. Before emitting output, read [references/output-contract.md](references/output-contract.md) — it defines the `pm_deep_analysis.v1` schema, apply-batch rules, ID and fingerprint conventions, projection fit, and PMKNB write discipline. The schema is unchanged.
+Produce both readable report content and structured fields. Before emitting output, read [references/output-contract.md](references/output-contract.md) — it defines the `pm_deep_analysis.v1` schema, the `output_mode` flag, apply-batch rules, ID and fingerprint conventions, projection fit, and PMKNB write discipline.
 
-For plain-English answers, still include the per-question likelihood table near the end:
+For plain-English answers in estimation mode, still include the per-question likelihood table near the end; mechanism-only briefs omit it:
 
 ```markdown
 | Market question | Resolution predicate | Likelihood 0-100 | Confidence | Main reason | What could change |
