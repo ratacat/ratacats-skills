@@ -4,7 +4,7 @@ This skill is for market-aware analysis of one prediction-market event.
 
 Use it after the agent has enough world context and needs to connect that context to exact instruments, current market structure, liquidity, resolution risk, platform risk, and possible forecast or proposal outputs. This is disciplined trading context: a good pass identifies the exact market, the exact side, the exact resolution path, and the practical forces around price and execution.
 
-Family role: use `pm-market-analysis` after `pm-situation-framing` and price-blind world research from `pm-deep-analysis` or `polymarket-event-research`; this skill is the market-aware handoff.
+Family role: use `pm-market-analysis` after `pm-situation-framing` and price-blind world research from `pm-deep-analysis`; this skill is the market-aware handoff.
 
 Good fits:
 

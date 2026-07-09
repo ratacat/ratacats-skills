@@ -1,6 +1,6 @@
 ---
 name: conjecture-cascade
-description: Use when probing a bounded target from many directions at once: auditing software for hidden bugs, dropped behavior, stale state, or reliability risks; stress-testing a claim, plan, argument, or decision; or brainstorming a topic across a wide space of angles. Runs falsifiable or generative probes through explicit lenses and closes every probe with evidence or yield.
+description: "Probe a bounded target from many angles at once — audit for hidden bugs/stale state, stress-test a claim or plan, or brainstorm wide. Falsifiable or generative probes through explicit lenses, each closed with evidence."
 metadata:
   category: tools
   blurb: "Directional thinking engine: fires batches of probes through any bounded target — code, claims, plans, or ideas — and closes each probe with evidence or yield."

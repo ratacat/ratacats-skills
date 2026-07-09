@@ -1,6 +1,6 @@
 ---
 name: pm-research-methodologies
-description: Manual-only. Never auto-load or auto-select this skill from task context. Load only when the user explicitly names pm-research-methodologies, or asks for the general research methodology framework, to structure deep research on a subject that has no dedicated methodology skill.
+description: "Manual-only; never auto-load. Use when explicitly named, or for the general research-methodology framework when no dedicated methodology skill fits."
 metadata:
   category: prediction markets
   blurb: "General deep-research scaffold that turns a broad subject into named nodes, sourced claims, provenance checks, synthesis, and open questions."
@@ -16,7 +16,7 @@ metadata:
 
 ## Overview
 
-The fallback methodology for researching any subject deeply. When a dedicated skill covers the domain (in this repo: `pm-situation-framing`, `pm-deep-analysis`, `polymarket-event-research`, `pm-market-analysis`; where installed: `middle-east-research`, the `pmw-*` weather family), follow it and use this skill only to fill its gaps.
+The fallback methodology for researching any subject deeply. When a dedicated skill covers the domain (in this repo: `pm-situation-framing`, `pm-deep-analysis`, `pm-market-analysis`; where installed: `middle-east-research`, the `pmw-*` weather family), follow it and use this skill only to fill its gaps.
 
 ```
 Inputs: subject/question · run budget in queries or time (ask if not given) ·

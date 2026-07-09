@@ -1,6 +1,6 @@
 ---
 name: graph-researcher
-description: Deep web research with relevance scoring and knowledge graph storage. Use when researching topics, companies, people, or concepts. Performs Graph-of-Thoughts style exploration with parallel branching, relevance scoring, and synthesis into themed reports.
+description: "Deep web research with Graph-of-Thoughts exploration — parallel branching, relevance scoring, knowledge-graph storage, synthesis into themed reports. Use for researching topics, companies, people, or concepts."
 metadata:
   category: tools
   blurb: "Deep web research that stores sources, findings, relationships, contradictions, and open leads in a SQLite knowledge graph."

@@ -1,6 +1,6 @@
 ---
 name: ansi-art
-description: "Use when creating, reviewing, converting, or embedding terminal text art: ASCII art, ANSI art, CP437/code page 437 glyph art, block ASCII, BBS-style logos, CLI banners, NFOs, fixed-width art, or SAUCE/XBIN/BIN/ANS output."
+description: "Create, review, convert, or embed terminal text art: ASCII/ANSI art, CP437, block ASCII, BBS logos, CLI banners, NFOs, SAUCE/XBIN/BIN/ANS output."
 metadata:
   category: art
   blurb: "Guides terminal-safe CP437/ANSI art from first sketch to validated fixed-width output, with glyph, palette, format, and rendering references."

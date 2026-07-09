@@ -1,6 +1,6 @@
 ---
 name: gpt-pro-loop
-description: "Use when running a GPT Pro or pro-cli assisted project revision loop: build a context package, write a GPT Pro prompt, request adversarial review, map issues into a design map, run revision passes, verify locally, write goal assessments, and hand off the loop."
+description: "Run a GPT Pro / pro-cli project revision loop: context package, GPT Pro prompt, adversarial review, design map, revision passes, local verification, goal assessments, handoff."
 metadata:
   category: developer tools
   blurb: "Run a local revision loop that packages project context for GPT Pro review, maps critiques into issues, verifies fixes, and assesses the goal."

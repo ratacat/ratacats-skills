@@ -1,6 +1,6 @@
 ---
 name: pm-situation-framing
-description: Use when the user or router explicitly names PM Situation Framing or pm-situation-framing to create or update a PMKNB situation frame. This skill is direct-invocation-only and must never be automatically loaded for general market, forecasting, research, or news-analysis requests.
+description: "Direct-invocation-only; never auto-load. Use only when explicitly named to create or update a PMKNB situation frame."
 metadata:
   category: prediction markets
   blurb: "Reusable PMKNB situation frame: separates facts from hypotheses, maps actors, gates, clocks, cruxes, observables, and update rules."

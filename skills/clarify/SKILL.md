@@ -1,6 +1,6 @@
 ---
 name: clarify
-description: Run a chained clarity review across a target repo, plan, or work items. Use when the user asks to clarify, defuzz, audit, review, harden, distill, de-duplicate, inspect naming, apply fresh eyes to recent code, or combine code review, plan refinement, deep-module architecture, DRY/cruft, and naming analysis into one reusable workflow.
+description: "Chained clarity review of a repo, plan, or work items — combines code review, plan refinement, deep-module architecture, DRY/cruft, and naming analysis. Use for clarify/defuzz/audit/harden/fresh-eyes requests."
 metadata:
   category: developer tools
   blurb: "Turns fuzzy repos, plans, diffs, or issue sets into clearer findings, fixes, names, and acceptance criteria using an evidence-first review chain."

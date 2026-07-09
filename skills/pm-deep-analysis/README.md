@@ -4,7 +4,7 @@ This skill is for deep, price-blind research on prediction-market questions.
 
 Use it when the important work is understanding the world: rules, actors, institutions, dates, proof standards, resolution mechanics, open questions, and evidence quality. It routes each event to a domain playbook (elections, geopolitics, macro, legal, tech, and more), builds a world model, and produces calibrated 0-100 likelihood estimates without looking at prices or letting market odds steer the research. If `pm-research-methodologies` is installed it uses that skill's execution loop for world research; otherwise it falls back to a compact built-in loop.
 
-Market prices are useful in other modes, but they can contaminate the first pass. This skill gives the agent a clean room for broad prediction-market world research before any market-aware analysis happens. Family role: use `pm-situation-framing` to frame the situation first, `pm-deep-analysis` or `polymarket-event-research` for price-blind world research, and `pm-market-analysis` when market facts matter.
+Market prices are useful in other modes, but they can contaminate the first pass. This skill gives the agent a clean room for broad prediction-market world research before any market-aware analysis happens. Family role: use `pm-situation-framing` to frame the situation first, `pm-deep-analysis` for price-blind world research — including mechanism-only resolution briefs with no likelihood estimates — and `pm-market-analysis` when market facts matter.
 
 Good fits:
 

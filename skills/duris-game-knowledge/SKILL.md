@@ -1,6 +1,6 @@
 ---
 name: duris-game-knowledge
-description: Use whenever working on Duris MUD — connecting to the game, navigating, exploring, fighting, parsing game output, writing commands, understanding zones, combat mechanics, spellcasting, geography, equipment, mobs, recovery, or any other gameplay question. Load this skill for any task involving Duris.
+description: "Duris MUD reference — load for any Duris task: connecting, navigation, combat, spellcasting, zones, geography, equipment, mobs, output parsing, recovery."
 metadata:
   category: games
   blurb: "Gives practical Duris MUD knowledge for navigation, combat, spells, gear, recovery, and parsing live game output without inventing commands."

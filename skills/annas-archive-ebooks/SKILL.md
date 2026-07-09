@@ -1,6 +1,6 @@
 ---
 name: annas-archive-ebooks
-description: Use when needing to look up book content, find a book by title/author, download an ebook, or reference material from a published book. Triggers on book lookups, ebook downloads, "find the book", "get the PDF/EPUB of". Downloads produce PDF/EPUB/MOBI files - use ebook-extractor skill to convert to text.
+description: "Find and download ebooks (PDF/EPUB/MOBI) by title/author, or look up published book content. Pair with ebook-extractor to convert downloads to text."
 metadata:
   category: tools
   blurb: "Finds book records, checks editions and formats, and uses a local Anna's Archive script to download ebooks when a membership key is available."

@@ -1,6 +1,6 @@
 ---
 name: pm-market-analysis
-description: "Use when Codex must analyze one prediction-market PM event for PMKNB: ingest subject/world research and market data, identify exact Polymarket or Kalshi instruments, assess market forces, resolution/oracle risk, liquidity, and platform/counterparty risk, then output a forecast, report, brief, proposal, or no-publish result. Triggers include prediction market, Polymarket, Kalshi, PM event, instrument identity, conditionId, token IDs, event_ticker, market ticker, YES/NO, PMKNB market_analysis, resolution risk, negative risk, or multi-market event analysis."
+description: "Analyze one PM event for PMKNB: identify exact Polymarket/Kalshi instruments (conditionId, token IDs, tickers), assess market forces, resolution/oracle risk, liquidity, and counterparty risk; output forecast, report, brief, proposal, or no-publish."
 metadata:
   category: prediction markets
   blurb: "Market-aware prediction-market analysis that verifies exact instruments, rules, liquidity, and risks before producing a forecast, report, or no-publish call."

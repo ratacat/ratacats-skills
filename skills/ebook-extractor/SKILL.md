@@ -1,6 +1,6 @@
 ---
 name: ebook-extractor
-description: Use when user wants to extract text from ebooks (EPUB, MOBI, PDF). Use for converting ebooks to plain text for analysis, processing, or reading. Handles all common ebook formats.
+description: "Extract plain text from ebooks (EPUB, MOBI, PDF) for analysis, processing, or reading."
 metadata:
   category: developer tools
   blurb: "Extract plain text from EPUB, MOBI, and PDF files with local Python tools so agents can search, quote, or analyze book content."

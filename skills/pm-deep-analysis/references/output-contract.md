@@ -1,12 +1,13 @@
 # PM Deep Analysis — Output Contract
 
-Schema `pm_deep_analysis.v1`, unchanged from prior versions of this skill. The structured fields are what make the output useful to PMKNB projections and the HTML cockpit.
+Schema `pm_deep_analysis.v1` with one additive field: `output_mode`, which defaults to `deep_analysis` when absent, so prior outputs remain valid. The structured fields are what make the output useful to PMKNB projections and the HTML cockpit.
 
 ## Output Shape
 
 ```yaml
 schema_version: pm_deep_analysis.v1
 research_mode: fresh | update
+output_mode: deep_analysis | mechanism_brief
 status: completed | blocked | skipped | failed
 price_blind: true
 as_of: "ISO-8601 timestamp"
@@ -101,9 +102,9 @@ market_questions:
     resolution_predicate:
     resolver_or_source:
     deadline:
-    likelihood_0_100:
-    resolution_true_likelihood_0_100:
-    confidence: low | medium | high
+    likelihood_0_100:                    # estimation mode only; omit when output_mode=mechanism_brief
+    resolution_true_likelihood_0_100:    # estimation mode only; omit when output_mode=mechanism_brief
+    confidence: low | medium | high      # estimation mode only; omit when output_mode=mechanism_brief
     rationale:
     key_supporting_claim_ids: []
     key_contrary_claim_ids: []
@@ -129,6 +130,7 @@ report:
     format_id: pm.world.report.deep_analysis.v1
     price_blind: true
     research_mode: fresh | update
+    output_mode: deep_analysis | mechanism_brief
     as_of: "ISO-8601 timestamp"
     generated_at: "ISO-8601 timestamp"
     event_title:
@@ -182,6 +184,8 @@ Inside PMKNB, `apply_batch.records` must contain the canonical report and run tr
 
 Use `report.fields.status="current"` for a completed deep-analysis report. Use `run_trace.fields.status="completed"`, `"blocked"`, `"skipped"`, or `"failed"` for the run trace. Blocked, skipped, or failed runs should write a diagnostic run trace and no likelihood rows; a diagnostic report may be written only with empty `market_questions`.
 
+Mechanism-only runs set `output_mode: mechanism_brief` at the top level and in `report.fields`, so consumers can distinguish intentionally-absent likelihoods from blocked or partial output; `research_mode` stays the fresh/update axis. They use the same schema otherwise: keep `market_questions` rows for identity, fingerprint, predicate, resolver, deadline, `main_uncertainties`, and `next_sources_to_check`, but omit `likelihood_0_100`, `resolution_true_likelihood_0_100`, and `confidence`, and leave `sections.likelihood_table.rows` empty. Also label the report a mechanism-only brief in `body_markdown`. The `deep_analysis_index` projection should skip `mechanism_brief` reports.
+
 Use `market_question_id` for a row in the deep-analysis likelihood table. Use `target_open_question_id` or `apply_batch.open_question_patches[].question_id` only for embedded PMKNB open questions. Never reuse one embedded open-question id for multiple child market rows unless every row is explicitly answering that same open question.
 
 For `question_fingerprint`, use normalized identity fields: platform, event slug or Kalshi event ticker, market slug/id or Kalshi market ticker, normalized title, normalized resolution text, deadline, and resolver/source. Hash text fields with SHA-256 of lowercase whitespace-collapsed text when tools are available; otherwise include the normalized text in `fingerprint_basis`.
@@ -194,7 +198,7 @@ Shape the output for PMKNB's view layer:
 
 - Keep the report self-contained in `body_markdown`, but expose table-ready `market_questions`.
 - Use stable IDs for sources, claims, reports, and run traces when available.
-- Put each market question on its own row with title, likelihood, confidence, source basis, uncertainty, and next checks.
+- Put each market question on its own row with title, source basis, uncertainty, and next checks — plus likelihood and confidence in estimation mode.
 - Keep provenance visible: source title/domain, published or observed time, captured time, actor/model, confidence, and basis ids.
 - Put unresolved items in `open_questions` fields or proposals so the research queue can surface them.
 - Do not create UI-only canonical records. HTML is a disposable presentation over projections.
@@ -202,7 +206,7 @@ Shape the output for PMKNB's view layer:
 Useful PMKNB projection targets:
 
 - `report_index`: the authored report and section summaries.
-- `deep_analysis_index`: table-ready price-blind resolution assessment rows from clean deep-analysis reports.
+- `deep_analysis_index`: table-ready price-blind resolution assessment rows from clean deep-analysis reports; `output_mode: deep_analysis` only.
 - `record_search`: sources, claims, entities, signals, proposals, and report records.
 - `question_backlog`: unresolved questions and next checks.
 - `run_trace_index`: what the run read, wrote, skipped, and produced.

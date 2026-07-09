@@ -1,6 +1,6 @@
 ---
 name: x-undocumented-api
-description: Manual-only skill. Never automatically load or select this skill from task context. Use only when the user explicitly asks to manually reference this skill or names `x-undocumented-api` / `x-api-skill`.
+description: "Manual-only; never auto-load. Use only when explicitly named (x-undocumented-api / x-api-skill)."
 metadata:
   category: developer tools
   blurb: "Safe guide to X.com's private web API: verifies current GraphQL operations, request headers, cursors, and secret-safe evidence."
