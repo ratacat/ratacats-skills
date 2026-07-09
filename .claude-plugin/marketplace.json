@@ -18,7 +18,7 @@
       "skills": [
         "./"
       ],
-      "description": "Use when needing to look up book content, find a book by title/author, download an ebook, or reference material from a published book. Triggers on book lookups, ebook downloads, \"find the book\", \"get the PDF/EPUB of\". Downloads produce PDF/EPUB/MOBI files - use ebook-extractor skill to convert to text.",
+      "description": "Find and download ebooks (PDF/EPUB/MOBI) by title/author, or look up published book content. Pair with ebook-extractor to convert downloads to text.",
       "category": "tools",
       "keywords": [
         "annas",
@@ -38,7 +38,7 @@
       "skills": [
         "./"
       ],
-      "description": "Use when creating, reviewing, converting, or embedding terminal text art: ASCII art, ANSI art, CP437/code page 437 glyph art, block ASCII, BBS-style logos, CLI banners, NFOs, fixed-width art, or SAUCE/XBIN/BIN/ANS output.",
+      "description": "Create, review, convert, or embed terminal text art: ASCII/ANSI art, CP437, block ASCII, BBS logos, CLI banners, NFOs, SAUCE/XBIN/BIN/ANS output.",
       "category": "art",
       "keywords": [
         "ansi",
@@ -60,7 +60,7 @@
       "skills": [
         "./"
       ],
-      "description": "Run a chained clarity review across a target repo, plan, or work items. Use when the user asks to clarify, defuzz, audit, review, harden, distill, de-duplicate, inspect naming, apply fresh eyes to recent code, or combine code review, plan refinement, deep-module architecture, DRY/cruft, and naming analysis into one reusable workflow.",
+      "description": "Chained clarity review of a repo, plan, or work items — combines code review, plan refinement, deep-module architecture, DRY/cruft, and naming analysis. Use for clarify/defuzz/audit/harden/fresh-eyes requests.",
       "category": "developer tools",
       "keywords": [
         "clarify"
@@ -78,7 +78,7 @@
       "skills": [
         "./"
       ],
-      "description": "Use when probing a bounded target from many directions at once: auditing software for hidden bugs, dropped behavior, stale state, or reliability risks; stress-testing a claim, plan, argument, or decision; or brainstorming a topic across a wide space of angles. Runs falsifiable or generative probes through explicit lenses and closes every probe with evidence or yield.",
+      "description": "Probe a bounded target from many angles at once — audit for hidden bugs/stale state, stress-test a claim or plan, or brainstorm wide. Falsifiable or generative probes through explicit lenses, each closed with evidence.",
       "category": "tools",
       "keywords": [
         "bugs",
@@ -121,7 +121,7 @@
       "skills": [
         "./"
       ],
-      "description": "Use whenever working on Duris MUD — connecting to the game, navigating, exploring, fighting, parsing game output, writing commands, understanding zones, combat mechanics, spellcasting, geography, equipment, mobs, recovery, or any other gameplay question. Load this skill for any task involving Duris.",
+      "description": "Duris MUD reference — load for any Duris task: connecting, navigation, combat, spellcasting, zones, geography, equipment, mobs, output parsing, recovery.",
       "category": "games",
       "keywords": [
         "duris",
@@ -161,7 +161,7 @@
       "skills": [
         "./"
       ],
-      "description": "Use when user wants to extract text from ebooks (EPUB, MOBI, PDF). Use for converting ebooks to plain text for analysis, processing, or reading. Handles all common ebook formats.",
+      "description": "Extract plain text from ebooks (EPUB, MOBI, PDF) for analysis, processing, or reading.",
       "category": "developer tools",
       "keywords": [
         "ebook",
@@ -199,7 +199,7 @@
       "skills": [
         "./"
       ],
-      "description": "Use when running a GPT Pro or pro-cli assisted project revision loop: build a context package, write a GPT Pro prompt, request adversarial review, map issues into a design map, run revision passes, verify locally, write goal assessments, and hand off the loop.",
+      "description": "Run a GPT Pro / pro-cli project revision loop: context package, GPT Pro prompt, adversarial review, design map, revision passes, local verification, goal assessments, handoff.",
       "category": "developer tools",
       "keywords": [
         "gpt",
@@ -221,7 +221,7 @@
       "skills": [
         "./"
       ],
-      "description": "Deep web research with relevance scoring and knowledge graph storage. Use when researching topics, companies, people, or concepts. Performs Graph-of-Thoughts style exploration with parallel branching, relevance scoring, and synthesis into themed reports.",
+      "description": "Deep web research with Graph-of-Thoughts exploration — parallel branching, relevance scoring, knowledge-graph storage, synthesis into themed reports. Use for researching topics, companies, people, or concepts.",
       "category": "tools",
       "keywords": [
         "graph",
@@ -260,7 +260,7 @@
       "skills": [
         "./"
       ],
-      "description": "Use when user shares a Medium article URL behind a paywall and wants to read the full content. Also use for articles on Medium-hosted publications like towardsdatascience.com, betterprogramming.pub, levelup.gitconnected.com, etc.",
+      "description": "Read paywalled Medium articles in full, including Medium-hosted publications (towardsdatascience.com, betterprogramming.pub, etc.).",
       "category": "developer tools",
       "keywords": [
         "medium",
@@ -299,7 +299,7 @@
       "skills": [
         "./"
       ],
-      "description": "Use when an agent needs price-blind deep research for a Polymarket or prediction-market event, market URL, event URL, market question set, or PMKNB situation, including fresh analysis, updating existing deep research, resolution mechanics, source discovery, and 0-100 likelihood estimates independent of market odds.",
+      "description": "Price-blind deep research for a Polymarket/prediction-market event or PMKNB situation — fresh or updated analysis, resolution mechanics, mechanism-only briefs, source discovery, 0-100 likelihood independent of market odds.",
       "category": "prediction markets",
       "keywords": [
         "pm",
@@ -325,7 +325,7 @@
       "skills": [
         "./"
       ],
-      "description": "Use when Codex must analyze one prediction-market PM event for PMKNB: ingest subject/world research and market data, identify exact Polymarket or Kalshi instruments, assess market forces, resolution/oracle risk, liquidity, and platform/counterparty risk, then output a forecast, report, brief, proposal, or no-publish result. Triggers include prediction market, Polymarket, Kalshi, PM event, instrument identity, conditionId, token IDs, event_ticker, market ticker, YES/NO, PMKNB market_analysis, resolution risk, negative risk, or multi-market event analysis.",
+      "description": "Analyze one PM event for PMKNB: identify exact Polymarket/Kalshi instruments (conditionId, token IDs, tickers), assess market forces, resolution/oracle risk, liquidity, and counterparty risk; output forecast, report, brief, proposal, or no-publish.",
       "category": "prediction markets",
       "keywords": [
         "pm",
@@ -345,7 +345,7 @@
       "skills": [
         "./"
       ],
-      "description": "Manual-only. Never auto-load or auto-select this skill from task context. Load only when the user explicitly names pm-research-methodologies, or asks for the general research methodology framework, to structure deep research on a subject that has no dedicated methodology skill.",
+      "description": "Manual-only; never auto-load. Use when explicitly named, or for the general research-methodology framework when no dedicated methodology skill fits.",
       "category": "prediction markets",
       "keywords": [
         "pm",
@@ -367,7 +367,7 @@
       "skills": [
         "./"
       ],
-      "description": "Use when the user or router explicitly names PM Situation Framing or pm-situation-framing to create or update a PMKNB situation frame. This skill is direct-invocation-only and must never be automatically loaded for general market, forecasting, research, or news-analysis requests.",
+      "description": "Direct-invocation-only; never auto-load. Use only when explicitly named to create or update a PMKNB situation frame.",
       "category": "prediction markets",
       "keywords": [
         "pm",
@@ -381,18 +381,27 @@
       "license": "MIT"
     },
     {
-      "name": "polymarket-event-research",
-      "source": "./skills/polymarket-event-research",
+      "name": "refine-tests",
+      "source": "./skills/refine-tests",
       "strict": false,
       "skills": [
         "./"
       ],
-      "description": "Use when the user asks for price-blind research on the real-world resolution mechanics of a specific Polymarket or prediction-market event, including actors, institutions, legal/procedural paths, local context, source discovery, proof standards, structured research handoffs, or KNB world-mode mapping. Do not use for odds, prices, portfolios, trade decisions, market microstructure, or forecast/EV analysis.",
-      "category": "prediction markets",
+      "description": "Use when auditing, scrutinizing, or strengthening an existing test suite — unit, integration, or e2e — because tests pass but bugs still ship, coverage looks high while trust is low, tests were written after the code or by another agent, tests are flaky and need fixing without loosening them, or the user asks to review, harden, or refine tests with fresh eyes.",
+      "category": "developer tools",
       "keywords": [
-        "polymarket",
-        "event",
-        "research"
+        "test",
+        "review",
+        "assertions",
+        "tautological",
+        "vacuous",
+        "mock",
+        "coverage",
+        "mutation",
+        "flaky",
+        "brittle",
+        "audit",
+        "strengthen"
       ],
       "author": {
         "name": "Jared Smith",
@@ -427,7 +436,7 @@
       "skills": [
         "./"
       ],
-      "description": "Manual-only skill. Never automatically load or select this skill from task context. Use only when the user explicitly asks to manually reference this skill or names `x-undocumented-api` / `x-api-skill`.",
+      "description": "Manual-only; never auto-load. Use only when explicitly named (x-undocumented-api / x-api-skill).",
       "category": "developer tools",
       "keywords": [
         "x",
