@@ -112,6 +112,8 @@ Find places where callers know too much:
 - pass-through Modules whose Interface is as complex as their Implementation
 - fake Seams with only one Adapter and no real variation
 
+Flag **dry gates** — a verdict codified mid-module for a decider never identified (write-time rejection, no ledger of what's held, unchecked pass-set). Every gate must be a **consumed gate**: its consumer named, both outcomes reaching a terminus (surface, logs, or next Module), placed at a Seam — else demote the verdict to an annotation. Litmus: who consumes? where do held items land? has anything real passed?
+
 Apply the deletion test:
 - If deleting a Module removes noise, it may be shallow.
 - If deleting it leaks knowledge into many callers, it may be earning its keep.
