@@ -30,7 +30,7 @@ Use these as the core trader-facing lens. Keep them practical and human-readable
 - Read the rules, not the title. A market can be right in the world and still resolve differently because of source, deadline, wording, or proof standard.
 - Know what price you can actually get. Displayed price is not executable price. Spread and depth matter more than headline probability.
 - Size matters. A good-looking price may only exist for tiny size. Before treating a market as attractive, ask what the effective price is for the amount that would actually be traded.
-- Timing is part of the trade. News, official releases, games starting, deadlines, dispute windows, and close times change whether a position is worth entering or exiting.
+- Timing is part of the trade. For occurrence-based markets, compare the qualifying act's timestamp with the exact child market's `createdAt`/listing time. An act completed before market creation is ineligible unless the written rules explicitly apply retroactively; later reporting, confirmation, or continuing consequences do not create a new qualifying act. Also assess deadlines, dispute windows, and close times.
 
 ## Load The Reference
 
@@ -57,12 +57,14 @@ Also load it whenever the task involves:
    - For Polymarket: verify event -> market -> conditionId -> CLOB token IDs/outcomes.
    - For Kalshi: verify event_ticker -> market ticker -> YES/NO side.
    - Do not attach Polymarket fields to Kalshi instruments.
+   - Record the exact child market's creation/listing timestamp, not only the parent PM event's timestamp.
    - If exact identity cannot be verified, choose `proposal` or `no_publish`.
 
 3. Ingest evidence before conclusions.
    - Capture sources, claims, market data snapshots, and rules.
    - Prefer primary sources for rules, resolver/oracle details, market identity, and settlement mechanics.
    - Record snapshot freshness for prices and liquidity.
+   - Timestamp every alleged qualifying occurrence and compare it with market creation before using it in the thesis.
    - Mark stale, ambiguous, conflicting, or unverified claims explicitly.
 
 4. Analyze market forces.
@@ -74,6 +76,7 @@ Also load it whenever the task involves:
 
 5. Assess resolution/oracle risk.
    - Inspect resolver, rules, source finality, ambiguity, challenge/dispute status, and title/rules/source mismatch.
+   - Apply temporal eligibility: exclude pre-creation occurrences unless the written rules explicitly state they count retroactively. Do not reset an occurrence's time because it was reported, confirmed, implemented, or remained in effect later.
    - Separate what will happen in the world from how the instrument will resolve.
    - If resolution risk dominates, prefer `report`, `brief`, `proposal`, or `no_publish` over `forecast`.
 
@@ -109,7 +112,7 @@ Also load it whenever the task involves:
 
 ## Product Decision Rule
 
-Produce a forecast only when exact instrument identity, resolution rules, source basis, and minimum evidence gates pass.
+Produce a forecast only when exact instrument identity, resolution rules, temporal eligibility, source basis, and minimum evidence gates pass.
 
 Produce a report when analysis is useful but forecast conditions are not met.
 
@@ -127,6 +130,7 @@ When this skill is used from a PMKNB workflow runner:
 
 - Read world context first, then market state. Market analysis compares world belief against exact instrument rules and current market state.
 - Validate exact venue identity before any forecast: platform, event slug or ticker, market slug or id, condition id, token id when available, exact selection label, outcome, and rules URL or resolution text.
+- Verify the child market creation/listing timestamp and the timestamp of every alleged qualifying occurrence. Pre-creation occurrences are excluded unless the rules explicitly say otherwise.
 - If no exact instrument is available, emit a proposal or `no_publish`; do not forecast.
 - If the trusted market provider is unavailable, emit a blocked result with reason `market_provider_unavailable`; do not fabricate price, liquidity, settlement status, or market freshness.
 - Store only selected market snapshots needed to support a forecast, report, or audit trail. Do not retain dense ticks, full orderbooks, or continuous price history.

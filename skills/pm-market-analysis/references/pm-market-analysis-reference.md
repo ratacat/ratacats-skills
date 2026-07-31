@@ -85,7 +85,7 @@ Required top-level sections:
 
 - `sources`: `source_id`, `kind`, `title`, `publisher`, `url|null`, `retrieved_at`, `source_as_of|null`.
 - `claims`: `claim_id`, `source_ids`, `claim_type`, `text`, `as_of`, `confidence`.
-- `pm_event`: `venue`, `pm_event_key`, `title`, `url|null`, `status`, `resolution`.
+- `pm_event`: `venue`, `pm_event_key`, `title`, `url|null`, `status`, `resolution`; each target child instrument must separately record its creation/listing timestamp.
 - `instruments`: venue-specific exact instruments.
 - `event_structure`: `child_market_count`, `sibling_instrument_keys`, `mece_status`, `negative_risk_status`, `event_math_allowed`.
 - `related_markets`: `relationship`, `venue`, `title`, `instrument_key|null`, `why_related`.
@@ -141,6 +141,7 @@ Required identity:
     "venue_outcome_label": "string",
     "rules_url": "string|null",
     "resolution_text_or_summary": "string",
+    "market_created_at": "ISO-8601",
     "verification": {
       "gamma_seen": true,
       "clob_seen": true,
@@ -184,6 +185,7 @@ Required identity:
     "series_ticker": "string|null",
     "rules_url": "string|null",
     "resolution_text_or_summary": "string",
+    "market_created_at": "ISO-8601",
     "verification": {
       "event_seen": true,
       "market_seen": true,
@@ -224,6 +226,7 @@ Forecast-blocking gates:
 - `G_NO_TITLE_ONLY_MATCH`: identity does not depend only on title/question similarity.
 - `G_VENUE_IDENTITY_VALID`: Polymarket/Kalshi fields are not mixed and required venue fields exist.
 - `G_RESOLUTION_RULES_KNOWN`: resolver, rules, source finality, and ambiguity status are known.
+- `G_TEMPORAL_ELIGIBILITY`: every occurrence offered as satisfying the instrument happened at or after the exact child market's creation/listing time, unless the written rules explicitly count earlier occurrences. Missing or ambiguous occurrence/creation timestamps block a forecast based on that occurrence.
 - `G_RESOLUTION_PROBABILITY_SEPARATED`: world outcome and venue resolution are not conflated.
 - `G_SOURCE_GROUNDED`: key claims have source IDs and `as_of`.
 - `G_LIQUIDITY_FRESH`: liquidity snapshot is fresh enough or limitation is explicit.
@@ -244,11 +247,14 @@ Record:
 
 - `retrieved_at` for every source.
 - `as_of` for every market, rules, or time-sensitive claim.
+- The exact child market's creation/listing timestamp and the event-time timestamp of every alleged qualifying occurrence.
 - Confidence for each claim.
 - Source IDs for each thesis, risk, gate, and conclusion.
 - Analyst inference separately from source claims.
 
 If sources conflict, keep the conflict visible and fail or warn the relevant gate. Do not smooth conflicts into an unsupported average.
+
+For occurrence-based instruments, use the time the qualifying act happened—not when it was later reported, confirmed, implemented, discovered, or remained in effect. A pre-creation act is not eligible merely because its consequences continue after listing. Only explicit retroactive language in the written rules overrides this default.
 
 ## 6. Market Forces Checklist
 
@@ -276,6 +282,7 @@ Assess:
 - Ambiguous terms or edge cases.
 - Challenge/dispute status.
 - Timing risk and publication deadlines.
+- Temporal eligibility relative to the exact child market's creation/listing timestamp.
 - Source availability risk.
 - Whether the venue can resolve differently from the intuitive world outcome.
 
@@ -428,18 +435,19 @@ Run these checks after schema validation:
 6. Kalshi `instrument_key` equals `kalshi:{market_ticker}:{side}`.
 7. Every claim used in thesis, risks, gates, or liquidity references at least one source.
 8. Every source has `retrieved_at`; every market/rules/price claim has `as_of`.
-9. Liquidity snapshot is no older than the configured freshness threshold or is explicitly marked stale.
-10. Any probability is in `[0, 1]`.
-11. Forecast includes both `probability_world` and `probability_resolution`.
-12. If `event_math_allowed = true`, then `mece_status = verified_complete_mece`, same venue is verified, and all sibling instrument keys are listed.
-13. Cross-venue markets appear only in `related_markets`.
-14. Resolution risk includes resolver, rules summary, source of truth, ambiguity list, and challenge/dispute status.
-15. Platform risk is limited to settlement, custody, oracle, regulatory, and access risks.
-16. Forecast output is invalid if any fatal gate is `block`.
-17. Report output is allowed with blocked forecast gates, but must include why no forecast was produced.
-18. Proposal output is required when suggesting uncertain PM event, instrument identity, source mapping, or forecast candidate needing acceptance.
-19. No_publish is required when the run lacks enough verified material even for a useful report/proposal.
-20. Final wording uses PMKNB vocabulary.
+9. Every occurrence used as resolution evidence includes an event-time timestamp and is compared with the exact child market's creation/listing timestamp. Pre-creation occurrences fail `G_TEMPORAL_ELIGIBILITY` unless explicit rule text makes them retroactively eligible.
+10. Liquidity snapshot is no older than the configured freshness threshold or is explicitly marked stale.
+11. Any probability is in `[0, 1]`.
+12. Forecast includes both `probability_world` and `probability_resolution`.
+13. If `event_math_allowed = true`, then `mece_status = verified_complete_mece`, same venue is verified, and all sibling instrument keys are listed.
+14. Cross-venue markets appear only in `related_markets`.
+15. Resolution risk includes resolver, rules summary, source of truth, ambiguity list, challenge/dispute status, and temporal eligibility.
+16. Platform risk is limited to settlement, custody, oracle, regulatory, and access risks.
+17. Forecast output is invalid if any fatal gate is `block`.
+18. Report output is allowed with blocked forecast gates, but must include why no forecast was produced.
+19. Proposal output is required when suggesting uncertain PM event, instrument identity, source mapping, or forecast candidate needing acceptance.
+20. No_publish is required when the run lacks enough verified material even for a useful report/proposal.
+21. Final wording uses PMKNB vocabulary.
 
 Schema or semantic failure should trigger one repair attempt when feasible. Remaining fatal failures downgrade `forecast` to `report`, `proposal`, or `no_publish` based on verified usefulness.
 
@@ -541,6 +549,7 @@ run_trace:
 - Cross-venue markets are related, not interchangeable.
 - Event-level math is allowed only for a verified same-venue complete MECE set.
 - World probability and resolution probability are different.
+- An occurrence before the exact child market's creation does not qualify unless the written rules explicitly apply retroactively; later reporting or continuing effects do not reset the occurrence time.
 - A forecast is an immutable thesis revision for exact instruments.
 - A position is wallet exposure, not a forecast.
 - Liquidity is part of analysis quality, not trading guidance.
