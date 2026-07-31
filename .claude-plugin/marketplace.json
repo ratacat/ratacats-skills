@@ -381,6 +381,31 @@
       "license": "MIT"
     },
     {
+      "name": "probe-driven-design",
+      "source": "./skills/probe-driven-design",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Use when a consequential design, architecture, process, or policy choice depends on unknowns that reasoning alone cannot settle, or when an investigation plan may be over-scoped, prematurely branched, or full of experiments whose results may not change a decision. Not for questions answerable by a straightforward lookup alone.",
+      "category": "tools",
+      "keywords": [
+        "probe",
+        "prototype",
+        "uncertainty",
+        "design",
+        "discovery",
+        "fog of war",
+        "decision making",
+        "graph workflow"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
       "name": "refine-tests",
       "source": "./skills/refine-tests",
       "strict": false,

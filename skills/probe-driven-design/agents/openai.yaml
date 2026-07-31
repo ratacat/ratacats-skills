@@ -1,0 +1,4 @@
+interface:
+  display_name: "Probe-Driven Design"
+  short_description: "Ground decisions with the smallest useful probe"
+  default_prompt: "Use $probe-driven-design to turn this uncertain problem into the smallest useful probe and update the design from its result."
