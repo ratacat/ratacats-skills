@@ -150,6 +150,11 @@ Look for:
 - copied helpers with minor edits
 - duplicate CLI/API/schema rules enforced in both parser and runtime layers
 - old aliases, legacy branches, unused Adapters, stale flags, and compatibility code left behind after replacement
+- backwards compatibility with unshipped code: an old signature, alias, or data shape that only existed earlier in the same branch was never deployed — delete the old path and update its callers
+- derivable state: a value passed or stored that can be computed from values already in scope (an `isDirty` parameter that is always `editorContent !== baseline`) — removing it often simplifies signatures, types, and control flow in one move
+- inlined logic that a shared utility in the codebase already covers — check before abstracting or keeping local copies
+- overlapping concepts: two types, functions, or constants that overlap significantly should merge — fewer distinct concepts to hold in the head
+- buried leads: files where helpers precede the exported or significant functions (inverted pyramid: lead with what matters, push helpers below)
 
 Do not abstract endpoint-specific logic that is semantically different. Abstract shared control flow or assign one clear owner for the shared concept.
 
@@ -165,6 +170,12 @@ Rank concept drift first, route or CLI plumbing second, cosmetic repeats last.
 ## Pass 6: Boundary-Aware Naming
 
 Do not begin by renaming. First understand boundaries and vocabulary.
+
+Names, function names, and comments are all prose. Apply Orwell's rules: never use a long word where a short one will do; if a word can be cut, cut it; active over passive; everyday English over jargon. Latinate vocabulary (reconcile, coalesce, normalize) sounds technical and abstract; Anglo-Saxon words (prune, run, watch, stop, drop, walk) are short and physical — prefer the Saxon word. Cut words the context already carries: inside `workspaceWatcher`, `watchWorkspace` beats `startNativeWorkspaceWatcher`. A compound name is usually a hedge — `lastObservedDiskContent` is a specification to defend; `baseline` is a readable description.
+
+Comments: state, in plain English, the constraint the code cannot show — why the non-obvious exists. Keep comments on complex, non-obvious implementations and doc comments on functions with side effects. Delete comments that narrate change history from the conversation or restate self-evident code.
+
+Overfitting check: code must stand on its own. If a name or comment only makes sense to someone who watched this conversation or PR happen, rewrite it against the codebase's own vocabulary — write for the reader who arrives with no history.
 
 Build a concept map:
 - concept
