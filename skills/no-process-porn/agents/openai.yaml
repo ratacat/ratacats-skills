@@ -1,0 +1,4 @@
+interface:
+  display_name: "No Process Porn"
+  short_description: "Keep agent process tied to delivery"
+  default_prompt: "Use $no-process-porn to identify process that is substituting for delivery and redirect the work."

@@ -40,6 +40,7 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 | [`gpt-pro-loop`](skills/gpt-pro-loop/) | Run a local revision loop that packages project context for GPT Pro review, maps critiques into issues, verifies fixes, and assesses the goal. |
 | [`medium-paywall-bypass`](skills/medium-paywall-bypass/) | Fetch readable Medium or Medium-hosted article text through mirror routes so an agent can summarize, compare, or discuss the content. |
 | [`name-review`](skills/name-review/) | Boundary-first naming review that maps concepts before recommending small, evidence-backed renames for code, plans, schemas, and docs. |
+| [`no-process-porn`](skills/no-process-porn/) | Detects when agent process is substituting for delivery and redirects the work into the smallest concrete next action. |
 | [`refine-tests`](skills/refine-tests/) | A methodical test-suite audit that finds tautological, vacuous, weak, brittle, mislabeled, and missing tests, then strengthens them without ever reducing coverage. |
 | [`writing-claude-skills`](skills/writing-claude-skills/) | TDD-style skill authoring guide that turns repeatable workflows into focused, tested Claude/Codex skills with clear triggers and resources. |
 | [`x-undocumented-api`](skills/x-undocumented-api/) | Safe guide to X.com's private web API: verifies current GraphQL operations, request headers, cursors, and secret-safe evidence. |

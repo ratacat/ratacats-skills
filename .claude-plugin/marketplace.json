@@ -293,6 +293,42 @@
       "license": "MIT"
     },
     {
+      "name": "no-process-porn",
+      "source": "./skills/no-process-porn",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Automatically use whenever a model starts looking at gates, promotion states, smoke tests, instrumentation, telemetry, observability, dashboards, ledgers, manifests, certificates, audits, reports, handoffs, fresh-eyes reviews, verification theater, or completion labels such as ready, green, promoted, validated, closed, or complete. Also use when those artifacts accumulate while requested functionality is still missing, or when reviewing whether process has become a substitute for delivery.",
+      "category": "developer tools",
+      "keywords": [
+        "process",
+        "ceremony",
+        "reward-hacking",
+        "gate",
+        "promoted",
+        "promotion",
+        "smoke-test",
+        "instrumentation",
+        "telemetry",
+        "observability",
+        "dashboard",
+        "ledger",
+        "manifest",
+        "certificate",
+        "verification",
+        "completion",
+        "audit",
+        "fresh-eyes",
+        "delivery"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
       "name": "pm-deep-analysis",
       "source": "./skills/pm-deep-analysis",
       "strict": false,
