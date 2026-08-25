@@ -93,7 +93,7 @@ Keep the branch model simple. Run one main loop. Invoke the Pro review loop insi
 
 ### Pro Review Loop
 
-Preflight: before the first review round, confirm `pro-cli` is ready with `pro-cli doctor --json`. If it is missing or unhealthy, install and authenticate it using [pro-cli-setup.md](references/pro-cli-setup.md) — the agent can run the install and verification and walk the user through the one-time browser login. Re-run `pro-cli doctor --json` until it reports healthy before sending a review.
+Preflight: before the first review round, confirm `pro-cli` is ready with `pro-cli doctor --json`. If it is missing or unhealthy, install and authenticate it using [pro-cli-setup.md](references/pro-cli-setup.md) — the agent can run the install and verification and walk the user through the one-time browser login. Re-run `pro-cli doctor --json` until it reports healthy before sending a review. Note: doctor proves stored auth, not a live CDP page — a healthy doctor plus a `CHATGPT_PAGE_MISSING` error means the launch line from `pro-cli auth command` must be run first (recovery steps in pro-cli-setup.md).
 
 1. Build the context package.
    - Rebuild it for the current iteration from repo instructions, design map state, current code, schemas, tests, data samples, validation, prior reviews, and known omissions.
@@ -109,7 +109,7 @@ Preflight: before the first review round, confirm `pro-cli` is ready with `pro-c
    - Completion: the prompt names the review target, requested output shape, and evidence standard.
 
 3. Run the adversarial review.
-   - Use the approved `pro-cli` command shape for the repo: durable jobs for long reviews, direct asks for short blocking reviews.
+   - Use the approved `pro-cli` command shape for the repo: durable jobs for long reviews, direct asks for short blocking reviews. Submit with `job create @prompt.md --json`, poll `job status <id>` separately (never depend on `--wait`), and follow the reliability rules in [operating-guide.md](references/operating-guide.md) — size budget, output cap, and EMPTY_RESPONSE retry policy.
    - Save job id, status, command metadata, raw output, and extracted review.
    - Completion: the adversarial review is persisted as an artifact.
 

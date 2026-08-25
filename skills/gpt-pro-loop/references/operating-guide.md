@@ -68,6 +68,34 @@ Use direct excerpts for small critical files. Use file references plus concise s
 
 Redact secrets, tokens, cookies, credentials, private keys, raw `.env` files, and account material before sending.
 
+## Pro Request Reliability
+
+Long review jobs fail in known ways. These rules come from measured failures
+(2026-08-25 loop: two 309 KB bundles died with `EMPTY_RESPONSE` after 10–30 min
+of model work; the same review at 218 KB with a capped output returned cleanly).
+
+- **Size budget: keep the full submitted prompt ≲220 KB (~55 k tokens).** Oversized
+  bundles complete upstream without returning assistant text (`EMPTY_RESPONSE`) —
+  after tens of minutes, so each failure is expensive. Condense rather than drop:
+  strip markdown link URLs (keep anchor text), digest verbatim evidence while
+  preserving every table row's substance and headings (citations must stay
+  resolvable), cap long table cells, and say in the package which parts are digests
+  so Pro treats rows as second-hand quotations.
+- **Cap the requested output and add a partial-result fallback.** In the output
+  shape, bound the response (e.g. "at most 15 issues, ≤120-word claims") and
+  instruct: "If you cannot complete the full analysis, return the issues you have —
+  a partial issue list beats an empty response." Uncapped output is the second
+  suspect in `EMPTY_RESPONSE`.
+- **Submit, then poll — never rely on `--wait` as the record.** Use
+  `pro-cli job create @prompt.md --json` (file reference; no shell injection), then
+  poll `pro-cli job status <id> --json` and retrieve with
+  `pro-cli job result <id> --json > pro-result.json`. A local crash or render error
+  during `--wait` must not orphan the job; the durable id is the record.
+- **Retry policy: one retry per `EMPTY_RESPONSE` is sanctioned** (the CLI error says
+  so), but two consecutive failures on the same payload mean the payload is the
+  problem — condense the bundle and cap the output before a third attempt, and never
+  send probe queries in its place.
+
 ## GPT Pro Prompt Output Shape
 
 Ask Pro to return findings in this shape:

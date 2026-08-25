@@ -53,13 +53,21 @@ pro-cli doctor --json
 
 This creates `~/.pro-cli/chrome-profile`, keeping ChatGPT auth separate from the personal profile. Port `9222` is the default; if you use another, pass the same `--cdp`/`--port` to `doctor`, `ask`, and `job create`.
 
-## 4. Keep it running
+## Keep it running
 
 Keep the ChatGPT Chrome window open while jobs run.
 
 - Chrome closed → rerun `pro-cli auth command --json`.
 - ChatGPT logged out → sign in, then `pro-cli auth capture --cdp <url> --json`.
 - Anything unclear → `pro-cli doctor --json`.
+- **`CHATGPT_PAGE_MISSING` while doctor reports healthy**: `doctor` verifies stored
+  auth, not a live page. Both `ask` and `job create` need a logged-in ChatGPT tab
+  over CDP. Run the Chrome launch line printed by `pro-cli auth command --json`,
+  confirm CDP (`curl -s http://127.0.0.1:9222/json/version`), then send the real
+  request. Do not use probe/smoke asks to test this — the error itself is the
+  signal, and launching the page is the fix.
+- **Never use `-h`/`--help` to probe `job create`**: the flag is parsed as a prompt
+  and creates a real (failed) job. If a stray job appears, `pro-cli job cancel <id>`.
 
 ## Guardrails
 
