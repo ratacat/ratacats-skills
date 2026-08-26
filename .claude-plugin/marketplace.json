@@ -417,6 +417,31 @@
       "license": "MIT"
     },
     {
+      "name": "prediction-drill",
+      "source": "./skills/prediction-drill",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Use when a bug, regression, or misbehavior has an unknown cause and the user wants iterative hypothesis-driven investigation — invoked by name (\"prediction drill\", \"drill into this bug\"), or when asked to falsify hypotheses and converge on a root cause and fix through repeated prediction rounds.",
+      "category": "tools",
+      "keywords": [
+        "bug",
+        "root-cause",
+        "falsify",
+        "hypothesis",
+        "prediction",
+        "convergence",
+        "investigation",
+        "debugging"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
       "name": "probe-driven-design",
       "source": "./skills/probe-driven-design",
       "strict": false,
