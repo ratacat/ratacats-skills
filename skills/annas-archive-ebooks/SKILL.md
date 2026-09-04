@@ -168,6 +168,40 @@ Typical workflow:
 1. Download with this skill → `books/Clean_Code.pdf`
 2. Convert with ebook-extractor → `books/Clean_Code.txt`
 
+## Partner Host Outages (downloads failing with 403/404)
+
+Fast downloads route through rotating partner file hosts. When downloads fail with
+nginx 404s or 403 stub pages but the md5 page loads fine, the hosts have changed or
+are down — the catalog still lists the file, the mirrors just don't serve it.
+
+**To discover the current host list:**
+
+1. Open any known-file md5 page in a real browser: `https://annas-archive.gl/md5/<md5>`
+2. Scrape all fast-download link indexes from the HTML: `/fast_download/<md5>/<path_index>/<domain_index>`
+3. Map each `domain_index` to its hostname by querying the API per index:
+   `https://annas-archive.gl/dyn/api/fast_download.json?md5=<md5>&key=<key>&domain_index=N`
+   (invalid indexes return `Invalid domain_index or path_index`; valid ones return a
+   `download_url` whose hostname IS that index's current server)
+
+Known host map (verified 2026-08-24, re-verify when failures cluster):
+
+| domain_index | Host |
+|---|---|
+| 0, 3 | wtgadtq.org |
+| 1, 4 | hxd7ms.org |
+| 2, 5 | momot.rs |
+| 6, 10 | yqrii5.org |
+| 7, 11 | wbsg8v.xyz |
+| 8, 12 | b4mcx2ml.net |
+| 9, 13 | asuycdg6.org |
+
+Hostnames are ephemeral (auto-generated when Anna's rotates partners); the INDEXES
+are stable. Never hardcode trust in a hostname — always re-map via step 3.
+
+Note: DDoS-Guard challenges scripted page fetches on deep paths after ~10 requests
+regardless of cookie freshness. Fetch pages through a real Chrome (CDP or headed) and
+reserve plain HTTP for `fast_download.json` + partner file bytes only.
+
 ## Mirror Fallback
 
 The `.org` domain is defunct. The script tries these mirrors in order:

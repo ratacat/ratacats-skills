@@ -7,7 +7,7 @@ Two closure regimes:
 - **Falsify mode** — probes are conjectures: testable claims closed against evidence (`confirmed`, `disproved`, `fixed`, `intentional`, `incomplete`). For bug hunts, claim audits, and plan stress-tests.
 - **Explore mode** — probes are directional questions closed on what they produce (`fertile`, `barren`, `merged`, `parked`). For brainstorming and angle-finding.
 
-Lenses come from prebuilt packs — `software-audit` (the original bug-hunt lens set), `inquiry` (claims, arguments, plans), `ideation` (brainstorming) — plus a table of composable direction operators (inversion, negation, scale shift, time shift, stakeholder rotation, analogy transfer, constraint mutation, extremization, recombination, modality shift) that derive fresh lenses for any target. Spread discipline keeps probes genuinely different directions, volume tiers (spot-check, sweep, dragnet, saturation) scale the run from 10 to 1000+ probes, and surprising closures branch into child probes — the cascade.
+Lenses come from prebuilt packs — `software-audit` (the original bug-hunt lens set), `inquiry` (claims, arguments, plans), `ideation` (brainstorming) — plus a table of composable direction operators (inversion, negation, scale shift, time shift, stakeholder rotation, analogy transfer, constraint mutation, extremization, recombination, modality shift) that derive fresh lenses for any target. Spread discipline keeps probes genuinely different directions, volume tiers (spot-check, sweep, dragnet, saturation) scale the run from 10 to 1000+ probes, and surprising closures branch into child probes — the cascade. The operator runs the cascade in this session; it does not use subagents unless you command it to.
 
 Good fits:
 

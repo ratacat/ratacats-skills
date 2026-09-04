@@ -89,6 +89,8 @@ Operators compose: invert a stakeholder's view, extremize a time-shifted project
 
 ## Cascade Discipline
 
+**No subagents unless commanded.** Run every lens and probe in this session. Do not spawn other agents, delegate lens groups, or fan probes out unless the user explicitly commands it. Volume is more in-session rounds, not more agents. When commanded: split by lens group; each returns a closed matrix segment; merge and dedupe here.
+
 Treat the lens list as the coverage contract. Walk it top to bottom; give each lens a real pass.
 
 For each lens:
@@ -98,7 +100,7 @@ For each lens:
 4. Close each probe with one status.
 5. Record the evidence or yield behind the status.
 
-**Branch on surprise.** This is what makes it a cascade: when a probe closes with an unexpected result — a surprising confirmation, a weird disproof, an unusually fertile direction — spawn a child batch aimed at that surprise. Apply a fresh operator to the surprise to pick the child direction. Bound branching to 2 levels of depth unless the volume tier allows more.
+**Branch on surprise.** This is what makes it a cascade: when a probe closes with an unexpected result — a surprising confirmation, a weird disproof, an unusually fertile direction — open a child batch in this session aimed at that surprise. Apply a fresh operator to the surprise to pick the child direction. Bound branching to 2 levels of depth unless the volume tier allows more.
 
 If the scope exceeds one pass, split the cascade into numbered rounds and preserve the unfinished lens/probe position in a ledger or handoff note. Resume from that exact position.
 
@@ -120,11 +122,11 @@ The unit is the probe. Scale by tier — a requested probe count selects the tie
 | Spot-check | 10–20 | One round, 3–6 lenses, deep closure on every probe, branch depth 1 |
 | Sweep | 20–50 | One round, full pack + a few operator lenses, branch depth 2 |
 | Dragnet | 50–150 | Numbered rounds with a ledger; full pack + broad operator derivation; branch depth 2 |
-| Saturation | 150+ | Multiple rounds; delegate lens groups to parallel subagents, each returning a closed matrix segment; merge and dedupe centrally; branch depth 3 |
+| Saturation | 150+ | Multiple rounds with a ledger; full pack + broad operator derivation; branch depth 3 |
 
 Default tier by scope: narrow function, diff, or single question → spot-check; feature, module, or one topic → sweep; subsystem, repo, or multi-facet topic → dragnet. Honor a user-requested count exactly; distribute probes across lenses so coverage stays visible.
 
-Evidence depth never scales down: at every tier, prefer fewer well-closed probes over a larger list with shallow closure. Higher tiers get more probes by adding rounds and parallelism, not by cheapening closure.
+Evidence depth never scales down: at every tier, prefer fewer well-closed probes over a larger list with shallow closure. Higher tiers get more probes by adding rounds, not by cheapening closure.
 
 ## Closure Standards
 

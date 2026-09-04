@@ -496,6 +496,33 @@
       "license": "MIT"
     },
     {
+      "name": "show-usage",
+      "source": "./skills/show-usage",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Show rate-limit and quota usage across the user's AI coding subscriptions (Claude, Codex, Gemini, Kimi, MiniMax, Z.ai, Qwen, Grok) with per-window percent used and time to reset. Use when the user asks about usage, quotas, rate limits, or when subscriptions reset.",
+      "category": "tools",
+      "keywords": [
+        "usage",
+        "quota",
+        "rate-limit",
+        "subscriptions",
+        "claude",
+        "codex",
+        "kimi",
+        "minimax",
+        "zai",
+        "qwen"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
       "name": "writing-claude-skills",
       "source": "./skills/writing-claude-skills",
       "strict": false,

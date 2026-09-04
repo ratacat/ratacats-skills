@@ -64,6 +64,7 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 | [`graph-researcher`](skills/graph-researcher/) | Deep web research that stores sources, findings, relationships, contradictions, and open leads in a SQLite knowledge graph. |
 | [`prediction-drill`](skills/prediction-drill/) | Vertical two-phase falsification loop for a single bug: rounds of five cheap-to-check predictions drill down to the root cause, then drill back up to a validated fix. |
 | [`probe-driven-design`](skills/probe-driven-design/) | Use the smallest useful probe to ground consequential decisions before uncertain detail hardens into design. |
+| [`show-usage`](skills/show-usage/) | Reads live quota windows across AI coding subscriptions and prints percent used and time to reset in a minimal fixed format. |
 
 ### Writing
 
