@@ -34,6 +34,7 @@ Read only what the task needs:
 - [graphql-discovery.md](references/graphql-discovery.md): extracting operation names, query IDs, feature flags, field toggles, and endpoint inventories from X web bundles.
 - [endpoint-patterns.md](references/endpoint-patterns.md): request/response shapes for SearchTimeline, user/list/follower/tweet timelines, timeline instructions, and search operators.
 - [community-timelines.md](references/community-timelines.md): X Communities operations, variables, ranking modes, response paths, and community-search caveats.
+- [trends-and-explore.md](references/trends-and-explore.md): authenticated trend collection, Explore tabs, topic aliases, story history, locations, personalization, and measured count/cursor limits.
 - [cursor-behavior.md](references/cursor-behavior.md): X timeline cursor semantics, pagination risks, fan-out caveats, and evidence standards.
 - [reply-visibility-research.md](references/reply-visibility-research.md): high-fidelity notes from the 2026-05 reply visibility investigation, including observed failure modes, experiments, current best thinking, and next discriminators.
 
@@ -49,7 +50,7 @@ Reusable script:
 4. For author-corpus work, compare native timeline operations against `SearchTimeline` author queries and record lane yield per page, not just total pages.
 5. For live read probes, use secret-safe output: status code, top-level keys, response path presence, item counts, cursor presence, and example public IDs only.
 6. For pagination behavior, record request cursor, returned cursors, item IDs in order, item count, first/last sort index, endpoint, variables, and observed time.
-6. Save dated findings outside the skill unless the user explicitly asks to update this skill.
+7. Save dated findings outside the skill unless the user explicitly asks to update this skill.
 
 ## GraphQL Request Shape
 
@@ -96,6 +97,12 @@ The transaction ID path must include the query ID:
 
 ## Current High-Value Facts
 
+- For broad trend discovery, test `GET /i/api/2/guide.json` with `candidate_source=trends` before relying on `ExplorePage` pagination. In 2026-09-04 probes, `count=200` returned about 120 trends, while the GraphQL Trending tab returned 30 ordinary trends and one promoted item regardless of counts 1, 100, or 500.
+- Preserve `groupedTrends` aliases separately from ranked parent trends. Three sampled accounts produced 122 distinct parent trends and 144 terms including aliases. Account rotation added little in that sample.
+- A returned or changed cursor does not prove more data exists. All five Explore tab continuations returned no content; the guide's `DefaultBottomCursorValue` also returned an empty page. Stop on zero new items.
+- `TrendHistory` returns timestamped story summaries, not volume history. `TrendRelevantUsers` returned three users per tested AI trend. Neither supplies a posts-per-hour baseline.
+- Location discovery uses both WOEIDs and separate signed-string `place_id` values. Their catalogues differ. Request-only `woeid` and `place_id` overrides did not establish geographic control; the current UI writes account settings to change location. Do not perform that mutation without authorization.
+- The bundle extractor now starts at `https://x.com/explore`. The logged-out homepage uses a different `x-web` app. Public webpack runtime maps can reveal lazy bundles without login; derive filenames from the current resolver.
 - `SearchTimeline` uses `rawQuery`, `product`, `count`, optional `cursor`, and promoted-content controls.
 - `SearchTimeline` author queries can outperform native user timelines for corpus collection. In live xpool probes on 2026-06-18, `from:<handle> -filter:replies -filter:retweets` and `from:<handle> filter:replies` reached 100 lane items in 5 pages for sampled accounts where native timeline crawls hit only 39-47 items after 20 pages.
 - Search author-query cursors appear risky across account rotation. In live xpool profile-sample probes, later-page `SearchTimeline` continuations under rotating accounts produced concentrated 404 / timeout / network failures; pinning one account per lane materially reduced that failure mix, though it did not remove empty-page degeneration.

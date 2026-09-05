@@ -4,7 +4,7 @@ Use this reference to find current X web GraphQL operations, query IDs, feature 
 
 ## Extraction Pattern
 
-Fetch `https://x.com`, find client-web script URLs, then scan each script for operation metadata:
+Fetch `https://x.com/explore`, find client-web script URLs, then scan each script for operation metadata:
 
 ```regex
 queryId:"([^"]+)",operationName:"([^"]+)",operationType:"([^"]+)"
@@ -17,6 +17,10 @@ Use the bundled script:
 bun /Users/jaredsmith/Projects/agent-skills/skills/x-undocumented-api/scripts/extract-x-graphql-endpoints.ts --out-dir /tmp/x-graphql
 ```
 
+The default source is `https://x.com/explore`; `--source-page <url>` overrides it. On 2026-09-04 Mountain time, a logged-out request redirected to `https://x.com/i/flow/login?redirect_after_login=%2Fexplore`. That page exposed six client-web scripts with 105 operations, including `ExplorePage`, `ExploreSidebar`, `GenericTimelineById`, `TrendHistory`, and `TrendRelevantUsers`.
+
+The logged-out `https://x.com/` homepage instead loaded `https://abs.twimg.com/x-web/x-web/entry-client-logged-out-DJ1gyf49.js`. It exposed no client-web script URLs, so the old default failed with `No X client-web script URLs found in https://x.com`. A failed homepage harvest is not evidence that an operation was removed.
+
 The script writes:
 
 - `x-graphql-endpoints-<date>.json`
@@ -25,12 +29,14 @@ The script writes:
 
 ### Structural limits of bundle extraction
 
-Bundle extraction has two hard limits — knowing them prevents wild-goose hunts:
+The script scans only client-web script URLs present in the source HTML. Its output is a partial bootstrap inventory, not a complete API inventory.
 
-1. **Lazy chunks.** The logged-out `x.com` harvest only sees bootstrap bundles. Many operations ship in **on-demand chunks** loaded only at their surface *after* its gate clears (e.g. `/i/chat` after the E2E PIN gate). To find those operations, drive a logged-in browser to the surface and scan the chunks `performance.getEntriesByType('resource')` shows as loaded — not just the main bundle.
-2. **WebSocket surfaces.** Some actions are not GraphQL at all. X Chat sends are WebSocket frames to `wss://chat-ws.x.com/ws?token=<JWT>` — there is **no** send `operationName`/`queryId` to extract, ever, because the operation is not a GraphQL mutation. Bundle extraction cannot surface it regardless of auth or which chunks are scanned. Capture it with CDP WebSocket frame handlers instead.
+1. **Lazy chunks.** Additional operations and caller code can be in on-demand chunks. The public login HTML can expose webpack's chunk-name and hash maps. Inspect its filename resolver, select chunks related to the requested feature, and fetch those exact URLs. This can work without account cookies. If the available map omits the required chunk, visit the feature in an authenticated browser and inspect scripts listed by `performance.getEntriesByType('resource')`. Access to a bundle does not establish access to its data endpoints.
+2. **WebSocket operations.** Some actions are not GraphQL. X Chat sends are WebSocket frames to `wss://chat-ws.x.com/ws?token=<JWT>`. There is no send `operationName` or `queryId` to extract. Capture those operations with CDP WebSocket frame handlers.
 
-"Regenerate, don't trust stale query ids" remains correct for the HTTP operations that exist; these limits explain why some operations will simply never appear in a bundle scan.
+Use the exact filename expression from the current runtime. On 2026-09-04 Mountain time, the resolver appended the literal `a.js` after the hash. `https://abs.twimg.com/responsive-web/client-web/bundle.Explore.2a293193d547b00fa.js` returned HTTP 200; `https://abs.twimg.com/responsive-web/client-web/bundle.Explore.2a293193d547b00f.js` returned HTTP 404. Do not assume `.js`, or make `a.js` a universal suffix.
+
+In that scan, 14 public lazy chunks whose names contained `Explore`, `Trend`, or `GenericTimeline` added 40 operations to the bootstrap inventory, for 145 unique operations. This was a selected subset, not an exhaustive scan. Refresh query IDs from current bundles before use.
 
 ## What Metadata Gives You
 

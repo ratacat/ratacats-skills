@@ -39,7 +39,7 @@ function usage(): string {
 
 function parseArgs(argv: string[]): CliOptions {
 	const options: CliOptions = {
-		sourcePage: "https://x.com",
+		sourcePage: "https://x.com/explore",
 		outDir: process.cwd(),
 		filter: null,
 	};

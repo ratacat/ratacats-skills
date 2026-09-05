@@ -10,6 +10,7 @@ Good fits:
 
 - Inspecting X web GraphQL operations
 - Understanding timeline and cursor behavior
+- Collecting trends, Explore recommendations, related terms, and AI story context
 - Updating request shapes after query IDs rotate
 - Building tooling around read-only X endpoints
 - Documenting endpoint evidence with dates and scopes
@@ -30,3 +31,7 @@ npx skills add ratacat/ratacats-skills --skill x-undocumented-api
 For live authenticated probes, use only an X browser session the user is authorized to use. Keep cookies, `auth_token`, `ct0`, bearer tokens, proxy credentials, and raw upstream payloads out of output.
 
 Query IDs rotate. Before relying on an operation ID, inspect the current X web bundle or use [`scripts/extract-x-graphql-endpoints.ts`](scripts/extract-x-graphql-endpoints.ts) to build a current operation inventory.
+
+The extractor starts at `https://x.com/explore`; the logged-out homepage now
+uses a different web app. See [Trends and Explore](references/trends-and-explore.md)
+for measured collection limits, location controls, and authenticated probe results.
