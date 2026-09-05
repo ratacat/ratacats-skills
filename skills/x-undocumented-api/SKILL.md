@@ -36,6 +36,7 @@ Read only what the task needs:
 - [community-timelines.md](references/community-timelines.md): X Communities operations, variables, ranking modes, response paths, and community-search caveats.
 - [trends-and-explore.md](references/trends-and-explore.md): authenticated trend collection, Explore tabs, topic aliases, story history, locations, personalization, and measured count/cursor limits.
 - [geography.md](references/geography.md): working per-request WOEID trends, coordinate lookup, city/country overlap, location-name ambiguity, and geography controls.
+- [geographic-post-search.md](references/geographic-post-search.md): keyword and place-tag searches, cursor depth, volume measurement, query-window omissions, and historical city-filter false negatives.
 - [cursor-behavior.md](references/cursor-behavior.md): X timeline cursor semantics, pagination risks, fan-out caveats, and evidence standards.
 - [reply-visibility-research.md](references/reply-visibility-research.md): high-fidelity notes from the 2026-05 reply visibility investigation, including observed failure modes, experiments, current best thinking, and next discriminators.
 
@@ -98,6 +99,8 @@ The transaction ID path must include the query ID:
 
 ## Current High-Value Facts
 
+- Geographic post search uses `place:<hexadecimal post-place ID>` or `place_country:<country code>`, not trend WOEIDs or Explore place IDs. SF `place:5a110d312052166f` worked alone and with keywords. Treat returned place metadata as a label, not verified physical presence.
+- Geographic search counts are observed lower bounds. An SF study retrieved 3,020 cursor-linked posts, but a smaller keyword/day query recovered a weekly post missed by the broad crawl. Historical city-filter queries excluded a known 2019 SF-tagged post that remained visible without that filter. Do not turn empty older city searches into zero-volume measurements.
 - For broad trend discovery, test `GET /i/api/2/guide.json` with `candidate_source=trends` before relying on `ExplorePage` pagination. In 2026-09-04 probes, `count=200` returned about 120 trends, while the GraphQL Trending tab returned 30 ordinary trends and one promoted item regardless of counts 1, 100, or 500.
 - Preserve `groupedTrends` aliases separately from ranked parent trends. Three sampled accounts produced 122 distinct parent trends and 144 terms including aliases. Account rotation added little in that sample.
 - A returned or changed cursor does not prove more data exists. All five Explore tab continuations returned no content; the guide's `DefaultBottomCursorValue` also returned an empty page. Stop on zero new items.

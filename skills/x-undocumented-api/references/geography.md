@@ -3,6 +3,10 @@
 Use this reference to request trends for a city or country, resolve a
 coordinate to a trend location, or compare geographic coverage.
 
+For keyword searches or volume measurements over posts, use
+[Geographic post search](geographic-post-search.md). That interface uses a
+third location identifier: the hexadecimal place ID attached to a post.
+
 September 5, 2026: 49 authenticated GET probes across three authorized
 accounts. Sixteen selected location snapshots yielded 321 distinct display
 names, or 320 terms after Unicode NFKC normalization, trimming, and case folding.
