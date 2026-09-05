@@ -35,6 +35,7 @@ Read only what the task needs:
 - [endpoint-patterns.md](references/endpoint-patterns.md): request/response shapes for SearchTimeline, user/list/follower/tweet timelines, timeline instructions, and search operators.
 - [community-timelines.md](references/community-timelines.md): X Communities operations, variables, ranking modes, response paths, and community-search caveats.
 - [trends-and-explore.md](references/trends-and-explore.md): authenticated trend collection, Explore tabs, topic aliases, story history, locations, personalization, and measured count/cursor limits.
+- [geography.md](references/geography.md): working per-request WOEID trends, coordinate lookup, city/country overlap, location-name ambiguity, and geography controls.
 - [cursor-behavior.md](references/cursor-behavior.md): X timeline cursor semantics, pagination risks, fan-out caveats, and evidence standards.
 - [reply-visibility-research.md](references/reply-visibility-research.md): high-fidelity notes from the 2026-05 reply visibility investigation, including observed failure modes, experiments, current best thinking, and next discriminators.
 
@@ -101,7 +102,8 @@ The transaction ID path must include the query ID:
 - Preserve `groupedTrends` aliases separately from ranked parent trends. Three sampled accounts produced 122 distinct parent trends and 144 terms including aliases. Account rotation added little in that sample.
 - A returned or changed cursor does not prove more data exists. All five Explore tab continuations returned no content; the guide's `DefaultBottomCursorValue` also returned an empty page. Stop on zero new items.
 - `TrendHistory` returns timestamped story summaries, not volume history. `TrendRelevantUsers` returned three users per tested AI trend. Neither supplies a posts-per-hour baseline.
-- Location discovery uses both WOEIDs and separate signed-string `place_id` values. Their catalogues differ. Request-only `woeid` and `place_id` overrides did not establish geographic control; the current UI writes account settings to change location. Do not perform that mutation without authorization.
+- For per-request geographic trends, `GET /i/api/1.1/trends/place.json?id=<WOEID>` works with authorized web sessions. September 5 probes across 16 cities/countries/worldwide yielded 321 distinct names. This does not require changing Explore settings. `trends/closest.json` maps `lat` and `long` to a supported WOEID.
+- Location discovery uses both WOEIDs and separate signed-string `place_id` values. Their catalogues differ. Request-only location overrides failed to establish control on `guide`, but the separate `trends/place` reader works. Keep all account-settings mutations outside read-only probes.
 - The bundle extractor now starts at `https://x.com/explore`. The logged-out homepage uses a different `x-web` app. Public webpack runtime maps can reveal lazy bundles without login; derive filenames from the current resolver.
 - `SearchTimeline` uses `rawQuery`, `product`, `count`, optional `cursor`, and promoted-content controls.
 - `SearchTimeline` author queries can outperform native user timelines for corpus collection. In live xpool probes on 2026-06-18, `from:<handle> -filter:replies -filter:retweets` and `from:<handle> filter:replies` reached 100 lane items in 5 pages for sampled accounts where native timeline crawls hit only 39-47 items after 20 pages.

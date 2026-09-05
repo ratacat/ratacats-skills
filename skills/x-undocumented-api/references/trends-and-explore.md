@@ -8,6 +8,10 @@ authorized xpool accounts on September 4, 2026, Mountain time. They cover
 one short observation window. Counts are observations, not permanent caps.
 No account settings, follows, interests, or public posts were changed.
 
+September 5 follow-up: [Geography](geography.md) verifies direct location
+selection through `trends/place.json?id=<WOEID>`. The unsuccessful location
+overrides below apply to `guide`, not to every geography reader.
+
 ## Choose the read by the question
 
 - Broad trending-term collection: REST `guide` with `candidate_source=trends`.
@@ -18,6 +22,8 @@ No account settings, follows, interests, or public posts were changed.
 - Relevant people for a known AI story: `TrendRelevantUsers`.
 - Available geographic selectors: `trends/available` or the newer Explore
   location autocomplete. These return locations, not trending terms.
+- Trends for a specific location: `trends/place` with a WOEID. See
+  [Geography](geography.md) for the measured regional comparisons.
 
 Do not treat X's ranked selection as a complete trend catalogue. Displayed
 post counts are not a defined posts-per-hour rate or an activity multiplier.
