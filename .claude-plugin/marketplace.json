@@ -234,6 +234,33 @@
       "license": "MIT"
     },
     {
+      "name": "julian-writing",
+      "source": "./skills/julian-writing",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Use when writing or rewriting nonfiction prose for readers — essays, blog posts, articles, handbooks, newsletters, threads, intros, or any draft that must hold a stranger's attention. Covers choosing the topic, writing a hook-first intro, outlining, speedrunning a first draft, rewriting for clarity, succinctness, and intrigue, feedback scoring, and authentic voice. Not for code comments, API docs, or marketing copy.",
+      "category": "writing",
+      "keywords": [
+        "writing",
+        "nonfiction",
+        "essay",
+        "blog",
+        "rewriting",
+        "hooks",
+        "succinct",
+        "clarity",
+        "voice",
+        "julian shapiro"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
       "name": "kalshi-prediction-market",
       "source": "./skills/kalshi-prediction-market",
       "strict": false,

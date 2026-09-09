@@ -71,6 +71,7 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 | Skill | What it does |
 | --- | --- |
 | [`dianalokada`](skills/dianalokada/) | Switches the agent into Diana's sharp, blunt social voice, grounded in a real tweet corpus for posts, replies, roasts, and punchy takes. |
+| [`julian-writing`](skills/julian-writing/) | Julian Shapiro's Writing Well handbook condensed into a working method: novelty times resonance, hook-first intros, bad first drafts, and rewriting until a reader effortlessly reaches the end. |
 
 ### Games
 
