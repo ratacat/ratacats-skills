@@ -62,6 +62,7 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 | [`annas-archive-ebooks`](skills/annas-archive-ebooks/) | Finds book records, checks editions and formats, and uses a local Anna's Archive script to download ebooks when a membership key is available. |
 | [`conjecture-cascade`](skills/conjecture-cascade/) | Directional thinking engine: fires batches of probes through any bounded target — code, claims, plans, or ideas — and closes each probe with evidence or yield. |
 | [`graph-researcher`](skills/graph-researcher/) | Deep web research that stores sources, findings, relationships, contradictions, and open leads in a SQLite knowledge graph. |
+| [`ml-learning-methods`](skills/ml-learning-methods/) | Explains how machine-learning methods work, how they relate, and when to choose them, with a detailed BERT-to-MAE guide and cited research chapters. |
 | [`prediction-drill`](skills/prediction-drill/) | Vertical two-phase falsification loop for a single bug: rounds of five cheap-to-check predictions drill down to the root cause, then drill back up to a validated fix. |
 | [`probe-driven-design`](skills/probe-driven-design/) | Use the smallest useful probe to ground consequential decisions before uncertain detail hardens into design. |
 | [`show-usage`](skills/show-usage/) | Reads live quota windows across AI coding subscriptions and prints percent used and time to reset in a minimal fixed format. |

@@ -301,6 +301,30 @@
       "license": "MIT"
     },
     {
+      "name": "ml-learning-methods",
+      "source": "./skills/ml-learning-methods",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Explain, compare, or choose machine-learning objectives and learning regimes, including masked prediction, self-supervision, generative modeling, reinforcement learning, transfer, and classical methods. Use for ML learning-method questions and training-design tradeoffs; not routine model API usage or infrastructure debugging.",
+      "category": "tools",
+      "keywords": [
+        "machine-learning",
+        "self-supervised-learning",
+        "masked-language-modeling",
+        "masked-autoencoders",
+        "representation-learning",
+        "generative-modeling",
+        "reinforcement-learning"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
       "name": "name-review",
       "source": "./skills/name-review",
       "strict": false,

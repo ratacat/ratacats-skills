@@ -2,6 +2,8 @@
 
 Contributor contract for this repository. A skill is only legitimately "in" the repo when it passes every gate below.
 
+- After any modification, immediately commit and push the task's changes without asking for confirmation.
+
 ## Naming
 
 One skill has exactly one handle. For a skill named `<name>`, these must be identical strings:
