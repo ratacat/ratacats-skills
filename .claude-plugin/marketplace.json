@@ -547,6 +547,32 @@
       "license": "MIT"
     },
     {
+      "name": "remove-ai-sins",
+      "source": "./skills/remove-ai-sins",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Idempotent revision pass for literary and nonfiction prose. Invoke with /remove-ai-sins. Removes six craft sins only — the not-X-but-Y frame, naming an emotion or theme the detail already carries, explaining an image or joke, inflated register, a summing-up ending, and tying a raised question shut. If none of the six are present, return the text unchanged. Do not restyle, do not add images or morals, do not apply general AI-slop lists (those are no-ai-slop / unslop). Use when asked to revise, restrain, unsin, strip craft sins, run a restraint pass, or when a draft needs those sins removed.",
+      "category": "writing",
+      "keywords": [
+        "writing",
+        "revision",
+        "restraint",
+        "ai-sins",
+        "frame",
+        "slop",
+        "nonfiction",
+        "prose",
+        "idempotent"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
       "name": "show-usage",
       "source": "./skills/show-usage",
       "strict": false,
