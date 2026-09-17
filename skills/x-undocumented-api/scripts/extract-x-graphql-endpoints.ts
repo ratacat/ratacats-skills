@@ -122,6 +122,11 @@ function extractOperations(source: string, sourceScript: string): Operation[] {
 				/operationName:"([^"]+)",operationType:"([^"]+)",queryId:"([^"]+)"/g,
 			order: "operation-name-first",
 		},
+		{
+			regex:
+				/params:\{id:"([^"]+)",metadata:\{[^{}]*\},name:"([^"]+)",operationKind:"([^"]+)"/g,
+			order: "query-id-first",
+		},
 	] as const;
 
 	for (const pattern of patterns) {

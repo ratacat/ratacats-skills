@@ -1,8 +1,8 @@
 # remove-ai-sins
 
-Idempotent revision pass for literary and narrative nonfiction. Removes six craft sins and otherwise leaves the draft alone. A second run on the result is a no-op.
+Idempotent revision pass for literary and narrative nonfiction. Removes seven craft sins and otherwise leaves the draft alone. A second run on the result is a no-op.
 
-The six:
+The seven:
 
 - **frame** — "not X but Y" antithesis
 - **name** — labeling a feeling the detail already carries
@@ -10,6 +10,7 @@ The six:
 - **intensify** — inflating a moment that was written small
 - **summary** — a last sentence that moralizes
 - **resolve** — tying shut a question the text opened
+- **meta** — prose about the prose instead of the subject
 
 Good fits:
 

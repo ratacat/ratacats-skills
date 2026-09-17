@@ -179,6 +179,9 @@ The returned timeline IDs have an encoded category. Substituting `ai` or
 `BadRequest: invalid trending category`. Use advertised IDs. Do not equate
 transport success with a valid category or useful content.
 
+For text search and the separate Relay News/topic surface, read
+[Story search](story-search.md). Topic-based lookup is not verified keyword search.
+
 ## AI story enrichment
 
 AI trend links can use `twitter://trending/<id>`, not only
@@ -205,6 +208,67 @@ data.ai_trend_by_rest_id.result.trend_relevant_users.timeline
 
 Both tested IDs returned three `TimelineUser` entries with public user
 objects. Neither tested enrichment response had pagination cursors.
+
+### Story page and post feeds
+
+Verified September 5, 2026: the story page has a separate
+`AiTrendByRestId` read. Query ID `KhRAGEmnsniTdBG3OXeDhQ` was discovered in
+`bundle.LiveEvent`, not the main bundle. Refresh the lazy-chunk metadata
+before reuse.
+
+The current UI passes:
+
+```json
+{
+  "trendId": "<observed story ID>",
+  "includePromotedContent": false,
+  "withBirdwatchNotes": false,
+  "withVoice": false,
+  "withCommunity": false
+}
+```
+
+Response path: `data.ai_trend_by_rest_id.result`. Its `rest_id` identifies
+the story; `page` contained:
+- `article.title` and `article.article_text.text`: the headline and summary.
+- `last_updated_at_ms`: the returned story update time.
+- `disclaimer`: X's warning that the summary is generated from posts and can be wrong.
+- `post_timelines[]`: labels and opaque `post_timeline.id` values.
+- `available_actions`: empty in the sampled responses.
+
+All 14 current story pages returned Top and Latest timeline IDs. Read each
+advertised ID with `GenericTimelineById`, using `timelineId`, `count`,
+`withQuickPromoteEligibilityTweetFields: true`, and an optional returned
+`cursor`. The 28 first pages contained 452 distinct accessible post IDs.
+Six second-page reads across three stories returned additional posts.
+
+**Explore-tab pagination and story-post pagination differ.** Empty Explore
+continuations do not establish that story post feeds are shallow.
+`GenericTimelineById` serves both. The tested Top story feeds also included
+three `TimelineUser` items. Tweet slots can contain unavailable/protected
+placeholders; count accessible post IDs separately from slots and never
+treat unavailable placeholders as retrieved posts.
+
+The xpool manual probe permits `AiTrendByRestId`. Supply its discovered lazy
+`bundleUrl` so the reader can extract operation metadata.
+
+### Discovery display counts
+
+AI discovery items carry `social_context.text`, for example
+`Trending now · Entertainment · 1.3K posts`, plus profile-image URLs.
+The first normalized report omitted this field. Preserve it when parsing;
+category and age labels may be embedded in this same string.
+
+Displayed K/M post counts are rounded and have an unverified counting scope
+and time window. They are not hourly rates, daily totals, or geographic
+traffic measurements. Different story IDs can describe the same event, so
+do not sum their counts or equate unique IDs with distinct real-world events.
+
+Regional term objects do not include a list of geographic connections.
+Location belongs to the requested regional response. Following a term's
+search URL does not preserve that region as a post-location filter.
+Account-selected Explore stories are not proven US-only because the same
+session also requested the US WOEID list.
 
 ## Location and personalization
 

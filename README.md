@@ -74,7 +74,7 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 | --- | --- |
 | [`dianalokada`](skills/dianalokada/) | Switches the agent into Diana's sharp, blunt social voice, grounded in a real tweet corpus for posts, replies, roasts, and punchy takes. |
 | [`julian-writing`](skills/julian-writing/) | Julian Shapiro's Writing Well handbook condensed into a working method: novelty times resonance, hook-first intros, bad first drafts, and rewriting until a reader effortlessly reaches the end. |
-| [`remove-ai-sins`](skills/remove-ai-sins/) | Idempotent pass that removes six prose sins (antithesis frame, named feelings, glossed images, inflated register, moral endings, tied-off questions) and otherwise leaves the draft alone. |
+| [`remove-ai-sins`](skills/remove-ai-sins/) | Idempotent pass that removes seven prose sins (antithesis frame, named feelings, glossed images, inflated register, moral endings, tied-off questions, meta overload) and otherwise leaves the draft alone. |
 
 ### Games
 

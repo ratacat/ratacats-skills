@@ -202,13 +202,27 @@ Note: DDoS-Guard challenges scripted page fetches on deep paths after ~10 reques
 regardless of cookie freshness. Fetch pages through a real Chrome (CDP or headed) and
 reserve plain HTTP for `fast_download.json` + partner file bytes only.
 
+## DDoS-Guard on Search and Detail Pages
+
+Verified 2026-09-11: every mirror answers `/search` from a script with a DDoS-Guard check
+page (403 at `?check=1`). Plain HTTP, a cookie jar, and headless Chromium (`agent-browser`,
+even after a 25-second wait) all stay on the check page.
+
+What works is the nodriver stealth browser in `~/Projects/others/stealth-browser-mcp`, which
+opens a headed Chrome. `annas.py` falls back to it on any 403 page fetch, so `search` and
+`details` work as before, with a Chrome window per fetch. `fast_download.json` and the file
+bytes still work over plain HTTP with the key.
+
+If the fallback prints nothing, check that `~/Projects/others/stealth-browser-mcp/venv/bin/python`
+exists and can `import nodriver`.
+
 ## Mirror Fallback
 
-The `.org` domain is defunct. The script tries these mirrors in order:
+The `.org` domain is defunct. `.li` and `.pm` are parked pages that return 200 with no
+results, and `.in` does not answer. The script tries these mirrors in order:
 - annas-archive.gl (primary)
-- annas-archive.li
-- annas-archive.in
-- annas-archive.pm
+- annas-archive.gd
+- annas-archive.pk
 
 If all known mirrors fail, the script checks the status page at https://open-slum.pages.dev/ to discover new mirror domains automatically.
 

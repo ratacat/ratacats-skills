@@ -10,6 +10,7 @@ import argparse
 import json
 import os
 import re
+import subprocess
 import sys
 import urllib.request
 import urllib.parse
@@ -19,10 +20,26 @@ from pathlib import Path
 # Mirror domains in order of preference (.org is defunct)
 MIRROR_DOMAINS = [
     "annas-archive.gl",
-    "annas-archive.li",
-    "annas-archive.in",
-    "annas-archive.pm",
+    "annas-archive.gd",
+    "annas-archive.pk",
 ]
+
+STEALTH_PYTHON = Path.home() / "Projects/others/stealth-browser-mcp/venv/bin/python"
+
+BROWSER_FETCH = """
+import asyncio, sys, nodriver
+async def main():
+    browser = await nodriver.start()
+    page = await browser.get(sys.argv[1])
+    for _ in range(40):
+        await asyncio.sleep(1.5)
+        html = await page.get_content()
+        if '/md5/' in html:
+            break
+    browser.stop()
+    sys.stdout.write(html)
+nodriver.loop().run_until_complete(main())
+"""
 
 # Status page to discover new mirrors if all known ones fail
 MIRROR_DISCOVERY_URL = "https://open-slum.pages.dev/"
@@ -152,6 +169,10 @@ def fetch_url(url, headers=None):
                 return body
         except Exception:
             pass
+        if e.code == 403 and STEALTH_PYTHON.exists():
+            print("HTTP 403 (DDoS-Guard): fetching through stealth browser", file=sys.stderr)
+            result = subprocess.run([str(STEALTH_PYTHON), "-c", BROWSER_FETCH, url], capture_output=True, text=True, timeout=180)
+            return result.stdout or None
         print(f"HTTP Error {e.code}: {e.reason}", file=sys.stderr)
         return None
     except urllib.error.URLError as e:
@@ -192,7 +213,9 @@ def search_books(query, format_filter=None, sort_by_year=True, limit=10, verify=
     # Find all MD5 hashes
     md5s = list(dict.fromkeys(re.findall(r'/md5/([a-f0-9]{32})', html)))
 
-    for md5 in md5s[:limit]:
+    for md5 in md5s:
+        if len(results) >= limit:
+            break
         # Find context around this MD5
         idx = html.find(f'href="/md5/{md5}"')
         if idx == -1:

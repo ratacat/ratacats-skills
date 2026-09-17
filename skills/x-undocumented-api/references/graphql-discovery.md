@@ -11,6 +11,16 @@ queryId:"([^"]+)",operationName:"([^"]+)",operationType:"([^"]+)"
 operationName:"([^"]+)",operationType:"([^"]+)",queryId:"([^"]+)"
 ```
 
+Also recognize Relay persisted-operation metadata:
+
+```regex
+params:\{id:"([^"]+)",metadata:\{[^{}]*\},name:"([^"]+)",operationKind:"([^"]+)"
+```
+
+The extractor supports both formats. News/topic queries found in September 5
+lazy chunks used Relay metadata; an `operationName`-only scan missed them.
+See [story-search.md](story-search.md) for the bounded findings and callers.
+
 Use the bundled script:
 
 ```bash

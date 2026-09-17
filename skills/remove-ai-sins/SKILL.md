@@ -1,9 +1,9 @@
 ---
 name: remove-ai-sins
-description: Idempotent revision pass for literary and nonfiction prose. Invoke with /remove-ai-sins. Removes six craft sins only — the not-X-but-Y frame, naming an emotion or theme the detail already carries, explaining an image or joke, inflated register, a summing-up ending, and tying a raised question shut. If none of the six are present, return the text unchanged. Do not restyle, do not add images or morals, do not apply general AI-slop lists (those are no-ai-slop / unslop). Use when asked to revise, restrain, unsin, strip craft sins, run a restraint pass, or when a draft needs those sins removed.
+description: Idempotent revision pass for literary and nonfiction prose. Invoke with /remove-ai-sins. Removes seven craft sins only — the not-X-but-Y frame, naming an emotion or theme the detail already carries, explaining an image or joke, inflated register, a summing-up ending, tying a raised question shut, and prose about the prose instead of the subject. If none of the seven are present, return the text unchanged. Do not restyle, do not add images or morals, do not apply general AI-slop lists (those are no-ai-slop / unslop). Use when asked to revise, restrain, unsin, strip craft sins, run a restraint pass, or when a draft needs those sins removed.
 metadata:
   category: writing
-  blurb: Idempotent pass that removes six prose sins (antithesis frame, named feelings, glossed images, inflated register, moral endings, tied-off questions) and otherwise leaves the draft alone.
+  blurb: Idempotent pass that removes seven prose sins (antithesis frame, named feelings, glossed images, inflated register, moral endings, tied-off questions, meta overload) and otherwise leaves the draft alone.
   keywords:
     - writing
     - revision
@@ -18,11 +18,11 @@ metadata:
 
 # Remove AI sins
 
-One pass. Remove the six sins below. Touch nothing else.
+One pass. Remove the seven sins below. Touch nothing else.
 
 This is not a rewrite, not Julian's three-pass polish, not unslop. Those improve writing. This one only takes sins out. A second run on the result must be a no-op.
 
-The six sins are the restraint layer (`name`, `explain`, `intensify`, `summary`, `resolve`) plus the antithesis frame ("not this but that").
+The seven sins are the restraint layer (`name`, `explain`, `intensify`, `summary`, `resolve`) plus the antithesis frame ("not this but that") plus meta overload (prose about the prose).
 
 ## When
 
@@ -41,7 +41,7 @@ The six sins are the restraint layer (`name`, `explain`, `intensify`, `summary`,
 ## Contract
 
 1. Read the whole draft before touching a sentence. Summary and resolve only fire at an ending. Explain needs the image it would gloss. Frame needs to know whether the denied X carries a fact.
-2. Edit only spans that match a sin below. Prefer replace over cut for `frame`, `name`, `intensify`. Cut for `explain`, `summary`, `resolve`.
+2. Edit only spans that match a sin below. Prefer replace over cut for `frame`, `name`, `intensify`. Cut for `explain`, `summary`, `resolve`, `meta`. Replace for `meta` only when the staging carries a real claim the neighbors do not.
 3. Keep content, order, voice, and claims. Word count may drop when a gloss or ending is cut. Never pad.
 4. If a passage has no sin, leave it. Including every sentence of a paragraph that has a sin in only one sentence.
 5. Stop. Do not "while you're at it" tighten, vary rhythm, swap synonyms, or fix commas.
@@ -512,11 +512,86 @@ Crested caracaras in Patagonia are said to spread wildfires by dropping burning 
 
 "Are said to" is the open thing. Do not close it. Do not rehabilitate them in the last sentence.
 
+## meta
+
+A sentence about the prose instead of the subject. "That is where the simple sentence ends and the useful one begins." "They are the finding." "So much for the map; now for the clock." The subject of the sentence is the draft itself: what was said, what comes next, which part matters. Delete it and let the announced sentence do the work. Some meta is load-bearing navigation in long exposition; this sin is the overload, the staging that carries no information the neighbors do not.
+
+Fix is cut, or shrink to the real claim when the staging carries one the neighbors lack. "The best evidence comes from the places where the simple story strained" keeps its claim and loses its staging. If deletion would strand the reader or remove a fact, it is navigation, not overload. Leave it.
+
+Not a meta sin: a sentence that says what the next passage will do when the passage needs it ("Three burns per life period follow, from childhood to adulthood"). A heading or caption. A first-person admission that does narrative work ("I went to Greece to write about freediving"). `explain` glosses backward, what the image meant; `meta` glosses forward or sideways, what the prose is doing. When both fit, `meta` wins if the sentence is about the draft, `explain` if it is about the world.
+
+### 1 — where the simple sentence ends
+
+Ultraviolet radiation in sunlight causes most cutaneous melanoma. A global model attributed 267,353 of the 331,722 melanomas estimated for 2022 to UV, about four in five.
+
+**Sin**
+
+That is where the simple sentence ends and the useful one begins: the exposure that matters most is intense, intermittent, and burning, on skin that tans poorly.
+
+**Revised**
+
+The exposure that matters most is intense, intermittent, and burning, on skin that tans poorly.
+
+The staging names two sentences and adds no fact. The useful sentence survives on its own.
+
+### 2 — they are the finding
+
+The short answer assumes all sun exposure is the same exposure. It assumes all people respond to it the same way. It assumes all melanomas are the same tumor.
+
+**Sin**
+
+None of those is close to true, and the corrections are not footnotes. They are the finding.
+
+**Revised**
+
+None of those is close to true.
+
+The second sentence judges the paragraph's own importance. Cut it; the paragraph already said the thing.
+
+### 3 — the key to everything that follows
+
+For lentigo maligna, the slow tumor of weathered faces, the same data ran the other way. There, risk tracked the whole length of a life outdoors.
+
+**Sin**
+
+That split is the key to almost everything that follows. Melanoma is at least two diseases wearing one name, and they keep different time.
+
+**Revised**
+
+Melanoma is at least two diseases wearing one name, and they keep different time.
+
+The first sentence announces the importance of the sentence beside it. The sentence beside it is the importance.
+
+### 4 — shrink to the claim
+
+In 1985 the Buffalo study found that light-complexioned men with the most lifetime hours in the sun had a fraction of the melanoma risk of men with the least.
+
+**Sin**
+
+The best evidence for each correction comes from the places where the simple story visibly strained: the studies that seemed to let the sun off the hook.
+
+**Revised**
+
+The studies that seemed to let the sun off the hook are the ones to take seriously first.
+
+The staging carried a real claim about where to look. Keep the claim, drop the draft talking about itself.
+
+### 5 — navigation stays
+
+A methods section has named three exposure classes: remembered summers, job titles, place-level light. The next three paragraphs take them in order.
+
+Not a sin. This sentence is navigation, and the paragraphs below need it:
+
+Remembered summers came first, in the case-control interviews of the early eighties. Job titles came next, in the occupational cohorts. Place-level light came last, in the registry comparisons.
+
+A roadmap that tells the reader where a long passage is going is allowed. Meta fires only when the sentence can be deleted without stranding anyone.
+
 ---
+
 
 ## Idempotence example
 
-Run the pass on this. It has none of the six.
+Run the pass on this. It has none of the seven.
 
 Even now, when you can fly the length of Darwin's five-year odyssey in two days, Tierra del Fuego's fog-bound channels are seldom visited, largely inaccessible, and since the demise of the Amerindians who lived there for thousands of years, unpeopled. Ships occasionally use them to shelter from the mighty Pacific swells, but almost no one lingers. Nor do the winds.
 
@@ -539,14 +614,14 @@ Even now, when you can fly the length of Darwin's five-year odyssey in two days,
 - **Endings only at endings.** `summary` and `resolve` do not fire mid-stretch. If you cut a moral in paragraph two, you invented a sin.
 - **Frame is antithesis, not every but.** "They mapped the coast, but the real job was company" is a partition. Leave it.
 - **Quoted feelings stay.** Darwin's "wonder, astonishment, and devotion" is his sentence, not yours to un-name.
-- **No padding.** The DPO editor was told to keep 88% of the words and started inventing images to make up length. Never do that.
+- **Meta is overload, not all navigation.** Some prose about the prose is load-bearing. Fire only when deletion loses nothing and strands nobody. A roadmap a long passage needs stays.
 - **One sin per span, worst one if several fire.** At an ending, `resolve` beats `summary` when the open thing is a question the text raised. `intensify` beats `summary` when the refusal is the register of the last sentence. `name` beats `summary` at a paragraph end when the refusal is a specific unnamed feeling.
 - **Do not run unslop in the same pass.** Banned-word lists will eat "tapestry" in a rug and "foster" in a foster parent. Different job.
 
 ## Workflow
 
 1. Read the whole draft.
-2. Walk it once, marking candidate spans against the six. When unsure, leave it.
+2. Walk it once, marking candidate spans against the seven. When unsure, leave it.
 3. Edit only those spans, smallest change.
 4. Re-read the result as if it were the input. If you would edit again, you overshot.
 5. Emit `SINS:` then the full draft.

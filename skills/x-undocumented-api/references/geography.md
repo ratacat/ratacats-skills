@@ -53,6 +53,13 @@ returned 45 rows. It did not replace them to reach 50.
 `id=0` returned HTTP 404 with JSON code 34, `Sorry, that page does not exist.`
 This is a content/identifier error, not an empty transaction-ID failure.
 
+September 5 follow-up (20:29–20:33 UTC): US, Japan, Australia, and Canada
+returned 50 rows each; Australia had 49 distinct terms because
+`#aflcrowsdogs` appeared twice. China was absent from the fetched
+`TrendLocations` catalogue; `PlaceTrends` with China WOEID `23424781` returned
+code 34. Do not substitute another region or claim that this means no Chinese
+conversation exists. These are observations of this endpoint's coverage.
+
 ## Resolve coordinates
 
 ```text

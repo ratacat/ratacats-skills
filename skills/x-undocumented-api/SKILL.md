@@ -35,6 +35,7 @@ Read only what the task needs:
 - [endpoint-patterns.md](references/endpoint-patterns.md): request/response shapes for SearchTimeline, user/list/follower/tweet timelines, timeline instructions, and search operators.
 - [community-timelines.md](references/community-timelines.md): X Communities operations, variables, ranking modes, response paths, and community-search caveats.
 - [trends-and-explore.md](references/trends-and-explore.md): authenticated trend collection, Explore tabs, topic aliases, story history, locations, personalization, and measured count/cursor limits.
+- [story-search.md](references/story-search.md): story-search limits, official News search versus web access, and Relay news/topic operations missed by older inventories.
 - [geography.md](references/geography.md): working per-request WOEID trends, coordinate lookup, city/country overlap, location-name ambiguity, and geography controls.
 - [geographic-post-search.md](references/geographic-post-search.md): keyword and place-tag searches, cursor depth, volume measurement, query-window omissions, and historical city-filter false negatives.
 - [cursor-behavior.md](references/cursor-behavior.md): X timeline cursor semantics, pagination risks, fan-out caveats, and evidence standards.
@@ -105,6 +106,8 @@ The transaction ID path must include the query ID:
 - Preserve `groupedTrends` aliases separately from ranked parent trends. Three sampled accounts produced 122 distinct parent trends and 144 terms including aliases. Account rotation added little in that sample.
 - A returned or changed cursor does not prove more data exists. All five Explore tab continuations returned no content; the guide's `DefaultBottomCursorValue` also returned an empty page. Stop on zero new items.
 - `TrendHistory` returns timestamped story summaries, not volume history. `TrendRelevantUsers` returned three users per tested AI trend. Neither supplies a posts-per-hour baseline.
+- Full story pages use `AiTrendByRestId`, discovered in lazy `bundle.LiveEvent`. Its `page` returns the summary, update time, and Top/Latest post timeline IDs. Read those with `GenericTimelineById`; story-feed pagination returned more posts even when Explore-tab pagination was empty. See the Trends reference for variables and response paths.
+- AI story discovery items carry `social_context.text` with displayed age/category/post counts. Preserve that field; rounded counts have no verified time window and are not geographic traffic totals.
 - For per-request geographic trends, `GET /i/api/1.1/trends/place.json?id=<WOEID>` works with authorized web sessions. September 5 probes across 16 cities/countries/worldwide yielded 321 distinct names. This does not require changing Explore settings. `trends/closest.json` maps `lat` and `long` to a supported WOEID.
 - Location discovery uses both WOEIDs and separate signed-string `place_id` values. Their catalogues differ. Request-only location overrides failed to establish control on `guide`, but the separate `trends/place` reader works. Keep all account-settings mutations outside read-only probes.
 - The bundle extractor now starts at `https://x.com/explore`. The logged-out homepage uses a different `x-web` app. Public webpack runtime maps can reveal lazy bundles without login; derive filenames from the current resolver.
