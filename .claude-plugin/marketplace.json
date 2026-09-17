@@ -234,6 +234,30 @@
       "license": "MIT"
     },
     {
+      "name": "jev",
+      "source": "./skills/jev",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Build with Jev, TypeSafe's System One model — fast structured judgments (Choice, Score, Noul) that code consumes directly. Use when replacing fragile parsing or prompt-and-parse LLM steps with typed decisions, or when designing routing, ranking, classification, extraction, verification, or guardrail flows on the TypeSafe API.",
+      "category": "developer tools",
+      "keywords": [
+        "typesafe",
+        "system-one",
+        "structured-output",
+        "classification",
+        "llm-api",
+        "confidence",
+        "routing"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
       "name": "julian-writing",
       "source": "./skills/julian-writing",
       "strict": false,

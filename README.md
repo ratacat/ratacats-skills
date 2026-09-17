@@ -38,6 +38,7 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 | [`ebook-extractor`](skills/ebook-extractor/) | Extract plain text from EPUB, MOBI, and PDF files with local Python tools so agents can search, quote, or analyze book content. |
 | [`failure-modes`](skills/failure-modes/) | A systematic code-review checklist for finding hidden bugs, stale contracts, weak tests, drift, duplication, and quiet failure paths. |
 | [`gpt-pro-loop`](skills/gpt-pro-loop/) | Run a local revision loop that packages project context for GPT Pro review, maps critiques into issues, verifies fixes, and assesses the goal. |
+| [`jev`](skills/jev/) | Builds features on TypeSafe's Jev model — typed Choice/Score/Noul judgments with calibrated probabilities that code branches on directly, no text parsing. |
 | [`medium-paywall-bypass`](skills/medium-paywall-bypass/) | Fetch readable Medium or Medium-hosted article text through mirror routes so an agent can summarize, compare, or discuss the content. |
 | [`name-review`](skills/name-review/) | Boundary-first naming review that maps concepts before recommending small, evidence-backed renames for code, plans, schemas, and docs. |
 | [`no-process-porn`](skills/no-process-porn/) | Detects when agent process is substituting for delivery and redirects the work into the smallest concrete next action. |
