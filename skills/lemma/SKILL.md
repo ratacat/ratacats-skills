@@ -59,24 +59,27 @@ Each evidence link also gets `bears`, from -1 (strongly undermines) to 1 (strong
 
 ## Loop
 
-1. **Frame.** Write the root claim. Add the strongest rival claims.
-2. **Split.** Add claims under each claim. The `atomic` score is a hint. You decide when a claim is small enough: one observation or one source could settle it.
-3. **Investigate.** Pick a claim from `frontier`. Search for evidence against it, then for it. Add evidence items and link them. Read sources yourself; do not trust search summaries.
-4. **Judge.** `python3 lemma.py judge <name> <id>`. Follow `next`:
-   - `investigate`: credence is between 0.2 and 0.8, or Jev is not sure. Get more or better evidence.
-   - `find primary evidence`: every linked item is `secondary` or `testimony`.
-   - `settled`: move up.
-5. **Propagate.** Judge each parent again after its children change.
-6. **Report.** Show the graph. List what is probably true, what is probably false, and what is still open.
+1. **Frame.** Write the root claim and the strongest rivals. Link them.
+2. **Next.** Run `python3 lemma.py next <name>`. It prints the shape of the graph and a ranked list of steps. Do step 1. Run `next` again. Repeat.
+3. **Report.** When you stop, show the graph. List what is probably true, what is probably false, and what is still open.
+
+`next` gives four actions:
+
+- **research**: find evidence for a claim. Search for evidence against it first. Prefer a find, a primary document, or a measurement. Read sources yourself; do not trust search summaries.
+- **break down**: split a claim into smaller claims below it. The `atomic` score is a hint. You decide when a claim is small enough: one observation or one source could settle it.
+- **expand**: add claims the graph is missing: premises, rivals, or a link for an orphan claim.
+- **judge**: get a new credence from Jev after the evidence or the claims below it change.
+
+Ranking: judge first, then claims closer to the root and closer to 0.5. You can do a different step if you have a reason. Say what the reason is.
 
 ## Commands
 
 `lemma.py` is in this skill's folder.
 
 ```bash
-python3 lemma.py show <name>       # the pyramid, from the root down
-python3 lemma.py frontier <name>   # open claims and claims between 0.2 and 0.8
+python3 lemma.py next <name> [k]   # graph shape and the top k steps (default 5)
 python3 lemma.py judge <name> <id> # one Jev call: credence, atomic, and bears for each linked evidence item
+python3 lemma.py show <name>       # the pyramid, from the root down
 ```
 
 Needs `TYPESAFE_API_KEY`. For large graphs, judging many claims in parallel with Python's `ThreadPoolExecutor` is a possible future step.
