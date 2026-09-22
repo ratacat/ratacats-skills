@@ -22,6 +22,9 @@ A question becomes a pyramid of claims. The root is the claim we want to settle.
 - You do not know the answer. Act as if you do not.
 - "Experts say X" is evidence that experts say X. It is not evidence of X. Record who says it and what they could observe.
 - Look for evidence against a claim before evidence for it.
+- Ask how much more expected the evidence is if the claim is true than if a rival is true. Evidence that every rival also predicts is weak.
+- Compare with a base rate. "Only 2 kings were found in their pyramids" means little until you know how often kings are found in tombs that are certainly tombs.
+- To state a rate, count the cases into one tally evidence item. Jev weighs examples; it does not count them.
 - Prefer a physical find, a primary document, or a measurement over a summary of one.
 - Many claims will never be proven. A credence is the result, not a step toward proof.
 - A false claim is a result. Keep it. An unexamined claim is a gap. Name it.
@@ -51,7 +54,7 @@ File: `~/.lemma/<name>.json` (set `LEMMA_HOME` to change the folder).
 - To reword a claim, push the old text onto its `was` list. Do not delete it.
 - One evidence item is one finding from one source. Link it to every claim it bears on.
 - Edge types, read `from <type> to`:
-  - `required_by`: if `from` is false, `to` falls. Code caps `to` at the credence of `from`. Use it only for true necessity.
+  - `required_by`: if `from` is false, `to` falls. Code caps `to` at the credence of `from`. Use it only for a necessary premise that a rival disputes.
   - `sufficient_for`: if `from` is true, `to` is true. Code raises `to` to at least the credence of `from`. Use it for "one case proves it".
   - `supports`, `undermines`: evidence-like weight. Jev weighs these.
   - Rival hypotheses link to the root with `undermines`.

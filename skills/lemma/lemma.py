@@ -12,12 +12,12 @@ CREDENCE = {
     "instructions": "How probable `claim` is, judged only from `evidence` and `linked_claims` in state, not from outside knowledge. A source that asserts something is not proof of it unless the source had direct access to the fact. Thin or second-hand evidence cannot reach the ends of the scale.",
     "criteria": [
         "Established false: direct, independent evidence rules the claim out",
-        "Probably false: good evidence against it and little for it",
-        "Leans false: some evidence against it, but thin or second-hand",
+        "Probably false: good evidence against it and little for it, from direct observation or from several independent sources that report observations",
+        "Leans false: some evidence against it, but thin, or one second-hand source",
         "No lean: no evidence, evidence that is balanced, or only bare assertion",
-        "Leans true: some evidence for it, but thin or second-hand",
-        "Probably true: good evidence for it and little against it",
-        "Established true: direct, independent evidence confirms the claim",
+        "Leans true: some evidence for it, but thin, or one second-hand source",
+        "Probably true: good evidence for it and little against it, from direct observation or from several independent sources that report observations",
+        "Established true: direct, independent, repeated observation confirms the claim",
     ],
 }
 ATOMIC = {
@@ -72,7 +72,7 @@ def judge(name, cid):
     ev = {ref["id"]: g["evidence"][ref["id"]] for ref in c["evidence"]}
     questions = {"credence": CREDENCE, "atomic": ATOMIC}
     for eid in ev:
-        questions[f"bears_{eid}"] = {"type": "score", "instructions": f"How `evidence.{eid}` bears on `claim`.", "criteria": BEARS}
+        questions[f"bears_{eid}"] = {"type": "score", "instructions": f"How `evidence.{eid}` bears on `claim`. Evidence that would be just as expected if the claim were false does not bear on it.", "criteria": BEARS}
     a = jev({"claim": c["text"], "evidence": ev, "linked_claims": linked_claims(g, cid)}, questions)
     for ref in c["evidence"]:
         ref["bears"] = round(a[f"bears_{ref['id']}"]["score"] / 2 - 1, 2)
