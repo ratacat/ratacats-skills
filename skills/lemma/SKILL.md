@@ -43,7 +43,7 @@ File: `~/.lemma/<name>.json` (set `LEMMA_HOME` to change the folder).
     "n0": {"text": "...", "evidence": [{"id": "e1"}]}
   },
   "evidence": {
-    "e1": {"source": "citation or URL", "says": "...", "kind": "find|primary|measurement|secondary|testimony", "access": "how the source could know this"}
+    "e1": {"source": "citation or URL", "says": "...", "origin": "the underlying source, e.g. Lehner 1997", "kind": "find|primary|measurement|secondary|testimony", "access": "how the source could know this"}
   },
   "edges": [{"from": "n1", "to": "n0", "type": "required_by"}]
 }
@@ -53,6 +53,7 @@ File: `~/.lemma/<name>.json` (set `LEMMA_HOME` to change the folder).
 - Say "as a rule" or "some" when you mean it. A claim about every case falls to one exception.
 - To reword a claim, push the old text onto its `was` list. Do not delete it.
 - One evidence item is one finding from one source. Link it to every claim it bears on.
+- `origin` names the underlying source, not the website. A Wikipedia page that summarizes Lehner has origin Lehner. `next` warns when half the evidence under a claim shares one origin.
 - Edge types, read `from <type> to`:
   - `required_by`: if `from` is false, `to` falls. Code caps `to` at the credence of `from`. Use it only for a necessary premise that a rival disputes.
   - `sufficient_for`: if `from` is true, `to` is true. Code raises `to` to at least the credence of `from`. Use it for "one case proves it".
@@ -68,7 +69,7 @@ Each evidence link also gets `bears`, from -1 (strongly undermines) to 1 (strong
 
 ## Loop
 
-1. **Frame.** Write the root claim and the strongest rivals. Link them.
+1. **Frame.** Write the root claim and the strongest rivals. Link them. Settling the root must answer the question as asked. Check for a shift between intent and outcome, possible and actual, some and all, or one case and the rule. `next` prints the question above the root on every loop so drift stays visible.
 2. **Next.** Run `python3 lemma.py next <name>`. It prints the shape of the graph and a ranked list of steps. Do step 1. Run `next` again. Repeat.
 3. **Report.** When you stop, show the graph. List what is probably true, what is probably false, and what is still open.
 

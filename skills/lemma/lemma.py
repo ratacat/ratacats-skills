@@ -142,6 +142,22 @@ def leverage(g):
     return lev
 
 
+def origin(e):
+    return e.get("origin") or e["source"].split(",")[0]
+
+
+def support_evidence(g, cid, seen=None):
+    seen = seen if seen is not None else set()
+    if cid in seen:
+        return set()
+    seen.add(cid)
+    ids = {r["id"] for r in g["claims"][cid]["evidence"]}
+    for e in g["edges"]:
+        if e["to"] == cid and e["type"] != "undermines":
+            ids |= support_evidence(g, e["from"], seen)
+    return ids
+
+
 def steps(g, name):
     claims, d, lev = g["claims"], depths(g), leverage(g)
     judge = lambda cid: f"Run `lemma.py judge {name} {cid}`."
@@ -172,6 +188,10 @@ def steps(g, name):
             yield reach * 0.8, cid, "break down", f"atomic {j['atomic']:.2f}: it may assert more than one thing", BREAK_DOWN
         if ev and all(e["kind"] in SECONDHAND for e in ev):
             yield reach * 0.6, cid, "research", "all linked evidence is second-hand", "Trace the sources back to a find, a primary document, or a measurement."
+        under = [origin(g["evidence"][i]) for i in support_evidence(g, cid)]
+        top = max(set(under), key=under.count) if under else None
+        if kids and len(under) >= 4 and under.count(top) * 2 >= len(under):
+            yield reach * 0.5, cid, "research", f"{under.count(top)} of {len(under)} evidence items under it trace to {top}", "Find sources independent of that origin."
         bears = [r.get("bears", 0) for r in c["evidence"]]
         if j and ev and (cr >= 1 - SETTLED and min(bears) >= 0 or cr <= SETTLED and max(bears) <= 0):
             yield reach * 0.3, cid, "research", f"credence {cr:.2f} rests on one-sided evidence", "Search for the strongest evidence the other way."
@@ -183,7 +203,9 @@ def next_steps(name, k="5"):
     judged = [cr for cr in crs if cr is not None]
     settled = sum(cr <= SETTLED or cr >= 1 - SETTLED for cr in judged)
     print(f"{name}: {len(crs)} claims ({len(crs) - len(judged)} open, {len(judged) - settled} unsettled, {settled} settled), {len(g['evidence'])} evidence items, depth {max(depths(g).values())}")
+    print(f"question: {g['question']}")
     print(f"root [{label(g['claims'][g['root']])}] {g['claims'][g['root']]['text']}")
+    print("check: settling the root must answer the question, with no shift between intent and outcome, some and all, or possible and actual.")
     merged = {}
     for pri, cid, action, why, do in sorted(steps(g, name), key=lambda s: -s[0]):
         m = merged.setdefault((cid, action), [pri, [], []])
