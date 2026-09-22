@@ -328,6 +328,29 @@
       "license": "MIT"
     },
     {
+      "name": "lemma",
+      "source": "./skills/lemma",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Answer a hard question by building a persistent graph of atomic claims, each given a 0-1 credence by Jev from a shared evidence ledger. Keeps false and unexamined claims. Use for research questions, codebase questions, hypothesis testing, or any claim that needs careful, skeptical support.",
+      "category": "tools",
+      "keywords": [
+        "research",
+        "hypothesis",
+        "evidence",
+        "credence",
+        "epistemics",
+        "jev"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
       "name": "medium-paywall-bypass",
       "source": "./skills/medium-paywall-bypass",
       "strict": false,
