@@ -61,7 +61,7 @@ def jev(state, questions):
     req = urllib.request.Request(
         "https://api.typesafe.ai/v1/systemone",
         data=json.dumps({"model": "jev-latest", "state": state, "questions": questions}).encode(),
-        headers={"Authorization": f"Bearer {os.environ['TYPESAFE_API_KEY']}", "Content-Type": "application/json"},
+        headers={"Authorization": f"Bearer {os.environ['TYPESAFE_API_KEY']}", "Content-Type": "application/json", "User-Agent": "lemma"},
     )
     return json.load(urllib.request.urlopen(req))["answers"]
 
