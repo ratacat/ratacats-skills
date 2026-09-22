@@ -47,13 +47,19 @@ File: `~/.lemma/<name>.json` (set `LEMMA_HOME` to change the folder).
 ```
 
 - A claim can be true or false. Write a question as the claim that would answer it.
+- Say "as a rule" or "some" when you mean it. A claim about every case falls to one exception.
+- To reword a claim, push the old text onto its `was` list. Do not delete it.
 - One evidence item is one finding from one source. Link it to every claim it bears on.
-- Edge types, read `from <type> to`: `required_by` (if `from` is false, `to` falls), `supports`, `undermines`. Rival hypotheses link to the root with `undermines`.
+- Edge types, read `from <type> to`:
+  - `required_by`: if `from` is false, `to` falls. Code caps `to` at the credence of `from`. Use it only for true necessity.
+  - `sufficient_for`: if `from` is true, `to` is true. Code raises `to` to at least the credence of `from`. Use it for "one case proves it".
+  - `supports`, `undermines`: evidence-like weight. Jev weighs these.
+  - Rival hypotheses link to the root with `undermines`.
 - A claim can have many parents. The graph is a DAG, not a tree.
 
 ## Credence
 
-One number from 0 to 1. 0 = established false, 0.5 = no lean, 1 = established true. Thin or second-hand evidence cannot reach the ends. So the strength of the evidence is part of the number. A claim without a judgment shows `open`.
+One number from 0 to 1. 0 = established false, 0.5 = no lean, 1 = established true. Thin or second-hand evidence cannot reach the ends. So the strength of the evidence is part of the number. A claim without a judgment shows `open`. `judged.jev` is Jev number before the `required_by` and `sufficient_for` bounds.
 
 Each evidence link also gets `bears`, from -1 (strongly undermines) to 1 (strongly supports).
 
@@ -70,7 +76,7 @@ Each evidence link also gets `bears`, from -1 (strongly undermines) to 1 (strong
 - **expand**: add claims the graph is missing: premises, rivals, or a link for an orphan claim.
 - **judge**: get a new credence from Jev after the evidence or the claims below it change.
 
-Ranking: judge first, then claims closer to the root and closer to 0.5. You can do a different step if you have a reason. Say what the reason is.
+Ranking: judge first (deepest claims first), then by leverage on the root and closeness to 0.5. `required_by` passes full leverage, `sufficient_for` passes the room its parent has left to rise, `supports` and `undermines` pass half. You can do a different step if you have a reason. Say what the reason is.
 
 ## Commands
 

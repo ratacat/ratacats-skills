@@ -76,9 +76,12 @@ def judge(name, cid):
     a = jev({"claim": c["text"], "evidence": ev, "linked_claims": linked_claims(g, cid)}, questions)
     for ref in c["evidence"]:
         ref["bears"] = round(a[f"bears_{ref['id']}"]["score"] / 2 - 1, 2)
+    raw = round(a["credence"]["score"] / 6, 2)
+    bound = lambda kind: [credence(g["claims"][e["from"]]) for e in g["edges"] if e["to"] == cid and e["type"] == kind and credence(g["claims"][e["from"]]) is not None]
     j = {
         "at": datetime.now().isoformat(timespec="milliseconds"),
-        "credence": round(a["credence"]["score"] / 6, 2),
+        "credence": min([max([raw, *bound("sufficient_for")]), *bound("required_by")]),
+        "jev": raw,
         "confidence": a["credence"]["confidence"],
         "atomic": a["atomic"]["noul"],
     }
@@ -124,8 +127,23 @@ def depths(g):
     return d
 
 
+def leverage(g):
+    lev = {g["root"]: 1.0}
+    changed = True
+    while changed:
+        changed = False
+        for e in g["edges"]:
+            if e["to"] in lev:
+                weight = {"required_by": 1, "sufficient_for": 1 - (credence(g["claims"][e["to"]]) or 0)}.get(e["type"], 0.5)
+                v = lev[e["to"]] * weight
+                if v > lev.get(e["from"], 0):
+                    lev[e["from"]] = v
+                    changed = True
+    return lev
+
+
 def steps(g, name):
-    claims, d = g["claims"], depths(g)
+    claims, d, lev = g["claims"], depths(g), leverage(g)
     judge = lambda cid: f"Run `lemma.py judge {name} {cid}`."
     if not any(e["to"] == g["root"] and e["type"] == "undermines" for e in g["edges"]):
         yield 3, g["root"], "expand", "the root has no rival", "Add the strongest rival hypothesis with an `undermines` edge to the root."
@@ -136,17 +154,18 @@ def steps(g, name):
         j, cr = c.get("judged"), credence(c)
         kids = [e["from"] for e in g["edges"] if e["to"] == cid]
         ev = [g["evidence"][r["id"]] for r in c["evidence"]]
-        reach = 0.5 ** d[cid]
+        reach = lev[cid]
         doubt = 1 if cr is None else 1 - abs(2 * cr - 1)
         if j and (any("bears" not in r for r in c["evidence"]) or any((claims[k].get("judged") or {}).get("at", "") > j["at"] for k in kids)):
-            yield 2, cid, "judge", "evidence or linked claims changed after the last judgment", judge(cid)
+            yield 2 + d[cid] / 100, cid, "judge", "evidence or linked claims changed after the last judgment", judge(cid)
         elif not j and (ev or any(credence(claims[k]) is not None for k in kids)):
-            yield 2, cid, "judge", "has evidence or judged claims below it, but no credence", judge(cid)
+            yield 2 + d[cid] / 100, cid, "judge", "has evidence or judged claims below it, but no credence", judge(cid)
         elif not ev and not kids:
             yield reach, cid, "research", "no evidence and no claims below it", RESEARCH
         elif j and SETTLED < cr < 1 - SETTLED:
             if kids and all(credence(claims[k]) is not None for k in kids):
-                yield reach * doubt, cid, "expand", f"credence {cr:.2f} is not settled by the claims below it", EXPAND
+                firm = all(not SETTLED < credence(claims[k]) < 1 - SETTLED for k in kids)
+                yield reach * doubt * (1 if firm else 0.5), cid, "expand", f"credence {cr:.2f} is not settled; the claims below it may not be enough", EXPAND
             elif not kids:
                 yield reach * doubt, cid, "research", f"credence {cr:.2f} is not settled", RESEARCH
         if j and j["atomic"] < 0.5 and not kids:
@@ -165,9 +184,14 @@ def next_steps(name, k="5"):
     settled = sum(cr <= SETTLED or cr >= 1 - SETTLED for cr in judged)
     print(f"{name}: {len(crs)} claims ({len(crs) - len(judged)} open, {len(judged) - settled} unsettled, {settled} settled), {len(g['evidence'])} evidence items, depth {max(depths(g).values())}")
     print(f"root [{label(g['claims'][g['root']])}] {g['claims'][g['root']]['text']}")
-    ranked = sorted(steps(g, name), key=lambda s: -s[0])[: int(k)]
-    for i, (_, cid, action, why, do) in enumerate(ranked, 1):
-        print(f"{i}. {action} {cid}: {g['claims'][cid]['text']}\n   why: {why}\n   do: {do}")
+    merged = {}
+    for pri, cid, action, why, do in sorted(steps(g, name), key=lambda s: -s[0]):
+        m = merged.setdefault((cid, action), [pri, [], []])
+        m[1].append(why)
+        m[2].append(do)
+    ranked = sorted(merged.items(), key=lambda kv: -kv[1][0])[: int(k)]
+    for i, ((cid, action), (_, whys, dos)) in enumerate(ranked, 1):
+        print(f"{i}. {action} {cid}: {g['claims'][cid]['text']}\n   why: {'; '.join(whys)}\n   do: {' '.join(dos)}")
 
 
 if __name__ == "__main__":
