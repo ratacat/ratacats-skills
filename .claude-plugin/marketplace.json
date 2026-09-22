@@ -97,6 +97,29 @@
       "license": "MIT"
     },
     {
+      "name": "crystallize",
+      "source": "./skills/crystallize",
+      "strict": false,
+      "skills": [
+        "./"
+      ],
+      "description": "Use when asked to crystallize a workflow, skill, codebase, or agent runs, or to find where agents repeatedly rediscover methods, apply stable rules, or do unnecessary work. Analysis of opportunities to replace repeated agent effort with reusable procedures; not a general code cleanup or an automatic implementation run.",
+      "category": "developer tools",
+      "keywords": [
+        "crystallize",
+        "workflow-distillation",
+        "repeated-reasoning",
+        "agent-workflows",
+        "automation",
+        "cost-reduction"
+      ],
+      "author": {
+        "name": "Jared Smith",
+        "url": "https://github.com/ratacat"
+      },
+      "license": "MIT"
+    },
+    {
       "name": "dianalokada",
       "source": "./skills/dianalokada",
       "strict": false,

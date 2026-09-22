@@ -35,6 +35,7 @@ Use the skill `name` from the table below as the `--skill` value (it matches the
 | Skill | What it does |
 | --- | --- |
 | [`clarify`](skills/clarify/) | Turns fuzzy repos, plans, diffs, or issue sets into clearer findings, fixes, names, and acceptance criteria using an evidence-first review chain. |
+| [`crystallize`](skills/crystallize/) | Finds repeated agent work that can be removed or turned into reusable procedures, with evidence, exception conditions, and a small first change. |
 | [`ebook-extractor`](skills/ebook-extractor/) | Extract plain text from EPUB, MOBI, and PDF files with local Python tools so agents can search, quote, or analyze book content. |
 | [`failure-modes`](skills/failure-modes/) | A systematic code-review checklist for finding hidden bugs, stale contracts, weak tests, drift, duplication, and quiet failure paths. |
 | [`gpt-pro-loop`](skills/gpt-pro-loop/) | Run a local revision loop that packages project context for GPT Pro review, maps critiques into issues, verifies fixes, and assesses the goal. |
