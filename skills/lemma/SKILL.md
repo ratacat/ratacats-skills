@@ -63,7 +63,17 @@ File: `~/.lemma/<name>.json` (set `LEMMA_HOME` to change the folder).
 
 ## Credence
 
-One number from 0 to 1. 0 = established false, 0.5 = no lean, 1 = established true. Thin or second-hand evidence cannot reach the ends. So the strength of the evidence is part of the number. A claim without a judgment shows `open`. `judged.jev` is Jev number before the `required_by` and `sufficient_for` bounds.
+One number from 0 to 1. 0 = established false, 0.5 = no lean, 1 = established true. A claim without a judgment shows `open`.
+
+- **Leaf claims:** Jev scores the claim from its own evidence. Thin or second-hand evidence cannot reach the ends.
+- **Parent claims:** code computes the number. Nobody asks Jev the parent question directly.
+  1. Jev scores the parent from its own evidence only (`local`).
+  2. Jev gives each `supports` or `undermines` edge a weight from -1 to 1: how the child would bear on the parent if true. A child that a rival also predicts gets about 0.
+  3. Each child adds `weight x log-odds(child)`, only when the child leans true. A false supporting child adds nothing.
+  4. Children whose evidence shares an origin count as one voice (their mean).
+  5. Halving: in each direction the strongest origin counts in full, the next half, the next a quarter.
+  6. `required_by` caps the result; `sufficient_for` sets a floor.
+- `judged.jev` keeps Jev's own direct judgment for comparison. `show` prints it when it differs by 0.15 or more. A large gap means an edge weight or the rule needs a look.
 
 Each evidence link also gets `bears`, from -1 (strongly undermines) to 1 (strongly supports).
 
@@ -90,6 +100,7 @@ Ranking: judge first (deepest claims first), then by leverage on the root and cl
 python3 lemma.py next <name> [k]   # graph shape and the top k steps (default 5)
 python3 lemma.py judge <name> <id> # one Jev call: credence, atomic, and bears for each linked evidence item
 python3 lemma.py show <name>       # the pyramid, from the root down
+python3 lemma.py explain <name> <id> # what each child added to a parent
 ```
 
 Needs `TYPESAFE_API_KEY`. For large graphs, judging many claims in parallel with Python's `ThreadPoolExecutor` is a possible future step.

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import json, os, sys, urllib.request
+import json, math, os, sys, urllib.request
+from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
 
@@ -50,11 +51,21 @@ def credence(c):
 
 
 def linked_claims(g, cid):
-    return [
-        {"relation": e["type"], "claim": g["claims"][e["from"]]["text"], "credence": credence(g["claims"][e["from"]])}
+    return {
+        e["from"]: {"relation": e["type"], "claim": g["claims"][e["from"]]["text"], "credence": credence(g["claims"][e["from"]])}
         for e in g["edges"]
         if e["to"] == cid
-    ]
+    }
+
+
+def logit(p):
+    p = min(max(p, 0.01), 0.99)
+    return math.log(p / (1 - p))
+
+
+def top_origin(g, cid):
+    under = [origin(g["evidence"][i]) for i in support_evidence(g, cid)]
+    return max(set(under), key=under.count) if under else f"no evidence under {cid}"
 
 
 def jev(state, questions):
@@ -70,25 +81,50 @@ def judge(name, cid):
     g = load(name)
     c = g["claims"][cid]
     ev = {ref["id"]: g["evidence"][ref["id"]] for ref in c["evidence"]}
+    linked = linked_claims(g, cid)
+    weighted = [k for k, v in linked.items() if v["relation"] in ("supports", "undermines") and v["credence"] is not None]
     questions = {"credence": CREDENCE, "atomic": ATOMIC}
     for eid in ev:
         questions[f"bears_{eid}"] = {"type": "score", "instructions": f"How `evidence.{eid}` bears on `claim`. Evidence that would be just as expected if the claim were false does not bear on it.", "criteria": BEARS}
-    a = jev({"claim": c["text"], "evidence": ev, "linked_claims": linked_claims(g, cid)}, questions)
+    if weighted:
+        questions["local"] = {**CREDENCE, "instructions": "How probable `claim` is, judged only from `evidence` in state, ignoring `linked_claims` and outside knowledge. A source that asserts something is not proof of it unless the source had direct access to the fact. Thin or second-hand evidence cannot reach the ends of the scale."}
+        for k in weighted:
+            questions[f"weight_{k}"] = {"type": "score", "instructions": f"How `linked_claims.{k}.claim` would bear on `claim` if it were true. A claim that would be just as expected if `claim` were false does not bear on it.", "criteria": BEARS}
+    a = jev({"claim": c["text"], "evidence": ev, "linked_claims": linked}, questions)
     for ref in c["evidence"]:
         ref["bears"] = round(a[f"bears_{ref['id']}"]["score"] / 2 - 1, 2)
     raw = round(a["credence"]["score"] / 6, 2)
+    j = {"at": datetime.now().isoformat(timespec="milliseconds"), "jev": raw, "confidence": a["credence"]["confidence"], "atomic": a["atomic"]["noul"]}
+    computed = raw
+    if weighted:
+        j["local"] = round(a["local"]["score"] / 6, 2)
+        groups = defaultdict(list)
+        for k in weighted:
+            w = a[f"weight_{k}"]["score"] / 2 - 1
+            groups[top_origin(g, k)].append((k, w, w * max(0, logit(linked[k]["credence"]))))
+        mean = {o: sum(add for _, _, add in grp) / len(grp) for o, grp in groups.items()}
+        rank = {o: i for side in (1, -1) for i, o in enumerate(sorted((o for o in mean if mean[o] * side > 0), key=lambda o: -abs(mean[o])))}
+        j["parts"] = {k: {"weight": round(w, 2), "adds": round(add / len(grp) * 0.5 ** rank.get(o, 0), 2), "origin": o} for o, grp in groups.items() for k, w, add in grp}
+        computed = 1 / (1 + math.exp(-(logit(j["local"]) + sum(p["adds"] for p in j["parts"].values()))))
     bound = lambda kind: [credence(g["claims"][e["from"]]) for e in g["edges"] if e["to"] == cid and e["type"] == kind and credence(g["claims"][e["from"]]) is not None]
-    j = {
-        "at": datetime.now().isoformat(timespec="milliseconds"),
-        "credence": min([max([raw, *bound("sufficient_for")]), *bound("required_by")]),
-        "jev": raw,
-        "confidence": a["credence"]["confidence"],
-        "atomic": a["atomic"]["noul"],
-    }
+    j["credence"] = round(min([max([computed, *bound("sufficient_for")]), *bound("required_by")]), 2)
     c.setdefault("history", []).append(j)
     c["judged"] = j
     save(name, g)
-    print(json.dumps({"claim": cid, **j, "evidence": {r["id"]: r["bears"] for r in c["evidence"]}}))
+    print(json.dumps({"claim": cid, "credence": j["credence"], "jev": raw, "local": j.get("local"), "atomic": j["atomic"]}))
+
+
+def explain(name, cid):
+    g = load(name)
+    c = g["claims"][cid]
+    j = c.get("judged") or {}
+    print(f"{cid}: {c['text']}\ncredence {j.get('credence')}  (jev alone {j.get('jev')}, own evidence {j.get('local', j.get('jev'))})")
+    for k, p in sorted((j.get("parts") or {}).items(), key=lambda kv: -abs(kv[1]["adds"])):
+        print(f"  {p['adds']:+.2f}  {k} [{label(g['claims'][k])}] weight {p['weight']:+.2f}  origin {p['origin']}  {g['claims'][k]['text'][:70]}")
+    for kind in ("required_by", "sufficient_for"):
+        for e in g["edges"]:
+            if e["to"] == cid and e["type"] == kind:
+                print(f"  bound {kind}: {e['from']} [{label(g['claims'][e['from']])}]")
 
 
 def label(c):
@@ -101,7 +137,9 @@ def show(name, cid=None, depth=0, seen=None):
     cid = cid or g["root"]
     seen = seen if seen is not None else set()
     c = g["claims"][cid]
-    print(f"{'  ' * depth}[{label(c)}] {cid}: {c['text']}  ({len(c['evidence'])} ev)")
+    j = c.get("judged") or {}
+    gap = f" (jev {j['jev']:.2f})" if j.get("parts") and abs(j["jev"] - j["credence"]) >= 0.15 else ""
+    print(f"{'  ' * depth}[{label(c)}]{gap} {cid}: {c['text']}  ({len(c['evidence'])} ev)")
     if cid in seen:
         return
     seen.add(cid)
@@ -218,4 +256,4 @@ def next_steps(name, k="5"):
 
 if __name__ == "__main__":
     cmd, *args = sys.argv[1:]
-    {"judge": judge, "show": show, "next": next_steps}[cmd](*args)
+    {"judge": judge, "show": show, "next": next_steps, "explain": explain}[cmd](*args)
